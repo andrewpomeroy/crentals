@@ -17,7 +17,7 @@ var orderForm = (function($) {
 					feedJSON = data.feed.entry;
 					console.table(flattenGSFeed(feedJSON));
 					var properFormObj = groupObjects(flattenGSFeed(feedJSON));
-					console.table(properFormObj);
+					console.log(properFormObj);
 					// popFields(feedJSON);
 					// stringJSON(properFormObj);
 					// console.table(properFormObj);
@@ -84,7 +84,7 @@ var orderForm = (function($) {
 			}
 			else if (obj[entry].type === "Item") {
 				console.log("found item");
-				console.log(obj[entry]);
+				console.table(obj[entry]);
 				output[output.length - 1].items.push(obj[entry]);
 			}
 		}
