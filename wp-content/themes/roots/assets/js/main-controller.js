@@ -222,7 +222,7 @@ app.controller('orderForm', function($scope, $http) {
 		// 	item.qty = 0;
 		// }
 		item.estimate = item.qty * item.rate;
-		console.log($scope.orderFormForm[item.name]);
+		console.log($scope.orderFormForm[item.name+"_qty"].$error);
 		console.log($scope.orderFormForm);
 		// console.log($scope.item.name);
 	};

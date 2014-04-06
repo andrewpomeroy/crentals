@@ -55,6 +55,10 @@
 		<div ng-controller="orderForm">
 			<section class="main-app">
 				<ng-form name="orderFormForm" novalidate>
+
+					<section class="applicant-info order-form">
+						<div class="form-group"><label for="Job Name" class="control-label">Name</label><input type="text" class="form-control"></div>
+					</section>
 					<table class="order-form table">
 						<thead>
 							<tr>
@@ -72,7 +76,9 @@
 							</tr>
 							<tr ng-repeat="item in group.items" class="item-row" ng-class="{error: (item.estimate === null)}">
 								<td class="data static">{{item.name}}</td>
-								<td class="data dynamic input" ng-class="{'has-error' : (orderFormForm[item.name + '_qty'].$error.required)}"><input required ng-model="item.qty" ng-change="changeQty(item)" dynamic-name="item.name + '_qty'"/><span ng-show="orderFormForm[item.name + '_qty'].$error.required">Required</span></td>
+								<td class="data dynamic input" ng-class="{'has-error': (
+								(orderFormForm[item.name + '_qty'].$error.required) )
+							}"><input required type="number" ng-model="item.qty" ng-change="changeQty(item)" dynamic-name="item.name + '_qty'"/><span ng-show="orderFormForm[item.name + '_qty'].$error.required">Required</span><span ng-show="orderFormForm[item.name + '_qty'].$error.integer">integer</span></td>
 								<td class="data static">{{item.rate | currency:"$"}}</td>
 								<td class="data static">{{item.daysweek}}</td>
 								<td class="data dynamic"><span ng-show="!!(item.estimate)">{{item.estimate | currency:"$"}}</span></td>
