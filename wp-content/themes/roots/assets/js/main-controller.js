@@ -1,32 +1,4 @@
-angular.module('myApp', [])
-.directive('numberMask', function () {
-    return {
-        require: 'ngModel',
-        restrict: 'A',
-        link: function (scope, elem, attrs, ctrl) {   
-            var oldValue = null;
-            scope.$watch(attrs.ngModel, function (newVal, oldVal) {
-                var min = parseInt(attrs.min) || 0;
-                var max = parseInt(attrs.max) || 999;
-                if (!between(newVal, min, max)) {
-                    if (newVal > max)
-                        ctrl.$setViewValue(max);
-                    else if (newVal < min)
-                        ctrl.$setViewValue(min);
-                    else
-                        ctrl.$setViewValue(oldValue);
-                    ctrl.$render();
-                }else{
-                    oldValue = newVal;
-                }
-            }, true);
-
-            function between(n, min, max) { return n >= min && n <= max; }
-        }
-    };
-});
-
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ui.bootstrap']);
 
 // angular.module('myReverseModule', [])
 //   .filter('nozero', function() {
@@ -259,17 +231,61 @@ app.controller('orderForm', function($scope, $http) {
 
 	// $scope.itemDataOutput = JSON.stringify($scope.fakeItemData, null, '\t');
 
-
 	$scope.clickButton = function() {
 		$scope.getItemDataGS();
 	};
+
+
+	// --- DATEPICKER FUNCTIONS ---
+
+	$scope.today = function() {
+		$scope.dt = new Date();
+	};
+	$scope.today();
+
+	$scope.showWeeks = true;
+	$scope.toggleWeeks = function () {
+		$scope.showWeeks = ! $scope.showWeeks;
+	};
+
+	$scope.clear = function () {
+		$scope.dt = null;
+	};
+
+	// Disable weekend selection
+	$scope.disabled = function(date, mode) {
+		return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+	};
+
+	$scope.toggleMin = function() {
+		$scope.minDate = ( $scope.minDate ) ? null : new Date();
+	};
+	$scope.toggleMin();
+
+	$scope.open = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+
+		$scope.opened = true;
+	};
+
+	$scope.dateOptions = {
+		'year-format': "'yy'",
+		'starting-day': 1
+	};
+
+	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+	$scope.format = $scope.formats[0];
+
 
 	var init = function() {
 		$scope.getItemDataGS();
 	};
 	init();
 
-	});
+});
+
+
 
 // <field-div> directive
 
@@ -298,16 +314,19 @@ app.controller('orderForm', function($scope, $http) {
 
 app.directive('dynamicName', function($compile, $parse) {
   return {
-    restrict: 'A',
-    terminal: true,
-    priority: 100000,
-    link: function(scope, elem) {
-      var name = $parse(elem.attr('dynamic-name'))(scope);
-      elem.removeAttr('dynamic-name');
-      elem.attr('name', name);
-      $compile(elem)(scope);
-    }
+	restrict: 'A',
+	terminal: true,
+	priority: 100000,
+	link: function(scope, elem) {
+	  var name = $parse(elem.attr('dynamic-name'))(scope);
+	  elem.removeAttr('dynamic-name');
+	  elem.attr('name', name);
+	  $compile(elem)(scope);
+	}
   };
 });
+
+
+
 
 

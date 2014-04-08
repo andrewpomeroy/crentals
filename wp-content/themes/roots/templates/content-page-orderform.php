@@ -58,6 +58,22 @@
 
 					<section class="applicant-info order-form">
 						<div class="form-group"><label for="Job Name" class="control-label">Name</label><input type="text" class="form-control"></div>
+						<section class="rental-dates">
+						    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+							<h4>Popup</h4>
+							<div class="row">
+							    <div class="col-md-6">
+							        <p class="input-group">
+							          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+							          <span class="input-group-btn">
+							            <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+							          </span>
+							        </p>
+							    </div>
+							</div>
+							
+						</section>
+
 					</section>
 					<table class="order-form table">
 						<thead>
