@@ -26,6 +26,7 @@ app.controller('orderForm', function($scope, $http) {
 		name: "Unnamed",
 		qty: 0,
 		rate: 0,
+		days: 0,
 		daysweek: 7,
 		notes: "",
 		estimate: 0
@@ -221,9 +222,13 @@ app.controller('orderForm', function($scope, $http) {
 		// if (item.qty === undefined || item.qty === null) {
 		// 	item.qty = 0;
 		// }
-		item.estimate = item.qty * item.rate;
-		console.log($scope.orderFormForm[item.name+"_qty"].$error);
-		console.log($scope.orderFormForm);
+		// var daysCounted = Math.floor(item.days/7) - (item.days*(7 - item.daysweek)) + (item.days + 7)%7;
+		var daysCounted = Math.floor(item.days/7)*item.daysweek;
+		if (item.days > 7) {
+			daysCounted = daysCounted + item.days%7;
+		}
+		item.estimate = item.qty * item.rate * daysCounted;
+
 		// console.log($scope.item.name);
 	};
 
@@ -238,10 +243,35 @@ app.controller('orderForm', function($scope, $http) {
 
 	// --- DATEPICKER FUNCTIONS ---
 
-	$scope.today = function() {
-		$scope.dt = new Date();
+	var one_day = 1000*60*60*24;
+
+	$scope.orderPickupDate = {
+		opened: false
 	};
-	$scope.today();
+	$scope.orderReturnDate = {
+		opened: false
+	};
+
+	$scope.flushIndividualDates = function() {
+		console.log($scope.itemData);
+		for (var group in $scope.itemData) {
+			console.log($scope.itemData[group]);
+			for (var item in $scope.itemData[group].items) {
+				var theItem = $scope.itemData[group].items[item];
+				console.log(theItem);
+				theItem.days = ($scope.totalRentalDays > 0) ? $scope.totalRentalDays : 0;
+				$scope.changeQty(theItem);
+			}
+		}
+	}
+
+	$scope.calcRentalDates = function() {
+		$scope.totalRentalDays = ($scope.orderReturnDate.date - $scope.orderPickupDate.date)/one_day;
+		$scope.flushIndividualDates();
+	};
+
+	$scope.calcRentalDates();
+
 
 	$scope.showWeeks = true;
 	$scope.toggleWeeks = function () {
@@ -252,22 +282,10 @@ app.controller('orderForm', function($scope, $http) {
 		$scope.dt = null;
 	};
 
-	// Disable weekend selection
-	$scope.disabled = function(date, mode) {
-		return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-	};
-
 	$scope.toggleMin = function() {
 		$scope.minDate = ( $scope.minDate ) ? null : new Date();
 	};
 	$scope.toggleMin();
-
-	$scope.open = function($event) {
-		$event.preventDefault();
-		$event.stopPropagation();
-
-		$scope.opened = true;
-	};
 
 	$scope.dateOptions = {
 		'year-format': "'yy'",
@@ -276,6 +294,7 @@ app.controller('orderForm', function($scope, $http) {
 
 	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
 	$scope.format = $scope.formats[0];
+
 
 
 	var init = function() {
