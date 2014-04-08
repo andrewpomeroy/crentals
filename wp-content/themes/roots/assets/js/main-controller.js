@@ -1,3 +1,31 @@
+angular.module('myApp', [])
+.directive('numberMask', function () {
+    return {
+        require: 'ngModel',
+        restrict: 'A',
+        link: function (scope, elem, attrs, ctrl) {   
+            var oldValue = null;
+            scope.$watch(attrs.ngModel, function (newVal, oldVal) {
+                var min = parseInt(attrs.min) || 0;
+                var max = parseInt(attrs.max) || 999;
+                if (!between(newVal, min, max)) {
+                    if (newVal > max)
+                        ctrl.$setViewValue(max);
+                    else if (newVal < min)
+                        ctrl.$setViewValue(min);
+                    else
+                        ctrl.$setViewValue(oldValue);
+                    ctrl.$render();
+                }else{
+                    oldValue = newVal;
+                }
+            }, true);
+
+            function between(n, min, max) { return n >= min && n <= max; }
+        }
+    };
+});
+
 var app = angular.module('myApp', []);
 
 // angular.module('myReverseModule', [])
@@ -281,3 +309,5 @@ app.directive('dynamicName', function($compile, $parse) {
     }
   };
 });
+
+
