@@ -78,7 +78,7 @@
 								<td class="data static">{{item.name}}</td>
 								<td class="data dynamic input" ng-class="{'has-error': (
 								(orderFormForm[item.name + '_qty'].$error.required) )
-							}"><input required type="number" ng-model="item.qty" ng-change="changeQty(item)" dynamic-name="item.name + '_qty'"/><span ng-show="orderFormForm[item.name + '_qty'].$error.required">Required</span><span ng-show="orderFormForm[item.name + '_qty'].$error.integer">integer</span></td>
+							}"><input type="number" ng-model="item.qty" ng-change="changeQty(item)" dynamic-name="item.name + '_qty'"/ ng-pattern="/[0-9]{1,6}/"><span ng-show="orderFormForm[item.name + '_qty'].$error.required">Required</span><span ng-show="orderFormForm[item.name + '_qty'].$invalid">integer</span></td>
 								<td class="data static">{{item.rate | currency:"$"}}</td>
 								<td class="data static">{{item.daysweek}}</td>
 								<td class="data dynamic"><span ng-show="!!(item.estimate)">{{item.estimate | currency:"$"}}</span></td>
