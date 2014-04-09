@@ -216,6 +216,8 @@ app.controller('orderForm', function($scope, $http) {
 
 	};
 
+	$scope.recalcTotalEstimate
+
 	$scope.changeQty = function(item) {
 
 		// ---  calculate Days/Week
@@ -235,7 +237,7 @@ app.controller('orderForm', function($scope, $http) {
 		}
 		// Total = Amount * Rate * Time
 		item.estimate = item.qty * item.rate * daysCounted;
-		// $scope.recalcTotalEstimate();
+		// $scope.recalcTotalEstimate($scope.itemData);
 	};
 
 	// Reset everything
@@ -255,32 +257,22 @@ app.controller('orderForm', function($scope, $http) {
 		opened: false
 	};
 
-	flushIndividualDate = function(item) {
-		item.days = ($scope.totalRentalDays > 0) ? $scope.totalRentalDays : 0;
-	};
-
-	$scope.loopThroughItems = function(itemFunctions) {
+	$scope.flushIndividualDates = function() {
 		console.log($scope.itemData);
 		for (var group in $scope.itemData) {
+			console.log($scope.itemData[group]);
 			for (var item in $scope.itemData[group].items) {
 				var theItem = $scope.itemData[group].items[item];
-				// loop through specific item functions and execute each on found item
-				for (var passedFunction in itemFunctions) {
-					itemFunctions[passedFunction](theItem);
-					console.log("Called: ");
-					console.log(itemFunctions[passedFunction]);
-					console.log("with: ");
-					console.log(theItem);
-				}
-				// $scope.changeQty(theItem);
+				console.log(theItem);
+				theItem.days = ($scope.totalRentalDays > 0) ? $scope.totalRentalDays : 0;
+				$scope.changeQty(theItem);
 			}
 		}
-	};
+	}
 
 	$scope.calcRentalDates = function() {
 		$scope.totalRentalDays = ($scope.orderReturnDate.date - $scope.orderPickupDate.date)/one_day;
-		$scope.loopThroughItems([flushIndividualDate, $scope.changeQty]);
-		console.log($scope.itemData);
+		$scope.flushIndividualDates();
 	};
 
 	$scope.calcRentalDates();

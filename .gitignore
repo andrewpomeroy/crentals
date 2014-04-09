@@ -36,3 +36,4 @@ wp-content/themes/*
 #Begin Customization
 wp-content/themes/roots/.sass-cache
 wp-content/themes/roots/.sass-cache/*
+*.sublime-project
