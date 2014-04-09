@@ -19,6 +19,7 @@ var app = angular.module('myApp', ['ui.bootstrap']);
 app.controller('orderForm', function($scope, $http) {
 
 	$scope.orderMeta = {};
+	$scope.totalEstimate = 0;
 
 	var valueTypeBase = {
 		type: "item",
@@ -259,7 +260,18 @@ app.controller('orderForm', function($scope, $http) {
 		item.days = ($scope.totalRentalDays > 0) ? $scope.totalRentalDays : 0;
 	};
 
-	$scope.loopThroughItems = function(itemFunctions) {
+	resetTotal = function() {
+		$scope.totalEstimate = 0;
+	};
+	addToTotal = function(item) {
+		if (item.estimate > 0) {$scope.totalEstimate += item.estimate;}
+	};
+	$scope.calcTotal = function() {
+		resetTotal();
+		loopThroughItems([addToTotal]);
+	};
+
+	loopThroughItems = function(itemFunctions) {
 		console.log($scope.itemData);
 		for (var group in $scope.itemData) {
 			for (var item in $scope.itemData[group].items) {
@@ -267,24 +279,24 @@ app.controller('orderForm', function($scope, $http) {
 				// loop through specific item functions and execute each on found item
 				for (var passedFunction in itemFunctions) {
 					itemFunctions[passedFunction](theItem);
-					console.log("Called: ");
-					console.log(itemFunctions[passedFunction]);
-					console.log("with: ");
-					console.log(theItem);
+					// console.log("Called: ");
+					// console.log(itemFunctions[passedFunction]);
+					// console.log("with: ");
+					// console.log(theItem);
 				}
-				// $scope.changeQty(theItem);
 			}
 		}
 	};
 
 	$scope.calcRentalDates = function() {
 		$scope.totalRentalDays = ($scope.orderReturnDate.date - $scope.orderPickupDate.date)/one_day;
-		$scope.loopThroughItems([flushIndividualDate, $scope.changeQty]);
+		resetTotal();
+		loopThroughItems([flushIndividualDate, $scope.changeQty, addToTotal]);
+		// calcTotal();
 		console.log($scope.itemData);
 	};
 
 	$scope.calcRentalDates();
-
 
 	$scope.showWeeks = true;
 	$scope.toggleWeeks = function () {
@@ -308,41 +320,13 @@ app.controller('orderForm', function($scope, $http) {
 	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
 	$scope.format = $scope.formats[0];
 
-
-
+	// --- INITIALIZE ---
 	var init = function() {
 		$scope.getItemDataGS();
 	};
 	init();
 
 });
-
-
-
-// <field-div> directive
-
-// app.directive	
-
-// app.directive('fieldDiv', function() {
-//   return {
-//     restrict: 'E',
-//     replace: true,
-//     transclude: true,
-//     scope: {
-//       label: '@',
-//     },
-//     template: [
-//     '<div class="divdiv">',
-//     	'<div class="thisdiv' ng-repeat=""
-//     	// '<label class="control-label">{{ label}}</label>',
-//     	// '<div class="'
-//     	// '<input type="text" class="form-control" ng-model="itemData.groups[0].type" />',
-//     '</div>'
-//     ].join('')
-//   };
-// });
-
-
 
 app.directive('dynamicName', function($compile, $parse) {
   return {
