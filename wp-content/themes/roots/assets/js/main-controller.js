@@ -18,9 +18,6 @@ var app = angular.module('myApp', ['ui.bootstrap']);
 
 app.controller('orderForm', function($scope, $http) {
 
-	$scope.orderMeta = {};
-	$scope.totalEstimate = 0;
-
 	var valueTypeBase = {
 		type: "item",
 		name: "Unnamed",
@@ -241,20 +238,14 @@ app.controller('orderForm', function($scope, $http) {
 
 	// Reset everything
 	$scope.resetForm = function() {
-		$scope.getItemDataGS();
+		// $scope.getItemDataGS();
+		init();
 	};
 
 
 	// --- DATEPICKER FUNCTIONS ---
 
 	var one_day = 1000*60*60*24;
-
-	$scope.orderPickupDate = {
-		opened: false
-	};
-	$scope.orderReturnDate = {
-		opened: false
-	};
 
 	flushIndividualDate = function(item) {
 		item.days = ($scope.totalRentalDays > 0) ? $scope.totalRentalDays : 0;
@@ -296,8 +287,6 @@ app.controller('orderForm', function($scope, $http) {
 		console.log($scope.itemData);
 	};
 
-	$scope.calcRentalDates();
-
 	$scope.showWeeks = true;
 	$scope.toggleWeeks = function () {
 		$scope.showWeeks = ! $scope.showWeeks;
@@ -322,6 +311,15 @@ app.controller('orderForm', function($scope, $http) {
 
 	// --- INITIALIZE ---
 	var init = function() {
+		$scope.orderMeta = {};
+		$scope.totalEstimate = 0;
+		$scope.orderPickupDate = {
+			opened: false
+		};
+		$scope.orderReturnDate = {
+			opened: false
+		};
+		$scope.calcRentalDates();
 		$scope.getItemDataGS();
 	};
 	init();
