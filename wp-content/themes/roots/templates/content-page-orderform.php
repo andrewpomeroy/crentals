@@ -130,7 +130,7 @@
 					</section>
 				</form>
 		</section>
-	<section class="debug hidden">
+	<section class="debug">
 		<pre class="debug">{{totalEstimate}}</pre>
 		<pre class="debug">{{orderMeta}}</pre>
 		<!-- <pre class="debug">{{orderPickupDate | json}}</pre> -->
