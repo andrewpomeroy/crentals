@@ -242,6 +242,28 @@ app.controller('orderForm', function($scope, $http) {
 		init();
 	};
 
+	// Submit Order to Wordpress Backend
+	$scope.submitOrder = function() {
+		doAjaxRequest();
+	}
+
+	var doAjaxRequest = function() {
+		$.ajax({
+			url: '/wp-admin/admin-ajax.php',
+			data: {
+				'theItemData': $scope.itemData,
+				dataType: 'JSON',
+				success: function(data) {
+					console.log(data);
+				},
+				error: function(errorThrown) {
+					alert('error');
+					console.log(errorThrown);
+				}
+			}
+		});
+	};
+
 
 	// --- DATEPICKER FUNCTIONS ---
 

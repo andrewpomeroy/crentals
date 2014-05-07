@@ -56,7 +56,7 @@
 							<h4>Pickup Date</h4>
 							<div class="form-group">
 								<p class="input-group">
-									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderPickupDate.date" name="orderPickupDate" is-open="orderPickupDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-change="calcRentalDates()" />
+									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderPickupDate.date" name="orderPickupDate" is-open="orderPickupDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
 									<span class="input-group-btn">
 										<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 									</span>
@@ -67,7 +67,7 @@
 							<h4>Return Date</h4>
 							<div class="form-group">
 								<p class="input-group" ng-class="{'has-error': (orderReturnDate.date < orderPickupDate.date)}">
-									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderReturnDate.date" name="orderReturnDate" is-open="orderReturnDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-change="calcRentalDates()" />
+									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderReturnDate.date" name="orderReturnDate" is-open="orderReturnDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
 									<span class="input-group-btn">
 										<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 									</span>
@@ -125,7 +125,9 @@
 							</table>
 							<div ng-if="totalEstimate > 0">
 								<h4 class="pull-right">Total Estimate: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
-								</div>
+							</div>
+							<div class="submit-bar">
+								<button class="btn btn-submit submit" ng-click="submitOrder()" ng-disabled="orderFormForm.$invalid">Submit</button>
 						</div>
 					</section>
 				</form>
