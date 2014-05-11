@@ -23,7 +23,16 @@ app.controller('orderForm', function($scope, $http) {
 		name: "Unnamed",
 		qty: 0,
 		rate: 0,
-		days: 0,
+		customRentalPeriod: false,
+		startDate: {
+			opened: false,
+			date: undefined
+		},
+		endDate: {
+			opened: false,
+			date: undefined
+		},
+		days: undefined,
 		daysweek: 7,
 		notes: "",
 		estimate: 0
@@ -89,6 +98,7 @@ app.controller('orderForm', function($scope, $http) {
 			console.log(data);
 			$scope.dataRetreived = data.feed.entry;
 			$scope.itemData = baselineColVars(groupObjects(flattenGSFeed($scope.dataRetreived)));
+			$scope.calcRentalDates();
 		});
 		responsePromise.error(function(data, status, headers, config) {
 			console.log("AJAX failed!");
@@ -270,7 +280,40 @@ app.controller('orderForm', function($scope, $http) {
 	var one_day = 1000*60*60*24;
 
 	flushIndividualDate = function(item) {
-		item.days = ($scope.totalRentalDays > 0) ? $scope.totalRentalDays : 0;
+		console.log("ITEM OBJECT TO BE FLUSHED:");
+		console.log(item);
+		if (item.customRentalPeriod) {
+			if ((!item.startDate.date) && (!item.endDate.date)) {
+				// console.log("no item start/end dates");
+				item.startDate.date = $scope.orderMeta.orderPickupDate.date;
+				item.endDate.date = $scope.orderMeta.orderPickupDate.date;
+			}
+			if (!item.endDate.date) {
+				console.log("no end date");
+				item.endDate.date = item.startDate.date;
+			}
+			if (!item.startDate.date || (item.startDate.date > item.endDate.date)) {
+				console.log("no start date, or start date after end date");
+				item.startDate.date = item.endDate.date;
+			}
+			if (item.endDate.date) {
+				console.log("endDate: " + item.endDate.date);
+			}
+			if (item.startDate.date && item.endDate.date) {
+				item.days = item.endDate.date - item.startDate.date + 1;
+			}
+			else {
+				console.log('nullifying '+item.name);
+				item.days = null;
+			}
+		}
+		else {
+			item.startDate.date = $scope.orderMeta.orderPickupDate.date;
+			item.endDate.date = $scope.orderMeta.orderReturnDate.date;
+			item.days = $scope.orderMeta.totalRentalDays;
+		}
+		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
+		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
 	};
 
 	resetTotal = function() {
@@ -302,7 +345,7 @@ app.controller('orderForm', function($scope, $http) {
 	};
 
 	$scope.calcRentalDates = function() {
-		$scope.totalRentalDays = ($scope.orderReturnDate.date - $scope.orderPickupDate.date)/one_day;
+		$scope.orderMeta.totalRentalDays = ($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date)/one_day + 1;
 		resetTotal();
 		loopThroughItems([flushIndividualDate, $scope.changeQty, addToTotal]);
 		// calcTotal();
@@ -328,20 +371,43 @@ app.controller('orderForm', function($scope, $http) {
 		'starting-day': 1
 	};
 
-	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'MM/dd/yyyy'];
 	$scope.format = $scope.formats[0];
+
+	var getToday = function() {
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+
+		today = mm+'/'+dd+'/'+yyyy;
+		// dateFormat(today);
+		console.log("TODAY: " + today);
+		return today;
+	}
 
 	// --- INITIALIZE ---
 	var init = function() {
 		$scope.orderMeta = {};
 		$scope.totalEstimate = 0;
-		$scope.orderPickupDate = {
-			opened: false
+		var todayDate = new Date();
+		$scope.orderMeta.orderPickupDate = {
+			opened: false,
+			date: todayDate
 		};
-		$scope.orderReturnDate = {
-			opened: false
+		$scope.orderMeta.orderReturnDate = {
+			opened: false,
+			date: todayDate
 		};
-		$scope.calcRentalDates();
+		// $scope.calcRentalDates();
 		$scope.getItemDataGS();
 	};
 	init();

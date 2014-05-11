@@ -5,3 +5,12 @@ td.input.dynamic
 {
 	max-width: 2em;
 }
+
+.item-days
+{
+	&:empty:after
+	{
+		content: "–";
+		display: inline;
+	}
+}

@@ -56,7 +56,7 @@
 							<h4>Pickup Date</h4>
 							<div class="form-group">
 								<p class="input-group">
-									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderPickupDate.date" name="orderPickupDate" is-open="orderPickupDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
+									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderMeta.orderPickupDate.date" name="orderMeta.orderPickupDate" is-open="orderMeta.orderPickupDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
 									<span class="input-group-btn">
 										<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 									</span>
@@ -66,18 +66,18 @@
 						<div class="col-sm-6">
 							<h4>Return Date</h4>
 							<div class="form-group">
-								<p class="input-group" ng-class="{'has-error': (orderReturnDate.date < orderPickupDate.date)}">
-									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderReturnDate.date" name="orderReturnDate" is-open="orderReturnDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
+								<p class="input-group" ng-class="{'has-error': (orderMeta.orderReturnDate.date < orderMeta.orderPickupDate.date)}">
+									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderMeta.orderReturnDate.date" name="orderMeta.orderReturnDate" is-open="orderMeta.orderReturnDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
 									<span class="input-group-btn">
 										<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 									</span>
 								</p>
-								<div class="help-block" ng-if="orderReturnDate.date < orderPickupDate.date">End date cannot be earlier than start date.</div>
+								<div class="help-block" ng-if="orderMeta.orderReturnDate.date < orderMeta.orderPickupDate.date">End date cannot be earlier than start date.</div>
 							</div>
 						</div>
 					</div>
-					<div ng-if="totalRentalDays > 0">
-						<h4 class="pull-right">Total Rental Days: <strong>{{totalRentalDays}}</strong></h4>
+					<div ng-if="orderMeta.totalRentalDays > 0">
+						<h4 class="pull-right">Total Rental Days: <strong>{{orderMeta.totalRentalDays}}</strong></h4>
 						</div>
 					</section>
 
@@ -87,13 +87,14 @@
 							<table class="order-form table">
 								<thead>
 									<tr>
-										<td>Item</td>
-										<td>Quantity</td>
-										<td>Rate</td>
-										<td>Days</td>
-										<td>Days/Week</td>
-										<td>Estimate</td>
-										<td>Notes</td>
+										<th>Item</th>
+										<th>Quantity</th>
+										<th>Rate</th>
+										<th>Rental Dates</th>
+										<th>Days</th>
+										<th>Days/Week</th>
+										<th>Estimate</th>
+										<th>Notes</th>
 									</tr>
 								</thead>
 								<tbody ng-repeat="group in itemData" ng-if="group.items">
@@ -106,10 +107,16 @@
 										(orderFormForm[item.name + '_qty'].$invalid) )
 									}"><input type="number" ng-model="item.qty" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_qty'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_qty'].$invalid">Must be a non-negative integer</div></td>
 									<td class="data static">{{item.rate | currency:"$"}}</td>
-									<td class="data dynamic input" ng-class="{'has-error': (
-									(orderFormForm[item.name + '_days'].$invalid) )
-								}"><input type="number" ng-model="item.days" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_days'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_days'].$invalid">Must be a non-negative integer</div></td>
-								<td class="data static">{{item.daysweek}}</td>
+									<td class="data static rental-period placeholder" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;"></td>
+									<td class="data static rental-period" ng-if="item.customRentalPeriod">
+										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="item.startDate.date" name="startDate" is-open="item.startDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
+										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="item.endDate.date" name="endDate" is-open="item.endDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
+									</td>
+									<!-- <td class="data static">{{item.startDate}}</td> -->
+									<!-- <td class="data static">{{item.endDate}}</td> -->
+									<!-- <td class="data dynamic input" ng-class="{'has-error': ((orderFormForm[item.name + '_days'].$invalid) )}"><input type="number" ng-model="item.days" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_days'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_days'].$invalid">Must be a non-negative integer</div></td> -->
+									<td class="data static">{{item.days}}</td>
+								<td class="data static item-days">{{item.daysweek}}</td>
 								<td class="data dynamic"><span ng-show="!!(item.estimate)">{{item.estimate | currency:"$"}}</span></td>
 								<td class="input dynamic"><span><textarea dynamic-name="item.name + '_notes'" ng-model="item.notes" /></textarea></span></td>
 									</tr>
@@ -134,9 +141,9 @@
 		</section>
 	<section class="debug">
 		<pre class="debug">{{totalEstimate}}</pre>
-		<pre class="debug">{{orderMeta}}</pre>
-		<!-- <pre class="debug">{{orderPickupDate | json}}</pre> -->
-		<!-- <pre class="debug">{{orderReturnDate | json}}</pre> -->
+		<pre class="debug">{{orderMeta | json}}</pre>
+		<!-- <pre class="debug">{{orderMeta.orderPickupDate | json}}</pre> -->
+		<!-- <pre class="debug">{{orderMeta.orderReturnDate | json}}</pre> -->
 		<h5 class="debug">Debug</h5>
 		<pre class="debug">{{itemData | json}}</pre>
 		<h5 class="debug">orderFormForm</h5>
