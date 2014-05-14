@@ -16,7 +16,7 @@ var app = angular.module('myApp', ['ui.bootstrap']);
 //     };
 //   });
 
-app.controller('orderForm', function($scope, $http) {
+app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 
 	var valueTypeBase = {
 		type: "item",
@@ -94,8 +94,8 @@ app.controller('orderForm', function($scope, $http) {
 		var responsePromise = $http.get($scope.GSurl);
 		responsePromise.success(function(data, status, headers, config) {
 			// console.table(data.feed.entry[0]);
-			console.log("OBJECT:");
-			console.log(data);
+			// console.log("OBJECT:");
+			// console.log(data);
 			$scope.dataRetreived = data.feed.entry;
 			$scope.itemData = baselineColVars(groupObjects(flattenGSFeed($scope.dataRetreived)));
 			$scope.calcRentalDates();
@@ -159,15 +159,11 @@ app.controller('orderForm', function($scope, $http) {
 		};
 		var checkEmptyItem = function(item) {
 			for (var key in valueTypeBase) {
-				console.log("checking key w/ item: ");
-				console.log(item);
-				console.log("key: "+key);
+				// console.log("checking key w/ item: ");
+				// console.log(item);
+				// console.log("key: "+key);
 				if (!(item[key]) || (item[key] === "")) {
 					console.table(item);
-					// console.log(key);
-					// console.log(item[key]);
-					// console.log(valueTypeBase[key]);
-					// item.push({keyitem[key] = valueTypeBase[item[key]];
 					item[key] = (valueTypeBase[key]);
 					console.log("Added: "+item[key]+" to "+key);
 				}
@@ -175,21 +171,10 @@ app.controller('orderForm', function($scope, $http) {
 			return item;
 		};
 		for (var entry in obj) {
-			// console.log("hello entry");
-			// console.table(obj[entry]);
 			if (obj[entry].items) {
-				// console.log("hello items");
-				// console.table(obj[entry].items);
 				for (var item in obj[entry].items)
 				{
 					item = checkEmptyItem(obj[entry].items[item]);
-					// console.table(obj[entry].items[item]);
-					// for (var key in obj[entry].items[item])
-					// {
-					// 	// console.log('KEY: '+ key);
-					// 	// console.log('VAL: '+ obj[entry].items[item][key]);
-					// 	obj[entry].items[item][key] = checkEmptySingle(key, obj[entry].items[item][key]);
-					// }
 				}
 			}
 		}
@@ -284,7 +269,7 @@ app.controller('orderForm', function($scope, $http) {
 		console.log(item);
 		if (item.customRentalPeriod) {
 			if ((!item.startDate.date) && (!item.endDate.date)) {
-				// console.log("no item start/end dates");
+				console.log("no item start/end dates");
 				item.startDate.date = $scope.orderMeta.orderPickupDate.date;
 				item.endDate.date = $scope.orderMeta.orderPickupDate.date;
 			}
@@ -300,7 +285,7 @@ app.controller('orderForm', function($scope, $http) {
 				console.log("endDate: " + item.endDate.date);
 			}
 			if (item.startDate.date && item.endDate.date) {
-				item.days = item.endDate.date - item.startDate.date + 1;
+				item.days = (item.endDate.date - item.startDate.date + 1) / one_day;
 			}
 			else {
 				console.log('nullifying '+item.name);
@@ -308,9 +293,12 @@ app.controller('orderForm', function($scope, $http) {
 			}
 		}
 		else {
+			console.log("setting default dates on: ");
+			console.log(item.name);
 			item.startDate.date = $scope.orderMeta.orderPickupDate.date;
 			item.endDate.date = $scope.orderMeta.orderReturnDate.date;
 			item.days = $scope.orderMeta.totalRentalDays;
+			console.log(item.startDate.date);
 		}
 		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
 		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
@@ -325,6 +313,13 @@ app.controller('orderForm', function($scope, $http) {
 	$scope.calcTotal = function() {
 		resetTotal();
 		loopThroughItems([addToTotal]);
+	};
+
+	$scope.openItemDates = function($event, item) {
+		$event.preventDefault();
+		$event.stopPropagation();
+		console.log($event);
+		console.log(item);
 	};
 
 	loopThroughItems = function(itemFunctions) {
@@ -412,7 +407,7 @@ app.controller('orderForm', function($scope, $http) {
 	};
 	init();
 
-});
+}]);
 
 app.directive('dynamicName', function($compile, $parse) {
   return {

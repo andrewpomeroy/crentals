@@ -109,8 +109,8 @@
 									<td class="data static">{{item.rate | currency:"$"}}</td>
 									<td class="data static rental-period placeholder" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;"></td>
 									<td class="data static rental-period" ng-if="item.customRentalPeriod">
-										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="item.startDate.date" name="startDate" is-open="item.startDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
-										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="item.endDate.date" name="endDate" is-open="item.endDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
+										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="item.startDate.date" name="startDate" is-open="item.startDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" ng-click="openItemDates($event, item)"/>
+										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="item.endDate.date" name="endDate" is-open="item.endDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" ng-click="openItemDates($event, item)"/>
 									</td>
 									<!-- <td class="data static">{{item.startDate}}</td> -->
 									<!-- <td class="data static">{{item.endDate}}</td> -->
@@ -148,6 +148,8 @@
 		<pre class="debug">{{itemData | json}}</pre>
 		<h5 class="debug">orderFormForm</h5>
 		<pre class="debug">{{orderFormForm | json}}</pre>
+<!-- 		<h5 class="debug">Scope</h5>
+		<pre class="debug">{{}}</pre> -->
 	</section>
 	<button class="btn" ng-click="resetForm()">Reset Form</button>
 
