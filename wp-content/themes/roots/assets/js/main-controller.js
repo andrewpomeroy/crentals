@@ -163,9 +163,9 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 				// console.log(item);
 				// console.log("key: "+key);
 				if (!(item[key]) || (item[key] === "")) {
-					console.table(item);
+					// console.table(item);
 					item[key] = (valueTypeBase[key]);
-					console.log("Added: "+item[key]+" to "+key);
+					// console.log("Added: "+item[key]+" to "+key);
 				}
 			}
 			return item;
@@ -264,14 +264,21 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 
 	var one_day = 1000*60*60*24;
 
+	$scope.incrementIndividualDate = function(date, amount) {
+		console.log(date);
+		date.setDate(date.getDate() + amount);
+		console.log(date);
+		// $scope.calcRentalDates();
+	};
+
 	flushIndividualDate = function(item) {
-		console.log("ITEM OBJECT TO BE FLUSHED:");
-		console.log(item);
+		// console.log("ITEM OBJECT TO BE FLUSHED:");
+		// console.log(item);
 		if (item.customRentalPeriod) {
 			if ((!item.startDate.date) && (!item.endDate.date)) {
 				console.log("no item start/end dates");
 				item.startDate.date = $scope.orderMeta.orderPickupDate.date;
-				item.endDate.date = $scope.orderMeta.orderPickupDate.date;
+				item.endDate.date = $scope.orderMeta.orderReturnDate.date;
 			}
 			if (!item.endDate.date) {
 				console.log("no end date");
@@ -285,7 +292,7 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 				console.log("endDate: " + item.endDate.date);
 			}
 			if (item.startDate.date && item.endDate.date) {
-				item.days = (item.endDate.date - item.startDate.date + 1) / one_day;
+				item.days = parseInt((item.endDate.date - item.startDate.date) / one_day) + 1;
 			}
 			else {
 				console.log('nullifying '+item.name);
@@ -293,12 +300,16 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 			}
 		}
 		else {
-			console.log("setting default dates on: ");
-			console.log(item.name);
-			item.startDate.date = $scope.orderMeta.orderPickupDate.date;
-			item.endDate.date = $scope.orderMeta.orderReturnDate.date;
+			// console.log("setting default dates on: ");
+			// console.log(item.name);
+			console.log("ITEM-----BEFORE");
+			console.log(item);
+			item.startDate.date = new Date($scope.orderMeta.orderPickupDate.date);
+			item.endDate.date = new Date($scope.orderMeta.orderReturnDate.date);
+			console.log("ITEM-----AFTER");
+			console.log(item);
 			item.days = $scope.orderMeta.totalRentalDays;
-			console.log(item.startDate.date);
+			// console.log(item.startDate.date);
 		}
 		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
 		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
@@ -315,15 +326,8 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 		loopThroughItems([addToTotal]);
 	};
 
-	$scope.openItemDates = function($event, item) {
-		$event.preventDefault();
-		$event.stopPropagation();
-		console.log($event);
-		console.log(item);
-	};
-
 	loopThroughItems = function(itemFunctions) {
-		console.log($scope.itemData);
+		// console.log($scope.itemData);
 		for (var group in $scope.itemData) {
 			for (var item in $scope.itemData[group].items) {
 				var theItem = $scope.itemData[group].items[item];
@@ -340,11 +344,26 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 	};
 
 	$scope.calcRentalDates = function() {
-		$scope.orderMeta.totalRentalDays = ($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date)/one_day + 1;
+		$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date)/one_day) + 1;
 		resetTotal();
-		loopThroughItems([flushIndividualDate, $scope.changeQty, addToTotal]);
+		for(var i = 0; i < $scope.itemData.length; i++) {
+			for (var x= 0;x< $scope.itemData[i].items.length;x++) {
+				var _item = $scope.itemData[i].items[x];
+				flushIndividualDate(_item);
+				$scope.changeQty(_item);
+				addToTotal(_item);
+			}
+		}
+		// angular.forEach($scope.itemData, function(group) { 
+		// 	angular.forEach($scope.itemData[group].items, function(item) {
+		// 		flushIndividualDate(item);
+		// 		$scope.changeQty(item);
+		// 		addToTotal(item);
+		// 	});
+		// });
+		// loopThroughItems([flushIndividualDate, $scope.changeQty, addToTotal]);
 		// calcTotal();
-		console.log($scope.itemData);
+		// console.log($scope.itemData);
 	};
 
 	$scope.showWeeks = true;

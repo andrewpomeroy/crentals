@@ -107,10 +107,9 @@
 										(orderFormForm[item.name + '_qty'].$invalid) )
 									}"><input type="number" ng-model="item.qty" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_qty'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_qty'].$invalid">Must be a non-negative integer</div></td>
 									<td class="data static">{{item.rate | currency:"$"}}</td>
-									<td class="data static rental-period placeholder" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;"></td>
-									<td class="data static rental-period" ng-if="item.customRentalPeriod">
-										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="item.startDate.date" name="startDate" is-open="item.startDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" ng-click="openItemDates($event, item)"/>
-										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="item.endDate.date" name="endDate" is-open="item.endDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" ng-click="openItemDates($event, item)"/>
+									<td class="data static rental-period"><button class="btn" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;" style="display:block">Make Custom Date</button>
+										<span class="individual-date">{{item.startDate.date | date : dd-MMMM-yyyy}}</span><button class="btn glyphicon-minus" ng-click="incrementIndividualDate(item.startDate.date, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon-plus" ng-click="incrementIndividualDate(item.startDate.date, 1)" ng-if="item.customRentalPeriod"></button>
+										<span class="individual-date">{{item.endDate.date | date : dd-MMMM-yyyy}}</span><button class="btn glyphicon-minus" ng-click="incrementIndividualDate(item.endDate.date, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon-plus" ng-click="incrementIndividualDate(item.endDate.date, 1)" ng-if="item.customRentalPeriod"></button>
 									</td>
 									<!-- <td class="data static">{{item.startDate}}</td> -->
 									<!-- <td class="data static">{{item.endDate}}</td> -->

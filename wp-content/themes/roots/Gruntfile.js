@@ -72,12 +72,12 @@ module.exports = function(grunt) {
         ],
         tasks: ['sass', 'version']
       },
-      js: {
-        files: [
-          '<%= jshint.all %>'
-        ],
-        tasks: ['jshint', 'uglify', 'version']
-      },
+      // js: {
+      //   files: [
+      //     '<%= jshint.all %>'
+      //   ],
+      //   tasks: ['jshint', 'uglify', 'version']
+      // },
       livereload: {
         // Browser live reloading
         // https://github.com/gruntjs/grunt-contrib-watch#live-reloading
