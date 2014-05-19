@@ -101,6 +101,7 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 		responsePromise.error(function(data, status, headers, config) {
 			console.log("AJAX failed!");
 			$scope.itemData = baselineColVars($scope.fakeItemData.groups);
+			$scope.calcRentalDates();
 		});
 	};
 
