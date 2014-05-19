@@ -275,27 +275,27 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 		if (item.customRentalPeriod) {
 			if ((!item.startDate) && (!item.endDate)) {
 				console.log("no item start/end dates");
-				item.startDate = $scope.orderMeta.orderPickupDate.date;
-				item.endDate = $scope.orderMeta.orderReturnDate.date;
+				item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
+				item.endDate = new Date($scope.orderMeta.orderReturnDate.date);
 			}
 			if (!item.endDate) {
 				console.log("no end date");
-				item.endDate = item.startDate;
+				item.endDate = angular.copy(item.startDate);
 			}
 			if (!item.startDate || (item.startDate > item.endDate)) {
 				console.log("no start date, or start date after end date");
-				item.startDate = item.endDate;
+				item.endDate = angular.copy(item.startDate);
 			}
 			if (item.endDate) {
 				console.log("endDate: " + item.endDate);
 			}
 			if (item.startDate && item.endDate) {
-				item.days = parseInt((item.endDate - item.startDate) / one_day) + 1;
 			}
 			else {
 				console.log('nullifying '+item.name);
 				item.days = null;
 			}
+			item.days = parseInt((item.endDate - item.startDate) / one_day) + 1;
 		}
 		else {
 			// console.log("setting default dates on: ");
@@ -384,7 +384,7 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 	};
 
 	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'MM/dd/yyyy'];
-	$scope.format = $scope.formats[0];
+	$scope.format = $scope.formats[3];
 
 	var getToday = function() {
 		var today = new Date();
