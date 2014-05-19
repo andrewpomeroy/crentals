@@ -28,10 +28,8 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 			opened: false,
 			date: undefined
 		},
-		endDate: {
-			opened: false,
-			date: undefined
-		},
+		endDate: function() {return new Date();}
+		,
 		days: undefined,
 		daysweek: 7,
 		notes: "",
@@ -268,31 +266,31 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 		console.log(date);
 		date.setDate(date.getDate() + amount);
 		console.log(date);
-		// $scope.calcRentalDates();
+		$scope.calcRentalDates();
 	};
 
 	flushIndividualDate = function(item) {
 		// console.log("ITEM OBJECT TO BE FLUSHED:");
 		// console.log(item);
 		if (item.customRentalPeriod) {
-			if ((!item.startDate.date) && (!item.endDate.date)) {
+			if ((!item.startDate) && (!item.endDate)) {
 				console.log("no item start/end dates");
-				item.startDate.date = $scope.orderMeta.orderPickupDate.date;
-				item.endDate.date = $scope.orderMeta.orderReturnDate.date;
+				item.startDate = $scope.orderMeta.orderPickupDate.date;
+				item.endDate = $scope.orderMeta.orderReturnDate.date;
 			}
-			if (!item.endDate.date) {
+			if (!item.endDate) {
 				console.log("no end date");
-				item.endDate.date = item.startDate.date;
+				item.endDate = item.startDate;
 			}
-			if (!item.startDate.date || (item.startDate.date > item.endDate.date)) {
+			if (!item.startDate || (item.startDate > item.endDate)) {
 				console.log("no start date, or start date after end date");
-				item.startDate.date = item.endDate.date;
+				item.startDate = item.endDate;
 			}
-			if (item.endDate.date) {
-				console.log("endDate: " + item.endDate.date);
+			if (item.endDate) {
+				console.log("endDate: " + item.endDate);
 			}
-			if (item.startDate.date && item.endDate.date) {
-				item.days = parseInt((item.endDate.date - item.startDate.date) / one_day) + 1;
+			if (item.startDate && item.endDate) {
+				item.days = parseInt((item.endDate - item.startDate) / one_day) + 1;
 			}
 			else {
 				console.log('nullifying '+item.name);
@@ -304,12 +302,12 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 			// console.log(item.name);
 			console.log("ITEM-----BEFORE");
 			console.log(item);
-			item.startDate.date = new Date($scope.orderMeta.orderPickupDate.date);
-			item.endDate.date = new Date($scope.orderMeta.orderReturnDate.date);
+			item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
+			item.endDate = new Date($scope.orderMeta.orderReturnDate.date);
 			console.log("ITEM-----AFTER");
 			console.log(item);
 			item.days = $scope.orderMeta.totalRentalDays;
-			// console.log(item.startDate.date);
+			// console.log(item.startDate);
 		}
 		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
 		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;

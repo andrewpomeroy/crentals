@@ -6,6 +6,11 @@ td.input.dynamic
 	max-width: 2em;
 }
 
+td input
+{
+	width: 100%;
+}
+
 .item-days
 {
 	&:empty:after
