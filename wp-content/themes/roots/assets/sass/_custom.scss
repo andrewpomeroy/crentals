@@ -20,7 +20,62 @@ td input
 	}
 }
 
-.individual-date
+td.rental-period
 {
-	display: block;
+	.date-type-label
+	{
+		display: none;
+	}
+	&.edit-mode
+	{
+		.date-type-label.edit-mode
+		{
+			display: block;
+			color: $text-muted;
+			font-style: italic;
+		}
+		.individual-date, .date-control
+		{
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.non-edit
+		{
+			display: none;
+		}
+		.date-separator
+		{
+			display: block;
+			font-size: 0;
+		}
+	}
+	.date-mode-control
+	{
+		opacity: 0;
+	}
+	.date-control
+	{
+		opacity: .3;
+	}
+	.date-control, .date-mode-control
+	{
+		margin-left: .3em;
+	}
+}
+tr:hover > td.rental-period
+{
+	.date-control, .date-mode-control
+	{
+		opacity: 1;
+	}
+}
+
+.date-controls-container
+{
+	display: table-row;
+	.date-controls
+	{
+		display: table-cell;
+		vertical-align: middle;
+	}
 }

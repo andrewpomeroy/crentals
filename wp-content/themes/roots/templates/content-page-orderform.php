@@ -107,9 +107,20 @@
 										(orderFormForm[item.name + '_qty'].$invalid) )
 									}"><input type="number" ng-model="item.qty" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_qty'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_qty'].$invalid">Must be a non-negative integer</div></td>
 									<td class="data static">{{item.rate | currency:"$"}}</td>
-									<td class="data static rental-period"><button class="btn" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;" style="display:block">Make Custom Date</button>
-										<span class="individual-date">{{item.startDate | date:"MM/dd"}}</span><button class="btn glyphicon-minus" ng-click="incrementIndividualDate(item.startDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon-plus" ng-click="incrementIndividualDate(item.startDate, 1)" ng-if="item.customRentalPeriod"></button>
-										<span class="individual-date">{{item.endDate | date:"MM/dd"}}</span><button class="btn glyphicon-minus" ng-click="incrementIndividualDate(item.endDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon-plus" ng-click="incrementIndividualDate(item.endDate, 1)" ng-if="item.customRentalPeriod"></button>
+									<td class="data static rental-period" ng-class="{'edit-mode': item.customRentalPeriod}">
+										<div class="date-controls-container">
+											<div class="date-controls left">
+												<span class="date-type-label edit-mode">Pickup Date</span>
+												<span class="individual-date">{{item.startDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.startDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.startDate, 1)" ng-if="item.customRentalPeriod"></button>
+												<span class="date-separator"> – </span>
+												<span class="date-type-label edit-mode">Return Date</span>
+												<span class="individual-date">{{item.endDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.endDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.endDate, 1)" ng-if="item.customRentalPeriod"></button>
+											</div>
+											<div class="date-controls left">
+												<button class="btn date-mode-control glyphicon glyphicon-pencil" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;"></button>
+												<button class="btn date-mode-control glyphicon glyphicon-repeat" ng-if="item.customRentalPeriod" ng-click="item.customRentalPeriod=false; flushIndividualItem(item)" title="Reset"></button>
+											</div>
+										</div>
 									</td>
 									<!-- <td class="data static">{{item.startDate}}</td> -->
 									<!-- <td class="data static">{{item.endDate}}</td> -->
