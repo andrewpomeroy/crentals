@@ -26,6 +26,27 @@ td.rental-period
 	{
 		display: none;
 	}
+	.individual-date, .date-separator
+	{
+		color: $text-muted;
+	}
+	.date-mode-control
+	{
+		opacity: 0;
+		background: $brand-warning;
+		margin-left: 10px;
+	}
+	.date-control
+	{
+		// background: $brand-info;
+		opacity: .5;
+		font-size: .5em;
+		margin-left: 5px;
+	}
+	.date-control, .date-mode-control
+	{
+		color: white;
+	}
 	&.edit-mode
 	{
 		.date-type-label.edit-mode
@@ -33,6 +54,11 @@ td.rental-period
 			display: block;
 			color: $text-muted;
 			font-style: italic;
+		}
+		.individual-date
+		{
+			color: $gray-dark;
+			font-weight: 600;
 		}
 		.individual-date, .date-control
 		{
@@ -49,17 +75,13 @@ td.rental-period
 			font-size: 0;
 		}
 	}
-	.date-mode-control
+	.date-controls.right
 	{
-		opacity: 0;
-	}
-	.date-control
-	{
-		opacity: .3;
-	}
-	.date-control, .date-mode-control
-	{
-		margin-left: .3em;
+		height: 100%;
+		.date-mode-control
+		{
+			min-height: 100%;
+		}
 	}
 }
 tr:hover > td.rental-period

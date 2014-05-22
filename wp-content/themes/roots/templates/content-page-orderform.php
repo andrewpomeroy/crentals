@@ -44,9 +44,9 @@
 						<div class="col-sm-6">
 							<div class="form-group"><label for="PONumber" class="control-label">PO #</label><input type="text" name="PONumber" id="PONumber" class="form-control" ng-model="orderMeta.PONumber"></div>
 						</div>
-						<div class="col-sm-6">
+<!-- 						<div class="col-sm-6">
 							<div class="form-group"><label for="shootDays" class="control-label">Shoot Days</label><input type="text" name="shootDays" id="shootDays" class="form-control" ng-model="orderMeta.shootDays"></div>
-						</div>
+						</div> -->
 					</div>
 				</section>
 
@@ -99,7 +99,7 @@
 								</thead>
 								<tbody ng-repeat="group in itemData" ng-if="group.items">
 									<tr class="section-heading-row">
-										<td colspan="7" class="section-heading"><h4 class="section-heading">{{group.type}}</h4></td>
+										<td colspan="8" class="section-heading"><h4 class="section-heading">{{group.type}}</h4></td>
 									</tr>
 									<tr ng-repeat="item in group.items" class="item-row" ng-class="{'has-error': (item.estimate === null)}">
 										<td class="data static">{{item.name}}</td>
@@ -116,7 +116,7 @@
 												<span class="date-type-label edit-mode">Return Date</span>
 												<span class="individual-date">{{item.endDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.endDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.endDate, 1)" ng-if="item.customRentalPeriod"></button>
 											</div>
-											<div class="date-controls left">
+											<div class="date-controls right">
 												<button class="btn date-mode-control glyphicon glyphicon-pencil" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;"></button>
 												<button class="btn date-mode-control glyphicon glyphicon-repeat" ng-if="item.customRentalPeriod" ng-click="item.customRentalPeriod=false; flushIndividualItem(item)" title="Reset"></button>
 											</div>
