@@ -16,7 +16,7 @@ var app = angular.module('myApp', ['ui.bootstrap']);
 //     };
 //   });
 
-app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
+app.controller('orderForm', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
 
 	var valueTypeBase = {
 		type: "item",
@@ -387,25 +387,31 @@ app.controller('orderForm', ['$scope', '$http', function($scope, $http) {
 	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'MM/dd/yyyy'];
 	$scope.format = $scope.formats[3];
 
-	var getToday = function() {
-		var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth()+1; //January is 0!
-		var yyyy = today.getFullYear();
+	// MODAL STUFF
 
-		if(dd<10) {
-		    dd='0'+dd
-		} 
+	 $scope.infoModal = function (item) {
 
-		if(mm<10) {
-		    mm='0'+mm
-		} 
-
-		today = mm+'/'+dd+'/'+yyyy;
-		// dateFormat(today);
-		console.log("TODAY: " + today);
-		return today;
+	    var modalInstance = $modal.open({
+	      templateUrl: '/wp-content/themes/roots/templates/myModalContent.html',
+	      controller: ModalInstanceCtrl,
+	      item: item,
+	      resolve: {
+	        theItem: function () {
+	          return item;
+	        }
+	      }
+	    });
 	}
+
+    var ModalInstanceCtrl = function ($scope, $modalInstance, theItem) {
+
+    $scope.theItem = theItem;
+
+      $scope.ok = function () {
+        $modalInstance.close();
+      };
+
+    };
 
 	// --- INITIALIZE ---
 	var init = function() {
@@ -440,6 +446,11 @@ app.directive('dynamicName', function($compile, $parse) {
 	}
   };
 });
+
+
+
+
+
 
 
 

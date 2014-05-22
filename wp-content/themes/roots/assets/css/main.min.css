@@ -6385,9 +6385,11 @@ tr:hover > td.rental-period .date-control, tr:hover > td.rental-period .date-mod
 td textarea {
   max-width: 100%;
   resize: vertical;
+  text-overflow: ellipsis;
 }
 td textarea:focus {
   max-width: 400px;
+  min-height: 10em;
 }
 
 .date-controls-container {
@@ -6397,6 +6399,22 @@ td textarea:focus {
   display: table-cell;
   vertical-align: middle;
   white-space: nowrap;
+}
+
+tr .only-hover {
+  opacity: 0;
+}
+
+tr:hover .only-hover {
+  opacity: 1;
+}
+
+.item-image {
+  max-width: 100%;
+}
+.item-image + .item-description {
+  margin-top: 1em;
+  font-size: 22px;
 }
 
 .demo-image {
@@ -6416,6 +6434,14 @@ td textarea:focus {
 
 .demo-image__admin-link {
   display: block;
+}
+
+.close-message {
+  font-style: italic;
+}
+
+.muted {
+  color: #999999;
 }
 
 /* ==========================================================================

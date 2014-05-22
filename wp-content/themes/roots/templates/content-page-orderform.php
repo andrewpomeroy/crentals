@@ -103,7 +103,10 @@
 										<td colspan="8" class="section-heading"><h4 class="section-heading">{{group.type}}</h4></td>
 									</tr>
 									<tr ng-repeat="item in group.items" class="item-row" ng-class="{'has-error': (item.estimate === null)}">
-										<td class="data static">{{item.name}}</td>
+										<td class="data static">
+											<a href class="item-name linked" ng-if="item.description || item.image" ng-click="infoModal(item)">{{item.name}}</a>
+											<span class="item-name no-image no-description" ng-if="!item.description && !item.image">{{item.name}}</span>
+										</td>
 										<td class="data dynamic input" ng-class="{'has-error': (
 										(orderFormForm[item.name + '_qty'].$invalid) )
 									}"><input type="number" ng-model="item.qty" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_qty'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_qty'].$invalid">Must be a non-negative integer</div></td>
@@ -111,15 +114,15 @@
 									<td class="data static rental-period" ng-class="{'edit-mode': item.customRentalPeriod}">
 										<div class="date-controls-container">
 											<div class="date-controls left">
-												<span class="date-type-label edit-mode">Pickup Date</span>
+												<span class="date-type-label edit-mode">First Day</span>
 												<span class="individual-date">{{item.startDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.startDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.startDate, 1)" ng-if="item.customRentalPeriod"></button>
 												<span class="date-separator"> – </span>
-												<span class="date-type-label edit-mode">Return Date</span>
+												<span class="date-type-label edit-mode">Last Day</span>
 												<span class="individual-date">{{item.endDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.endDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.endDate, 1)" ng-if="item.customRentalPeriod"></button>
 											</div>
 											<div class="date-controls right">
 												<button class="btn date-mode-control glyphicon glyphicon-pencil" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;"></button>
-												<button class="btn date-mode-control glyphicon glyphicon-repeat" ng-if="item.customRentalPeriod" ng-click="item.customRentalPeriod=false; flushIndividualItem(item)" title="Reset"></button>
+												<button class="btn date-mode-control glyphicon glyphicon-remove-circle" ng-if="item.customRentalPeriod" ng-click="item.customRentalPeriod=false; flushIndividualItem(item)" title="Reset"></button>
 											</div>
 										</div>
 									</td>
@@ -129,7 +132,9 @@
 									<td class="data static">{{item.days}}</td>
 								<td class="data static item-days">{{item.daysweek}}</td>
 								<td class="data dynamic"><span ng-show="!!(item.estimate)">{{item.estimate | currency:"$"}}</span></td>
-								<td class="input dynamic"><span><textarea dynamic-name="item.name + '_notes'" ng-model="item.notes" /></textarea></span></td>
+								<td class="input dynamic">
+									<span><textarea dynamic-name="item.name + '_notes'" ng-model="item.notes" ng-class="{'only-hover': !item.notes}"/></textarea></span>
+								</td>
 									</tr>
 								</tbody>
 
@@ -167,6 +172,8 @@
 </div>
 
 </div>
+
+
 
 <?php wp_link_pages(array('before' => '<nav class="pagination">', 'after' => '</nav>')); ?>
 <?php endwhile; ?>
