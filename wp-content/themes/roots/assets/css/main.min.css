@@ -6382,12 +6382,40 @@ tr:hover > td.rental-period .date-control, tr:hover > td.rental-period .date-mod
   opacity: 1;
 }
 
+td textarea {
+  max-width: 100%;
+  resize: vertical;
+}
+td textarea:focus {
+  max-width: 400px;
+}
+
 .date-controls-container {
   display: table-row;
 }
 .date-controls-container .date-controls {
   display: table-cell;
   vertical-align: middle;
+  white-space: nowrap;
+}
+
+.demo-image {
+  display: inline-block;
+  border: 10px solid #eeeeee;
+  background-color: #eeeeee;
+  margin: 3px 5px;
+}
+
+.demo-image__img-wrap:hover {
+  opacity: .8;
+}
+
+.demo-image__title {
+  font-style: italic;
+}
+
+.demo-image__admin-link {
+  display: block;
 }
 
 /* ==========================================================================

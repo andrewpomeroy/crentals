@@ -92,6 +92,17 @@ tr:hover > td.rental-period
 	}
 }
 
+td textarea
+{
+	max-width: 100%;
+	resize: vertical;
+	&:focus
+	{
+		// width: 200px;
+		max-width: 400px;
+	}
+}
+
 .date-controls-container
 {
 	display: table-row;
@@ -99,5 +110,33 @@ tr:hover > td.rental-period
 	{
 		display: table-cell;
 		vertical-align: middle;
+		white-space: nowrap;
 	}
 }
+
+.demo-image
+{
+	display: inline-block;
+	border: 10px solid rgb(238, 238, 238);
+	background-color: rgb(238, 238, 238);
+	margin: 3px 5px;
+}
+.demo-image__img-wrap
+{
+	&:hover
+	{
+		opacity: .8;
+	}
+}
+.demo-image_img
+{
+}
+.demo-image__title
+{
+	font-style: italic;
+}
+.demo-image__admin-link
+{
+	display: block;
+}
+

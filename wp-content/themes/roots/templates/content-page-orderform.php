@@ -44,16 +44,17 @@
 						<div class="col-sm-6">
 							<div class="form-group"><label for="PONumber" class="control-label">PO #</label><input type="text" name="PONumber" id="PONumber" class="form-control" ng-model="orderMeta.PONumber"></div>
 						</div>
-<!-- 						<div class="col-sm-6">
-							<div class="form-group"><label for="shootDays" class="control-label">Shoot Days</label><input type="text" name="shootDays" id="shootDays" class="form-control" ng-model="orderMeta.shootDays"></div>
-						</div> -->
+						<div class="col-sm-6">
+							<!-- <div class="form-group"><label for="shootDays" class="control-label">Shoot Days</label><input type="text" name="shootDays" id="shootDays" class="form-control" ng-model="orderMeta.shootDays"></div> -->
+
+						</div>
 					</div>
 				</section>
 
 				<section class="rental-dates">
 					<div class="row">
 						<div class="col-sm-6">
-							<h4>Pickup Date</h4>
+							<h4>First Working Day</h4>
 							<div class="form-group">
 								<p class="input-group">
 									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderMeta.orderPickupDate.date" name="orderMeta.orderPickupDate" is-open="orderMeta.orderPickupDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
@@ -64,7 +65,7 @@
 							</div>
 						</div>
 						<div class="col-sm-6">
-							<h4>Return Date</h4>
+							<h4>Last Working Day</h4>
 							<div class="form-group">
 								<p class="input-group" ng-class="{'has-error': (orderMeta.orderReturnDate.date < orderMeta.orderPickupDate.date)}">
 									<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderMeta.orderReturnDate.date" name="orderMeta.orderReturnDate" is-open="orderMeta.orderReturnDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
@@ -90,7 +91,7 @@
 										<th>Item</th>
 										<th>Quantity</th>
 										<th>Rate</th>
-										<th>Rental Dates</th>
+										<th>Working Dates</th>
 										<th>Days</th>
 										<th>Days/Week</th>
 										<th>Estimate</th>
