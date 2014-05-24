@@ -1,0 +1,26 @@
+/* @license
+ * MyFonts Webfont Build ID 2459291, 2013-01-24T17:36:11-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Twentieth Century Std UltraBold by Monotype Imaging
+ * URL: http://www.myfonts.com/fonts/mti/twentieth-century-mt/std-ultra-bold/
+ * Copyright: Font software Copyright 1997 Adobe Systems Incorporated. Typeface designs Copyright 1997 The Monotype Corporation. All rights reserved.
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2459291
+ * 
+ * © 2013 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/25869b");
+
+  
+@font-face {font-family: 'TwCenMTStd-UltraBold';src: url('webfonts/25869B_0_0.eot');src: url('webfonts/25869B_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/25869B_0_0.woff') format('woff'),url('webfonts/25869B_0_0.ttf') format('truetype');}
+ 
