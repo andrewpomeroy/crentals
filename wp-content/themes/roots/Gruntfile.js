@@ -12,11 +12,16 @@ module.exports = function(grunt) {
         '!assets/js/scripts.min.js'
       ]
     },
+    // connect: {
+    //   options: {
+    //     open: true
+    //   }
+    // },
     sass: {
       dist: {
         options: {
           style: 'expanded',
-          compass: true,
+          compass: false,
           // Source maps are available, but require Sass 3.3.0 to be installed
           // https://github.com/gruntjs/grunt-contrib-sass#sourcemap
           sourcemap: false
@@ -82,7 +87,7 @@ module.exports = function(grunt) {
         // Browser live reloading
         // https://github.com/gruntjs/grunt-contrib-watch#live-reloading
         options: {
-          livereload: true
+          livereload: true,
         },
         files: [
           'assets/css/main.min.css',
@@ -97,7 +102,14 @@ module.exports = function(grunt) {
         'assets/css/main.min.css',
         'assets/js/scripts.min.js'
       ]
-    }
+    },
+    // serve: {
+    //   connect: {
+    //     options: {
+    //       open: true
+    //     }
+    //   }
+    // }
   });
 
   // Load tasks
@@ -107,13 +119,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-wp-version');
+  // grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Register tasks
   grunt.registerTask('default', [
     'clean',
     'sass',
     'uglify',
-    'version'
+    'version',
+    // 'connect'
   ]);
   grunt.registerTask('dev', [
     'watch'
