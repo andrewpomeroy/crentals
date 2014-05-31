@@ -10,10 +10,63 @@ nav > li, .nav > li, nav > li > a, .nav > li > a
 
 // ----- Order Form Page Layout
 
+body
+{
+	position: relative;
+	background-color: $background-color;
+}
+
+.clmn-main, .clmn-main-push, .clmn-sidebar, .clmn-sidebar-push
+{
+	background: $background-color;
+}
+
+body:not(.estimate-form)
+{
+	// hide "Navigation" title
+	aside.sidebar > section:first-child > h3:first-child
+	{
+		display: none;
+	}
+	.clmn-main-push, .clmn-main
+	{
+		@include make-md-column(9);
+	}
+	.clmn-main-push
+	{
+		@include make-md-column-push(3);
+	}
+	.clmn-sidebar-pull, .clmn-sidebar
+	{
+		@include make-md-column(3);
+	}
+	.clmn-sidebar-pull
+	{
+		@include make-md-column-pull(9);
+	}
+}
+
 .estimate-form
 {
-	
+	.clmn-main-push, .clmn-main
+	{
+		@include make-md-column(12);
+	}
+	.clmn-sidebar-pull, .clmn-sidebar
+	{
+		@include make-md-column(3);
+		background-color: white;
+		position: fixed;
+		min-height: 100%;
+		left: 0;
+		top: 0;
+		box-shadow: 0px 0px 4px 1px rgba(0,0,0, .12);
+		z-index: 666;
+	}
 }
+
+
+
 .flex
 {
 	display: flex;

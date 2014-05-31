@@ -6323,98 +6323,87 @@ nav > li, .nav > li, nav > li > a, .nav > li > a {
   text-rendering: optimizeLegibility;
 }
 
+body {
+  position: relative;
+  background-color: #fafafa;
+}
+
+.clmn-main, .clmn-main-push, .clmn-sidebar, .clmn-sidebar-push {
+  background: #fafafa;
+}
+
+body:not(.estimate-form) aside.sidebar > section:first-child > h3:first-child {
+  display: none;
+}
+body:not(.estimate-form) .clmn-main-push, body:not(.estimate-form) .clmn-main {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  body:not(.estimate-form) .clmn-main-push, body:not(.estimate-form) .clmn-main {
+    float: left;
+    width: 75%;
+  }
+}
+@media (min-width: 992px) {
+  body:not(.estimate-form) .clmn-main-push {
+    left: 25%;
+  }
+}
+body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-sidebar {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-sidebar {
+    float: left;
+    width: 25%;
+  }
+}
+@media (min-width: 992px) {
+  body:not(.estimate-form) .clmn-sidebar-pull {
+    right: 75%;
+  }
+}
+
+.estimate-form .clmn-main-push, .estimate-form .clmn-main {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .estimate-form .clmn-main-push, .estimate-form .clmn-main {
+    float: left;
+    width: 100%;
+  }
+}
+.estimate-form .clmn-sidebar-pull, .estimate-form .clmn-sidebar {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: white;
+  position: fixed;
+  min-height: 100%;
+  left: 0;
+  top: 0;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
+  z-index: 666;
+}
+@media (min-width: 992px) {
+  .estimate-form .clmn-sidebar-pull, .estimate-form .clmn-sidebar {
+    float: left;
+    width: 25%;
+  }
+}
+
 .flex {
   display: flex;
-}
-
-td.input.dynamic {
-  max-width: 2em;
-}
-
-td input {
-  width: 100%;
-}
-
-td textarea {
-  max-width: 100%;
-  resize: vertical;
-  text-overflow: ellipsis;
-}
-td textarea:focus {
-  max-width: 400px;
-  min-height: 10em;
-}
-
-tr .only-hover {
-  opacity: 0;
-}
-
-tr:hover .only-hover {
-  opacity: 1;
-}
-
-.item-days:empty:after {
-  content: "–";
-  display: inline;
-}
-
-tr:hover > td.rental-period .date-control, tr:hover > td.rental-period .date-mode-control {
-  opacity: 1;
-}
-
-.date-controls-container {
-  display: table-row;
-}
-.date-controls-container .date-controls {
-  display: table-cell;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
-td.rental-period .date-type-label {
-  display: none;
-}
-td.rental-period .individual-date, td.rental-period .date-separator {
-  color: #999999;
-}
-td.rental-period .date-mode-control {
-  opacity: 0;
-  background: #f0ad4e;
-  margin-left: 10px;
-}
-td.rental-period .date-control {
-  opacity: .5;
-  font-size: .5em;
-  margin-left: 5px;
-}
-td.rental-period .date-control, td.rental-period .date-mode-control {
-  color: white;
-}
-td.rental-period.edit-mode .date-type-label.edit-mode {
-  display: block;
-  color: #999999;
-  font-style: italic;
-}
-td.rental-period.edit-mode .individual-date {
-  color: #333333;
-  font-weight: 600;
-}
-td.rental-period.edit-mode .individual-date, td.rental-period.edit-mode .date-control {
-  display: inline-block;
-  vertical-align: middle;
-}
-td.rental-period.edit-mode .non-edit {
-  display: none;
-}
-td.rental-period.edit-mode .date-separator {
-  display: block;
-  font-size: 0;
-}
-td.rental-period .date-controls.right {
-  height: 100%;
-}
-td.rental-period .date-controls.right .date-mode-control {
-  min-height: 100%;
 }
 
 .item-image {
