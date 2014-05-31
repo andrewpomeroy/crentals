@@ -6452,6 +6452,96 @@ td.rental-period .date-controls.right .date-mode-control {
   color: #999999;
 }
 
+td.input.dynamic {
+  max-width: 2em;
+}
+
+td input {
+  width: 100%;
+}
+
+td textarea {
+  max-width: 100%;
+  resize: vertical;
+  text-overflow: ellipsis;
+}
+td textarea:focus {
+  max-width: 400px;
+  min-height: 10em;
+}
+
+tr .only-hover {
+  opacity: 0;
+}
+
+tr:hover .only-hover {
+  opacity: 1;
+}
+
+.item-days:empty:after {
+  content: "–";
+  display: inline;
+}
+
+tr:hover > td.rental-period .date-control, tr:hover > td.rental-period .date-mode-control {
+  opacity: 1;
+}
+
+.date-controls-container {
+  display: table-row;
+}
+.date-controls-container .date-controls {
+  display: table-cell;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+td.rental-period .date-type-label {
+  display: none;
+}
+td.rental-period .individual-date, td.rental-period .date-separator {
+  color: #999999;
+}
+td.rental-period .date-mode-control {
+  opacity: 0;
+  background: #f0ad4e;
+  margin-left: 10px;
+}
+td.rental-period .date-control {
+  opacity: .5;
+  font-size: .5em;
+  margin-left: 5px;
+}
+td.rental-period .date-control, td.rental-period .date-mode-control {
+  color: white;
+}
+td.rental-period.edit-mode .date-type-label.edit-mode {
+  display: block;
+  color: #999999;
+  font-style: italic;
+}
+td.rental-period.edit-mode .individual-date {
+  color: #333333;
+  font-weight: 600;
+}
+td.rental-period.edit-mode .individual-date, td.rental-period.edit-mode .date-control {
+  display: inline-block;
+  vertical-align: middle;
+}
+td.rental-period.edit-mode .non-edit {
+  display: none;
+}
+td.rental-period.edit-mode .date-separator {
+  display: block;
+  font-size: 0;
+}
+td.rental-period .date-controls.right {
+  height: 100%;
+}
+td.rental-period .date-controls.right .date-mode-control {
+  min-height: 100%;
+}
+
 /* ==========================================================================
    Base
    ========================================================================== */
