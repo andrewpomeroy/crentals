@@ -2668,7 +2668,7 @@ input[type="button"].btn-block {
   src: url("bootstrap/glyphicons-halflings-regular.eot");
   src: url("bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
-.glyphicon, .estimate-form .clmn-sidebar-pull:after, .estimate-form .clmn-sidebar:after {
+.glyphicon {
   position: relative;
   top: 1px;
   display: inline-block;
@@ -6350,7 +6350,6 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
-  padding-left: 57px;
 }
 @media (min-width: 992px) {
   .estimate-form .clmn-main-push, .estimate-form .clmn-main {
@@ -6369,9 +6368,11 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   top: 0;
   min-height: 100%;
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
-  z-index: 1001;
-  -webkit-transition: 450ms 400ms -webkit-transform cubic-bezier(0.2, 0.865, 0.72, 1.01);
-  transition: 450ms 400ms transform cubic-bezier(0.2, 0.865, 0.72, 1.01);
+  z-index: 666;
+  -webkit-transition: 450ms 0s -webkit-transform cubic-bezier(0.2, 0.865, 0.72, 1.01);
+  transition: 450ms 0s transform cubic-bezier(0.2, 0.865, 0.72, 1.01);
+  -webkit-transition-delay: 400ms;
+  transition-delay: 400ms;
 }
 @media (min-width: 992px) {
   .estimate-form .clmn-sidebar-pull, .estimate-form .clmn-sidebar {
@@ -6382,32 +6383,21 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
 .estimate-form .clmn-sidebar-pull .widget, .estimate-form .clmn-sidebar .widget {
   opacity: 0;
 }
-.estimate-form .clmn-sidebar-pull .widget, .estimate-form .clmn-sidebar-pull:after, .estimate-form .clmn-sidebar .widget, .estimate-form .clmn-sidebar:after {
-  -webkit-transition: 450ms 200ms opacity cubic-bezier(0.2, 0.865, 0.72, 1.01);
-  transition: 450ms 200ms opacity cubic-bezier(0.2, 0.865, 0.72, 1.01);
-}
 .estimate-form .clmn-sidebar-pull:after, .estimate-form .clmn-sidebar:after {
-  color: #d4202b;
-  content: "\e012";
+  content: "MENU";
   position: absolute;
   top: 0;
-  right: 0;
-  font-size: 24px;
-  width: 42px;
-  line-height: 42px;
-  text-align: center;
+  left: 0;
 }
 .estimate-form .clmn-sidebar-pull:not(:hover), .estimate-form .clmn-sidebar:not(:hover) {
-  -webkit-transform: translateX(-webkit-calc(-100% + 42px)) !important;
-  transform: translateX(calc(-100% + 42px)) !important;
+  -webkit-transform: translateX(-80%) !important;
+  transform: translateX(-80%) !important;
 }
 .estimate-form .clmn-sidebar-pull:hover, .estimate-form .clmn-sidebar:hover {
   -webkit-transform: translateX(0);
   transform: translateX(0);
-}
-.estimate-form .clmn-sidebar-pull:hover, .estimate-form .clmn-sidebar-pull:hover:after, .estimate-form .clmn-sidebar-pull:hover .widget, .estimate-form .clmn-sidebar:hover, .estimate-form .clmn-sidebar:hover:after, .estimate-form .clmn-sidebar:hover .widget {
-  -webkit-transition-delay: 70ms;
-  transition-delay: 70ms;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
 }
 .estimate-form .clmn-sidebar-pull:hover:after, .estimate-form .clmn-sidebar:hover:after {
   opacity: 0;
@@ -6600,4 +6590,4 @@ figure.alignnone {
    Media Queries
    ========================================================================== */
 
-/*# sourceMappingURL=main.min.css.map */
+/*# sourceMappingURL=src.map */

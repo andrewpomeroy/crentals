@@ -24,10 +24,14 @@ body
 body:not(.estimate-form)
 {
 	// hide "Navigation" title
-	aside.sidebar > section:first-child > h3:first-child
+	aside.sidebar
 	{
-		display: none;
-	}
+		padding-top: ($line-height-computed * 2);
+		> section:first-child > h3:first-child
+		{
+			display: none;
+		}
+	} 
 	.clmn-main-push, .clmn-main
 	{
 		@include make-md-column(9);
@@ -51,17 +55,60 @@ body:not(.estimate-form)
 	.clmn-main-push, .clmn-main
 	{
 		@include make-md-column(12);
+		padding-left: ($grid-gutter-width / 2) + $sidebar-minimized; 
 	}
 	.clmn-sidebar-pull, .clmn-sidebar
 	{
 		@include make-md-column(3);
 		background-color: white;
 		position: fixed;
-		min-height: 100%;
 		left: 0;
 		top: 0;
+		min-height: 100%;
 		box-shadow: 0px 0px 4px 1px rgba(0,0,0, .12);
-		z-index: 666;
+		z-index: 1001;
+		transition: $sidebar-mv-duration $sidebar-mv-delay--out $sidebar-mv-prop $sidebar-mv-func;
+		.widget
+		{
+			opacity: 0;
+		}
+		.widget, &:after
+		{
+			transition: $sidebar-mv-duration ($sidebar-mv-delay--out/2) opacity $sidebar-mv-func;
+		}
+		&:after
+		{
+			@extend .glyphicon;
+			color: $brand-primary;
+			content: "\e012";
+			position: absolute;
+			top: 0;
+			right: 0;
+			font-size: 24px;
+			width: $sidebar-minimized;
+			line-height: $sidebar-minimized;
+			text-align: center;
+		}
+		&:not(:hover)
+		{
+			transform: translateX(calc(-100% + #{$sidebar-minimized})) !important;
+		}
+		&:hover
+		{
+			transform: translateX(0);
+			&, &:after, .widget
+			{
+				transition-delay: $sidebar-mv-delay;
+			}
+			&:after
+			{
+				opacity: 0;
+			}
+			.widget
+			{
+				opacity: 1;
+			}
+		}
 	}
 }
 

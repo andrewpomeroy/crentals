@@ -8,3 +8,11 @@ $brand-primary: #d4202b;
 $background-color: hsl(0,0%,98%);
 
 // LAYOUT
+$sidebar-minimized: 42px;
+
+// ANIMATION
+$sidebar-mv-duration: 450ms;
+$sidebar-mv-delay: 70ms;
+$sidebar-mv-delay--out: 400ms;
+$sidebar-mv-prop: transform;
+$sidebar-mv-func: cubic-bezier(0.200, 0.865, 0.720, 1.010);

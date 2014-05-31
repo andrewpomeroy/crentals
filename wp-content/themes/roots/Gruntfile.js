@@ -4,9 +4,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     autoprefixer: {
       options: {
-        browsers: ['last 2 versions']
+        browsers: ['last 2 versions'],
+        diff: true
       },
-      src: 'assets/css/main.min.css'
+      finalcss: {
+        src: 'assets/css/main.min.css'
+      }
     },
     jshint: {
       options: {
@@ -81,7 +84,7 @@ module.exports = function(grunt) {
           'assets/sass/*.scss',
           'assets/sass/bootstrap/*.scss'
         ],
-        tasks: ['sass', 'version']
+        tasks: ['sass', 'autoprefixer:finalcss', 'version']
       },
       // js: {
       //   files: [
