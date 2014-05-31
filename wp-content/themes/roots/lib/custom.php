@@ -9,6 +9,16 @@ if (!is_page(9)) {
 	
 }
 
+// // Import webfonts
+
+// function roots_scripts() {
+//   wp_enqueue_style('myfonts', get_template_directory_uri() . '/assets/css/main.min.css', false, 'f51037bc31c32c868c7508dd5595315a');
+
+//   // jQuery is loaded using the same method from HTML5 Boilerplate:
+//   // Grab Google CDN's latest jQuery with a protocol relative URL; fallback to local if offline
+//   // It's kept in the header instead of footer to avoid conflicts with plugins.
+// add_filter('script_loader_src', 'roots_jquery_local_fallback', 10, 2);
+
 // Hide Admin Bar
 add_filter('show_admin_bar', '__return_false');
 

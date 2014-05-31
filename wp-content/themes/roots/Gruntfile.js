@@ -2,6 +2,12 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+    autoprefixer: {
+      options: {
+        browsers: ['last 2 versions']
+      },
+      src: 'assets/css/main.min.css'
+    },
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -24,7 +30,7 @@ module.exports = function(grunt) {
           compass: false,
           // Source maps are available, but require Sass 3.3.0 to be installed
           // https://github.com/gruntjs/grunt-contrib-sass#sourcemap
-          sourcemap: false
+          sourcemap: true
         },
         files: {
           'assets/css/main.min.css': [
@@ -119,12 +125,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-wp-version');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   // grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Register tasks
   grunt.registerTask('default', [
     'clean',
     'sass',
+    'autoprefixer',
     'uglify',
     'version',
     // 'connect'
