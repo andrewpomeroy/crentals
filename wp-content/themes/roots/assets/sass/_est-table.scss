@@ -9,16 +9,21 @@ td input
 {
 	width: 100%;
 }
-td textarea
+td.input.dynamic.notes
 {
-	max-width: 100%;
-	resize: vertical;
-	text-overflow: ellipsis;
-	&:focus
+	min-width: 4em;
+	max-width: none;
+	textarea
 	{
-		// width: 200px;
-		max-width: 400px;
-		min-height: 10em;
+		max-width: 100%;
+		resize: vertical;
+		text-overflow: ellipsis;
+		&:focus
+		{
+			// width: 200px;
+			max-width: 400px;
+			min-height: 10em;
+		}
 	}
 }
 tr .only-hover

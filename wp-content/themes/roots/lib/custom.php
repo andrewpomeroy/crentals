@@ -11,8 +11,24 @@ if (!is_page(9)) {
 
 // // Import webfonts
 
+// function myfonts_css() {
+//   wp_enqueue_style('myfonts', get_template_directory_uri() . '/assets/css/myfonts.css', false);
+// }
+// add_filter('wp_print_styles', 'myfonts_css');
+
+function typekit_js() {
+    wp_enqueue_script('typekit', "//use.typekit.net/wwx3lml.js", false );
+}
+add_filter('wp_print_scripts', 'typekit_js');
+
+function typekit_try() { 
+    ?>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <?php
+}
+add_filter('wp_head', 'typekit_try');
+
 // function roots_scripts() {
-//   wp_enqueue_style('myfonts', get_template_directory_uri() . '/assets/css/main.min.css', false, 'f51037bc31c32c868c7508dd5595315a');
 
 //   // jQuery is loaded using the same method from HTML5 Boilerplate:
 //   // Grab Google CDN's latest jQuery with a protocol relative URL; fallback to local if offline

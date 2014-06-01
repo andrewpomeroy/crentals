@@ -2,7 +2,6 @@
 /*!
  * Roots 6.5.2
  */
-@import url(myfonts.css);
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -328,7 +327,7 @@ html {
 }
 
 body {
-  font-family: "TW Cen MT";
+  font-family: "futura-pt", "Futura Std", "Futura", "TW Cen MT";
   font-size: 16px;
   line-height: 1.42857;
   color: #333333;
@@ -414,7 +413,7 @@ hr {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.1;
   color: inherit;
 }
@@ -6466,12 +6465,16 @@ td input {
   width: 100%;
 }
 
-td textarea {
+td.input.dynamic.notes {
+  min-width: 4em;
+  max-width: none;
+}
+td.input.dynamic.notes textarea {
   max-width: 100%;
   resize: vertical;
   text-overflow: ellipsis;
 }
-td textarea:focus {
+td.input.dynamic.notes textarea:focus {
   max-width: 400px;
   min-height: 10em;
 }

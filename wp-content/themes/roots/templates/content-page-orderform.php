@@ -132,7 +132,7 @@
 									<td class="data static">{{item.days}}</td>
 								<td class="data static item-days">{{item.daysweek}}</td>
 								<td class="data dynamic"><span ng-show="!!(item.estimate)">{{item.estimate | currency:"$"}}</span></td>
-								<td class="input dynamic">
+								<td class="input dynamic notes">
 									<span><textarea dynamic-name="item.name + '_notes'" ng-model="item.notes" ng-class="{'only-hover': !item.notes}"/></textarea></span>
 								</td>
 									</tr>
