@@ -23,93 +23,89 @@ body
 
 body:not(.estimate-form)
 {
-	// hide "Navigation" title
-	aside.sidebar
-	{
-		padding-top: ($line-height-computed * 2);
-		> section:first-child > h3:first-child
-		{
-			display: none;
-		}
-	} 
-	.clmn-main-push, .clmn-main
-	{
-		@include make-md-column(9);
-	}
-	.clmn-main-push
-	{
-		@include make-md-column-push(3);
-	}
-	.clmn-sidebar-pull, .clmn-sidebar
-	{
-		@include make-md-column(3);
-	}
-	.clmn-sidebar-pull
-	{
-		@include make-md-column-pull(9);
-	}
+	@include regular-ass-columns();
 }
 
-.estimate-form
+@include media-query-max($screen-md) {
+	@include regular-ass-columns();
+}
+
+@include media-query-min($screen-md + 1px)
 {
-	.clmn-main-push, .clmn-main
+	%glyphicon-placeholder
 	{
-		@include make-md-column(12);
-		padding-left: ($grid-gutter-width / 2) + $sidebar-minimized; 
+		position: relative;
+		top: 1px;
+		display: inline-block;
+		font-family: 'Glyphicons Halflings';
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
-	.clmn-sidebar-pull, .clmn-sidebar
+	.estimate-form
 	{
-		@include make-md-column(3);
-		background-color: white;
-		position: fixed;
-		left: 0;
-		top: 0;
-		min-height: 100%;
-		box-shadow: 0px 0px 4px 1px rgba(0,0,0, .12);
-		z-index: 1001;
-		transition: $sidebar-mv-duration $sidebar-mv-delay--out $sidebar-mv-prop $sidebar-mv-func;
-		.widget
+		.clmn-main-push, .clmn-main
 		{
-			opacity: 0;
+			@include make-md-column(12);
+			padding-left: ($grid-gutter-width / 2) + $sidebar-minimized; 
 		}
-		.widget, &:after
+		.clmn-sidebar-pull, .clmn-sidebar
 		{
-			transition: $sidebar-mv-duration ($sidebar-mv-delay--out/2) opacity $sidebar-mv-func;
-		}
-		&:after
-		{
-			@extend .glyphicon;
-			color: $brand-primary;
-			content: "\e012";
-			position: absolute;
+			@include make-md-column(3);
+			background-color: white;
+			position: fixed;
+			left: 0;
 			top: 0;
-			right: 0;
-			font-size: 24px;
-			width: $sidebar-minimized;
-			line-height: $sidebar-minimized;
-			text-align: center;
-		}
-		&:not(:hover)
-		{
-			transform: translateX(calc(-100% + #{$sidebar-minimized})) !important;
-		}
-		&:hover
-		{
-			transform: translateX(0);
-			&, &:after, .widget
-			{
-				transition-delay: $sidebar-mv-delay;
-			}
-			&:after
+			min-height: 100%;
+			box-shadow: 0px 0px 4px 1px rgba(0,0,0, .12);
+			z-index: 1001;
+			transition: $sidebar-mv-duration $sidebar-mv-delay--out $sidebar-mv-prop $sidebar-mv-func;
+			.widget
 			{
 				opacity: 0;
 			}
-			.widget
+			.widget, &:after
 			{
-				opacity: 1;
+				transition: $sidebar-mv-duration ($sidebar-mv-delay--out/2) opacity $sidebar-mv-func;
+			}
+			&:after
+			{
+				@extend %glyphicon-placeholder;
+				color: $brand-primary;
+				content: "\e012";
+				position: absolute;
+				top: 0;
+				right: 0;
+				font-size: 24px;
+				width: $sidebar-minimized;
+				line-height: $sidebar-minimized;
+				text-align: center;
+			}
+			&:not(:hover)
+			{
+				transform: translateX(calc(-100% + #{$sidebar-minimized})) !important;
+			}
+			&:hover
+			{
+				transform: translateX(0);
+				&, &:after, .widget
+				{
+					transition-delay: $sidebar-mv-delay;
+				}
+				&:after
+				{
+					opacity: 0;
+				}
+				.widget
+				{
+					opacity: 1;
+				}
 			}
 		}
 	}
+
 }
 
 

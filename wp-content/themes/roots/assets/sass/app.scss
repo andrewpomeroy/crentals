@@ -4,7 +4,8 @@
 
 $bootstrap-sass-asset-helper: false;
 @import "vars-custom";
-@import "myfonts.css";
+@import "mixins";
+// @import "myfonts.css";
 @import "bootstrap/bootstrap";
 @import "custom";
 @import "est-table";

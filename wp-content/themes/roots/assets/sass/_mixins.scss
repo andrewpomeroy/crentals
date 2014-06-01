@@ -1,0 +1,47 @@
+@mixin media-query-max($value, $operator: 'max-width', $query: 'screen') {
+  @media #{$query} and (#{$operator}: #{$value}) {
+    @content;
+  }
+}
+@mixin media-query-min($value, $operator: 'min-width', $query: 'screen') {
+  @media #{$query} and (#{$operator}: #{$value}) {
+    @content;
+  }
+}
+
+@mixin media-query-minmax($value1, $value2, $operator1: 'min-width', $operator2: 'max-width', $query: 'screen') {
+    @media #{$query} and (#{$operator1}: #{$value1}) and (#{$operator2}: #{$value2}) {
+    @content;
+  }
+}
+
+
+// Placeholder replacements
+
+@mixin regular-ass-columns() {
+  // hide "Navigation" title
+  aside.sidebar
+  {
+    padding-top: ($line-height-computed * 2);
+    > section:first-child > h3:first-child
+    {
+      display: none;
+    }
+  } 
+  .clmn-main-push, .clmn-main
+  {
+    @include make-md-column(9);
+  }
+  .clmn-main-push
+  {
+    @include make-md-column-push(3);
+  }
+  .clmn-sidebar-pull, .clmn-sidebar
+  {
+    @include make-md-column(3);
+  }
+  .clmn-sidebar-pull
+  {
+    @include make-md-column-pull(9);
+  }
+}
