@@ -16,7 +16,7 @@ var app = angular.module('myApp', ['ui.bootstrap']);
 //     };
 //   });
 
-app.controller('orderForm', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
+app.controller('mainCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
 
 	var valueTypeBase = {
 		type: "item",
@@ -85,10 +85,11 @@ app.controller('orderForm', ['$scope', '$http', '$modal', function($scope, $http
 	// }
 
 
-	$scope.GSurl = 'https://spreadsheets.google.com/feeds/list/0Ase_pp75HN9MdGlpbkZmZmVTUGU2MElkOEktVUxyQWc/od6/public/values?alt=json';
+	// $scope.GSurl = 'https://spreadsheets.google.com/feeds/list/0Ase_pp75HN9MdGlpbkZmZmVTUGU2MElkOEktVUxyQWc/od6/public/values?alt=json';
+	$scope.GSurl = globalGSUrl;
 	$scope.dataRetreived = {};
 
-	$scope.getItemDataGS = function() {
+	$scope.getItemDataGS = function(thenDoThis) {
 		var responsePromise = $http.get($scope.GSurl);
 		responsePromise.success(function(data, status, headers, config) {
 			// console.table(data.feed.entry[0]);
@@ -136,6 +137,7 @@ app.controller('orderForm', ['$scope', '$http', '$modal', function($scope, $http
 			if (obj[entry].type === "Section") {
 				output.push({
 					type: obj[entry].name,
+					id: obj[entry].id,
 					items: []
 				});
 			}
@@ -301,12 +303,12 @@ app.controller('orderForm', ['$scope', '$http', '$modal', function($scope, $http
 		else {
 			// console.log("setting default dates on: ");
 			// console.log(item.name);
-			console.log("ITEM-----BEFORE");
-			console.log(item);
+			// console.log("ITEM-----BEFORE");
+			// console.log(item);
 			item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
 			item.endDate = new Date($scope.orderMeta.orderReturnDate.date);
-			console.log("ITEM-----AFTER");
-			console.log(item);
+			// console.log("ITEM-----AFTER");
+			// console.log(item);
 			item.days = $scope.orderMeta.totalRentalDays;
 			// console.log(item.startDate);
 		}
@@ -413,23 +415,23 @@ app.controller('orderForm', ['$scope', '$http', '$modal', function($scope, $http
 
     };
 
-	// --- INITIALIZE ---
-	var init = function() {
-		$scope.orderMeta = {};
-		$scope.totalEstimate = 0;
-		var todayDate = new Date();
-		$scope.orderMeta.orderPickupDate = {
-			opened: false,
-			date: todayDate
-		};
-		$scope.orderMeta.orderReturnDate = {
-			opened: false,
-			date: todayDate
-		};
-		// $scope.calcRentalDates();
-		$scope.getItemDataGS();
-	};
-	init();
+    // --- INITIALIZE ---
+    var init = function() {
+    	$scope.orderMeta = {};
+    	$scope.totalEstimate = 0;
+    	var todayDate = new Date();
+    	$scope.orderMeta.orderPickupDate = {
+    		opened: false,
+    		date: todayDate
+    	};
+    	$scope.orderMeta.orderReturnDate = {
+    		opened: false,
+    		date: todayDate
+    	};
+    	// $scope.calcRentalDates();
+    	$scope.getItemDataGS();
+    };
+    init();
 
 }]);
 

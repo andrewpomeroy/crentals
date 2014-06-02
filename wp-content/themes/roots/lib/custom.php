@@ -28,6 +28,15 @@ function typekit_try() {
 }
 add_filter('wp_head', 'typekit_try');
 
+function php_vars_go() {
+    ?>
+    <script type="text/javascript">
+        var globalGSUrl = '<?php echo get_field('product_spreadsheet_url', 'option') ?>';
+    </script>
+    <?php // echo print_r(get_fields('option'));
+}
+add_filter('the_content', 'php_vars_go');
+
 // function roots_scripts() {
 
 //   // jQuery is loaded using the same method from HTML5 Boilerplate:
@@ -40,14 +49,18 @@ add_filter('show_admin_bar', '__return_false');
 
 function my_scripts_init() {
 	$scriptinitDir = get_bloginfo('template_directory').'/assets/js/';
+    // wp_enqueue_script('phpvars', $scriptinitDir.'phpvars.js', array('jquery'), false);
+    // wp_register_script('jquery', $scriptinitDir.'vendor/jquery-1.11.0.min.js', array(), null, false);
+
     if ( (is_page_template('template-orderform.php') || is_page_template('template-category.php')) ) {
         wp_enqueue_script('angular', get_bloginfo('template_directory').'/bower_components/angular/angular.js', array('jquery'), false);
         wp_enqueue_script('uiBootstrap', get_bloginfo('template_directory').'/bower_components/angular-bootstrap/ui-bootstrap-tpls.js', array('angular'), false);
     }
-	if ( is_page_template('template-orderform.php') || is_page_template('template-category.php') ) {
-			// wp_enqueue_script('orderform', $scriptinitDir.'orderform.js', array('jquery'), false);
-        // wp_register_script('jquery', $scriptinitDir.'vendor/jquery-1.11.0.min.js', array(), null, false);
-		wp_enqueue_script('mainController', $scriptinitDir.'main-controller.js', array('angular'), false);
+    if ( is_page_template('template-orderform.php') || is_page_template('template-category.php') ) {
+        wp_enqueue_script('mainController', $scriptinitDir.'main-controller.js', array('angular'), false);
+    }
+    if ( is_page_template('template-orderform.php') ) {
+		wp_enqueue_script('estimateController', $scriptinitDir.'estimate-controller.js', array('angular'), false);
 	}
     if ( is_page_template('template-category.php')) {
             // wp_enqueue_script('orderform', $scriptinitDir.'orderform.js', array('jquery'), false);
