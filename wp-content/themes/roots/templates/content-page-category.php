@@ -6,6 +6,15 @@
 			<section class="main-app">
 				
 			</section>
+
+			<section class="debug">
+
+				<h5 class="debug">Debug</h5>
+
+				<pre class="debug">{{itemData | json}}</pre>
+
+			</section>
+
 		</div>
 	</div>
 
