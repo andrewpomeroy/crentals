@@ -2,19 +2,22 @@
 	<?php the_content(); ?>
 
 	<div ng-app="myApp">
-		<div ng-controller="productCategory">
-			<section class="main-app">
-				
-			</section>
+		<div ng-controller="orderForm">
 
-			<section class="debug">
+			<div ng-controller="productCategory">
+				<section class="main-app">
+					
+				</section>
 
-				<h5 class="debug">Debug</h5>
+				<section class="debug">
 
-				<pre class="debug">{{itemData | json}}</pre>
+					<h5 class="debug">Debug</h5>
 
-			</section>
+					<pre class="debug">{{itemData | json}}</pre>
 
+				</section>
+
+			</div>
 		</div>
 	</div>
 
