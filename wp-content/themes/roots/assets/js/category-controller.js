@@ -1,25 +1,29 @@
-app.controller('productCategory', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
+app.controller('productCategory', ['GSLoader', '$scope', '$http', '$modal', function(GSLoader, $scope, $http, $modal) {
 
-var getProducts = function() {
+var getProducts = function(category) {
 
-	$scope.category = 'vehicles';
+	$scope.category = category;
 
 	console.log("Category");
 	console.log($scope.category);
 	if ($scope.category !== "") {
 		console.log("$scope.itemData", $scope.itemData);
-		for (var group in $scope.itemData) {
+		angular.forEach($scope.itemData, function(group) {
 			console.log(group);
 			if (group.id === $scope.category) {
 				$scope.products = angular.copy(group);
+				console.log("Products: ", $scope.products);
 			}
-		}
+		});
 	}
 };
 
 var init = function() {
-	getProducts();
-}
+	GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
+		$scope.itemData = response;
+		getProducts('vehicles');
+	});
+};
 
 init();
 

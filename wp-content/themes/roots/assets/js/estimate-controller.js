@@ -1,25 +1,231 @@
-app.controller('estimateForm', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
+app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', function($scope, GSLoader, $http, $modal) {
+
+	$scope.calcRentalDates = function() {
+		$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date)/one_day) + 1;
+		resetTotal();
+		for(var i = 0; i < $scope.itemData.length; i++) {
+			for (var x= 0;x< $scope.itemData[i].items.length;x++) {
+				var _item = $scope.itemData[i].items[x];
+				flushIndividualDate(_item);
+				$scope.changeQty(_item);
+				addToTotal(_item);
+			}
+		}
+	};
 
 
+	// $scope.GSurl = 'https://spreadsheets.google.com/feeds/list/0Ase_pp75HN9MdGlpbkZmZmVTUGU2MElkOEktVUxyQWc/od6/public/values?alt=json';
+	$scope.GSurl = globalGSUrl;
+	$scope.dataRetreived = {};
 
-	// // --- INITIALIZE ---
-	// var init = function() {
-	// 	$scope.orderMeta = {};
-	// 	$scope.totalEstimate = 0;
-	// 	var todayDate = new Date();
-	// 	// $scope.calcRentalDates();
-	// 	$scope.getItemDataGS(function() {
-	// 		$scope.orderMeta.orderPickupDate = {
-	// 			opened: false,
-	// 			date: todayDate
-	// 		};
-	// 		$scope.orderMeta.orderReturnDate = {
-	// 			opened: false,
-	// 			date: todayDate
-	// 		};
-	// 		$scope.calcRentalDates();
-	// 	});
-	// };
-	// init();
+	$scope.changeQty = function(item) {
+
+		// ---  calculate Days/Week
+		// Begin with assumption of normal day-counting
+		var daysCounted = item.days;
+		// When days/week restriction is enabled for this item..
+		if (item.daysweek < 7) {
+			// Start out with the number of days counted in all complete weeks
+			daysCounted = Math.floor(item.days/7) * item.daysweek;
+			// In the case that the days in final week exceed specified days/week..
+			if ((item.days%7) > item.daysweek) {
+				// Add only the specified days in final week
+				daysCounted += parseInt(item.daysweek);
+			}
+			// Otherwise, add the entire remainder of days in the final week
+			else {daysCounted += (item.days % 7);}
+		}
+		// Total = Amount * Rate * Time
+		item.estimate = item.qty * item.rate * daysCounted;
+		// $scope.recalcTotalEstimate();
+	};
+
+	// Reset everything
+	$scope.resetForm = function() {
+		// $scope.getItemDataGS();
+		init();
+	};
+
+	// Submit Order to Wordpress Backend
+	$scope.submitOrder = function() {
+		doAjaxRequest();
+	}
+
+	var doAjaxRequest = function() {
+		$.ajax({
+			url: '/wp-admin/admin-ajax.php',
+			data: {
+				'theItemData': $scope.itemData,
+				dataType: 'JSON',
+				success: function(data) {
+					console.log(data);
+				},
+				error: function(errorThrown) {
+					alert('error');
+					console.log(errorThrown);
+				}
+			}
+		});
+	};
+
+
+	// --- DATEPICKER FUNCTIONS ---
+
+	var one_day = 1000*60*60*24;
+
+	$scope.incrementIndividualDate = function(date, amount) {
+		console.log(date);
+		date.setDate(date.getDate() + amount);
+		console.log(date);
+		$scope.calcRentalDates();
+	};
+
+	flushIndividualDate = function(item) {
+		// console.log("ITEM OBJECT TO BE FLUSHED:");
+		// console.log(item);
+		if (item.customRentalPeriod) {
+			if ((!item.startDate) && (!item.endDate)) {
+				console.log("no item start/end dates");
+				item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
+				item.endDate = new Date($scope.orderMeta.orderReturnDate.date);
+			}
+			if (!item.endDate) {
+				console.log("no end date");
+				item.endDate = angular.copy(item.startDate);
+			}
+			if (!item.startDate || (item.startDate > item.endDate)) {
+				console.log("no start date, or start date after end date");
+				item.endDate = angular.copy(item.startDate);
+			}
+			if (item.endDate) {
+				console.log("endDate: " + item.endDate);
+			}
+			if (item.startDate && item.endDate) {
+			}
+			else {
+				console.log('nullifying '+item.name);
+				item.days = null;
+			}
+			item.days = parseInt((item.endDate - item.startDate) / one_day) + 1;
+		}
+		else {
+			// console.log("setting default dates on: ");
+			// console.log(item.name);
+			// console.log("ITEM-----BEFORE");
+			// console.log(item);
+			item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
+			item.endDate = new Date($scope.orderMeta.orderReturnDate.date);
+			// console.log("ITEM-----AFTER");
+			// console.log(item);
+			item.days = $scope.orderMeta.totalRentalDays;
+			// console.log(item.startDate);
+		}
+		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
+		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
+	};
+
+	resetTotal = function() {
+		$scope.totalEstimate = 0;
+	};
+	addToTotal = function(item) {
+		if (item.estimate > 0) {$scope.totalEstimate += item.estimate;}
+	};
+	$scope.calcTotal = function() {
+		resetTotal();
+		loopThroughItems([addToTotal]);
+	};
+
+	loopThroughItems = function(itemFunctions) {
+		// console.log($scope.itemData);
+		for (var group in $scope.itemData) {
+			for (var item in $scope.itemData[group].items) {
+				var theItem = $scope.itemData[group].items[item];
+				// loop through specific item functions and execute each on found item
+				for (var passedFunction in itemFunctions) {
+					itemFunctions[passedFunction](theItem);
+					// console.log("Called: ");
+					// console.log(itemFunctions[passedFunction]);
+					// console.log("with: ");
+					// console.log(theItem);
+				}
+			}
+		}
+	};
+
+	$scope.showWeeks = true;
+	$scope.toggleWeeks = function () {
+		$scope.showWeeks = ! $scope.showWeeks;
+	};
+
+	$scope.clear = function () {
+		$scope.dt = null;
+	};
+
+	$scope.toggleMin = function() {
+		$scope.minDate = ( $scope.minDate ) ? null : new Date();
+	};
+	$scope.toggleMin();
+
+	$scope.dateOptions = {
+		'year-format': "'yy'",
+		'starting-day': 1
+	};
+
+	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'MM/dd/yyyy'];
+	$scope.format = $scope.formats[3];
+
+	// MODAL STUFF
+
+	 $scope.infoModal = function (item) {
+
+		var modalInstance = $modal.open({
+		  templateUrl: '/wp-content/themes/roots/templates/myModalContent.html',
+		  controller: ModalInstanceCtrl,
+		  item: item,
+		  resolve: {
+			theItem: function () {
+			  return item;
+			}
+		  }
+		});
+	}
+
+	var ModalInstanceCtrl = function ($scope, $modalInstance, theItem) {
+
+	$scope.theItem = theItem;
+
+	  $scope.ok = function () {
+		$modalInstance.close();
+	  };
+
+	};
+
+	// --- INITIALIZE ---
+	var init = function() {
+		$scope.orderMeta = {};
+		$scope.totalEstimate = 0;
+		var todayDate = new Date();
+		// $scope.calcRentalDates();
+		// $scope.getItemDataGS(function() {
+		$scope.orderMeta.orderPickupDate = {
+			opened: false,
+			date: todayDate
+		};
+		$scope.orderMeta.orderReturnDate = {
+			opened: false,
+			date: todayDate
+		};
+		GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
+			$scope.itemData = response;
+			$scope.calcRentalDates();
+		});
+
+			// $scope.calcRentalDates();
+
+		// (function(data, status, headers, config) {
+					// console.log("AJAX
+		// });
+	};
+	init();
 
 }]);
