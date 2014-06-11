@@ -158,7 +158,33 @@ body:not(.estimate-form)
 
 // REUSABLE
 
+.placeholder
+{
+	&.image
+	{
+		background-color: $pre-bg;
+		&.product
+		{
+			height: 150px;
+			width: 150px;
+		}
+	}
+}
+
 .muted
 {
 	color: $text-muted;
+}
+
+.Media {
+  display: flex;
+  align-items: flex-start;
+}
+
+.Media-figure {
+  margin-right: 1em;
+}
+
+.Media-body {
+  flex: 1;
 }
