@@ -11,8 +11,8 @@ var getProducts = function(category) {
 		angular.forEach($scope.itemData, function(group) {
 			console.log(group);
 			if (group.id === $scope.category) {
-				$scope.products = angular.copy(group);
-				console.log("Products: ", $scope.products);
+				$scope.productGroup = angular.copy(group);
+				console.log("Products: ", $scope.productGroup);
 			}
 		});
 	}
@@ -41,11 +41,15 @@ app.directive('getCategory', function() {
 app.directive('thumbSrc', function() {
 	return {
 		restrict: 'A',
-		link: function(elem, attrs) {
-			var filename = attrs['thumb-src'];
-			var appendage = "-150x150";
-			filename = filename.replace(/(\.[\w\d_-]+)$/i, appendage);
-			elem.attr('src', filename);
+		link: function(scope, element, attrs) {
+			attrs.$observe('thumbSrc', function(value) {
+				if (value) {
+					var file = value;
+					var appendage = "-150x150.jpg";
+					file = file.replace(/(\.[\w\d_-]+)$/i, appendage);
+					angular.element(element).attr('src', file).removeClass('no-image');
+				}
+			});			
 		}
 	};
 });

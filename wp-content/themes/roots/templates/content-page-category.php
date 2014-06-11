@@ -4,13 +4,16 @@
 		<div ng-controller="mainCtrl">
 
 			<div ng-controller="productCategory">
-				<section class="main-app" get-category="<?php echo get_field('category_id');?>"> 
+				<section class="main-app category-page" get-category="<?php echo get_field('category_id');?>"> 
 					
 					<div class="product-list">
-						<div class="product" ng-repeat="product in productList">
-							<h4>{{product.name}}</h4>
-							<img thumb-src="{{product.image}}">
-							<p class="product-description">{{product.description}}</p>
+						<div class="Media product" ng-repeat="product in productGroup.items" ng-class="{'opens-page': product.image}">
+							<img class="Media-figure product image" thumb-src="{{product.image}}" ng-if="product.image">
+							<span class="Media-figure placeholder product image" ng-if="!product.image"></span>
+							<div class="Media-body">
+								<h4 class="heading product-heading">{{product.name}}</h4>
+								<p class="product-description">{{product.description}}</p>
+							</div>
 						</div>
 					</div>
 
