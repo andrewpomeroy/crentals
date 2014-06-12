@@ -6519,12 +6519,12 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   font-style: italic;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .placeholder.image {
   background-color: whitesmoke;
-}
-.placeholder.image.product {
-  height: 150px;
-  width: 150px;
 }
 
 .muted {
@@ -6551,6 +6551,9 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+.Media-body > .heading:first-child {
+  margin-top: 0;
 }
 
 td.input.dynamic {
@@ -6657,13 +6660,14 @@ td.rental-period .date-controls.right .date-mode-control {
 }
 .category-page .product-list > .product {
   padding: .75em .5em;
+  position: relative;
 }
 .category-page .product-list > .product.opens-page {
-  -webkit-transition: 320ms background-color ease-out;
-  transition: 320ms background-color ease-out;
+  -webkit-transition: 120ms background-color ease-out;
+  transition: 120ms background-color ease-out;
 }
 .category-page .product-list > .product.opens-page:hover, .category-page .product-list > .product.opens-page:focus {
-  background-color: #f09da2;
+  background-color: #fef5f6;
 }
 
 /* ==========================================================================

@@ -18,12 +18,13 @@
 		> .product
 		{
 			padding: .75em .5em;
+			position: relative;
 			&.opens-page
 			{
-				transition: 320ms background-color ease-out;
+				transition: 120ms background-color ease-out;
 				&:hover, &:focus
 				{
-					background-color: lighten($brand-primary, 30%);
+					background-color: lighten($brand-primary, 50%);
 				}
 			}
 		}

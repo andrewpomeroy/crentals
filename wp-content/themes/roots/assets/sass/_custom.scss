@@ -158,16 +158,16 @@ body:not(.estimate-form)
 
 // REUSABLE
 
+.clickable
+{
+	cursor: pointer;
+}
+
 .placeholder
 {
 	&.image
 	{
 		background-color: $pre-bg;
-		&.product
-		{
-			height: 150px;
-			width: 150px;
-		}
 	}
 }
 
@@ -187,4 +187,11 @@ body:not(.estimate-form)
 
 .Media-body {
   flex: 1;
+  > .heading
+  {
+  	&:first-child
+  	{
+  		margin-top: 0;
+  	}
+  }
 }

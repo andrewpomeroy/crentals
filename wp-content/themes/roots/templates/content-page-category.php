@@ -7,7 +7,7 @@
 				<section class="main-app category-page" get-category="<?php echo get_field('category_id');?>"> 
 					
 					<div class="product-list">
-						<div class="Media product" ng-repeat="product in productGroup.items" ng-class="{'opens-page': product.image}">
+						<div class="Media product" ng-repeat="product in productGroup.items" ng-class="{'opens-page clickable': product.image}">
 							<img class="Media-figure product image" thumb-src="{{product.image}}" ng-if="product.image">
 							<span class="Media-figure placeholder product image" ng-if="!product.image"></span>
 							<div class="Media-body">
