@@ -6552,7 +6552,7 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   -ms-flex: 1;
   flex: 1;
 }
-.Media-body > .heading:first-child {
+.Media-body .heading:first-child {
   margin-top: 0;
 }
 
@@ -6658,9 +6658,16 @@ td.rental-period .date-controls.right .date-mode-control {
   list-style-type: none;
   padding-left: 0;
 }
-.category-page .product-list .product.image, .category-page .product-list .placeholder.image.product {
+.category-page .product-list img.product.image, .category-page .product-list a.product.image > img, .category-page .product-list .placeholder.image.product {
   height: 75px;
   width: 75px;
+}
+.category-page .product-list.product-page-list img.product.image, .category-page .product-list.product-page-list a.product.image > img, .category-page .product-list.product-page-list .placeholder.image.product {
+  height: 125px;
+  width: 125px;
+}
+.category-page .product-list.product-page-list > .product {
+  font-size: 20px;
 }
 .category-page .product-list > .product {
   padding: .75em .5em;
@@ -6672,6 +6679,12 @@ td.rental-period .date-controls.right .date-mode-control {
 }
 .category-page .product-list > .product.opens-page:hover, .category-page .product-list > .product.opens-page:focus {
   background-color: #fef5f6;
+}
+.category-page .product-list > .product .product-heading {
+  font-size: 1.25em;
+}
+.category-page .product-list > .product .product-description {
+  font-size: 1em;
 }
 
 /* ==========================================================================

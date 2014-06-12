@@ -12,10 +12,22 @@
 	{
 		list-style-type: none;
 		padding-left: 0;
-		.product.image, .placeholder.image.product
+		img.product.image, a.product.image > img, .placeholder.image.product
 		{
 			height: 75px;
 			width: 75px;
+		}
+		&.product-page-list
+		{
+			img.product.image, a.product.image > img, .placeholder.image.product
+			{
+				height: 125px;
+				width: 125px;
+			}
+			> .product
+			{
+				font-size: 20px;
+			}
 		}
 		> .product
 		{
@@ -28,6 +40,14 @@
 				{
 					background-color: lighten($brand-primary, 50%);
 				}
+			}
+			.product-heading
+			{
+				font-size: 1.25em;
+			}
+			.product-description
+			{
+				font-size: 1em;
 			}
 		}
 	}

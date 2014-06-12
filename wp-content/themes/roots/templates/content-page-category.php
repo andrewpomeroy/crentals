@@ -21,13 +21,13 @@
 					<div class="product-pages">
 						<ul class="product-list product-page-list">
 							<li ng-repeat="product in productPageObject" class="Media product product-page-feature clickable">
-								<a>
-									<img class="Media-figure product image" thumb-src="{{product.image}}" ng-if="product.image">
+								<a href class="Media-figure product image">
+									<img thumb-src="{{product.image}}" ng-if="product.image">
 									<span class="Media-figure placeholder product image" ng-if="!product.image"></span>
-									<span class="Media-body">
-										<h4 class="heading product-heading">{{product.name}}</h4>
-										<p class="product-description">{{product.description}}</p>
-									</span>
+								</a>
+								<a href class="Media-body">
+									<h4 class="heading product-heading">{{product.name}}</h4>
+									<p class="product-description">{{product.description}}</p>
 								</a>
 							</li>
 						</ul>
