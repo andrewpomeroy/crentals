@@ -21,7 +21,7 @@
 					<div class="product-pages">
 						<ul class="product-list product-page-list">
 							<li ng-repeat="product in productPageObject" class="Media product product-page-feature clickable">
-								<a href class="Media-figure product image">
+								<a href class="Media-figure product image-wrap">
 									<img thumb-src="{{product.image}}" ng-if="product.image">
 									<span class="Media-figure placeholder product image" ng-if="!product.image"></span>
 								</a>
