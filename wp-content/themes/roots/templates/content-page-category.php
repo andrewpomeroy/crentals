@@ -2,7 +2,7 @@
 	<?php the_content(); ?>
 	<?php
 		$category = get_field('category_id');
-		$children = query_posts(array('orderby' => 'menu_order', 'order' => 'ASC','showposts' => 1, 'post_parent' => $post->ID, 'post_type' => 'page'));
+		$children = get_posts(array('orderby' => 'menu_order', 'order' => 'ASC','showposts' => 1, 'post_parent' => $post->ID, 'post_type' => 'page'));
 		$childrenIDs = [];
 		foreach ($children as $key => $apost) {
 			$childrenIDs[] = get_field('product_id', $apost->ID);
