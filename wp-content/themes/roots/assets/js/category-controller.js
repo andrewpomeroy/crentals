@@ -1,6 +1,6 @@
 app.controller('productCategory', ['GSLoader', '$scope', '$http', '$modal', function(GSLoader, $scope, $http, $modal) {
 
-var getProducts = function(category) {
+$scope.getProducts = function(category) {
 
 	$scope.category = category;
 
@@ -18,14 +18,33 @@ var getProducts = function(category) {
 	}
 };
 
-var init = function() {
+$scope.getTheStuff = function(category) {
 	GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
 		$scope.itemData = response;
-		getProducts('vehicles');
+		$scope.getProducts(category);
+		buildProductPageObject($scope.ProductGroup);
 	});
 };
 
-init();
+$scope.hasProductPage = function(id) {
+	if ($scope.productPageIDs.indexOf(id) === -1) {
+		return false;
+	}
+	else {return true};
+};
+
+var buildProductPageObject = function() {
+	var counter = 0;
+	$scope.productPageObject = "";
+	angular.forEach($scope.productGroup.items, function(key, value) {
+		if ($scope.hasProductPage(value.id)) {
+			$scope.productPageObject.push(value);
+		}
+	});
+};
+
+
+$scope.productPageIDs = "";
 
 }]);
 
@@ -33,7 +52,19 @@ app.directive('getCategory', function() {
   return {
 	restrict: 'A',
 	link: function($scope, elem, attrs) {
-	$scope.category = attrs['get-category'];
+		attrs.$observe('getCategory', function(value) {
+			$scope.category = value;
+			$scope.getTheStuff(value);
+		});
+	}
+  };
+});
+
+app.directive('getProductIds', function() {
+  return {
+	restrict: 'A',
+	link: function($scope, elem, attrs) {
+		$scope.productPageIDs = attrs.value.split(",");
 	}
   };
 });

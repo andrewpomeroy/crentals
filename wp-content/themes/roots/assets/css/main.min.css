@@ -6654,6 +6654,10 @@ td.rental-period .date-controls.right .date-mode-control {
   display: none;
 }
 
+.category-page .product-list {
+  list-style-type: none;
+  padding-left: 0;
+}
 .category-page .product-list .product.image, .category-page .product-list .placeholder.image.product {
   height: 75px;
   width: 75px;

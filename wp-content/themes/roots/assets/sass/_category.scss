@@ -10,6 +10,8 @@
 {
 	.product-list
 	{
+		list-style-type: none;
+		padding-left: 0;
 		.product.image, .placeholder.image.product
 		{
 			height: 75px;
