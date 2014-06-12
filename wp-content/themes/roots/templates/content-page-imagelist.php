@@ -16,7 +16,7 @@ $args = array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' =
 								<img class="demo-image__img" src="<?php echo $image[0] ?>">
 							</a>
 							<p class="demo-image__title"><?php get_the_title() ?></p>
-							<textarea class="demo-image__url copy-this-url" onclick="this.focus();this.select()" readonly="readonly"><?php echo $image[0] ?></textarea>
+							<textarea class="demo-image__url copy-this-url" onclick="this.focus();this.select()" readonly="readonly"><?php echo wp_get_attachment_image_src( $post->ID, 'full', false )[0]; ?></textarea>
 							<a class="demo-image__admin-link" href="<?php echo get_site_url() ?>/wp-admin/post.php?post=<?php echo $post->ID ?>&action=edit">Admin link</a>
 						</div>
 						<?php
