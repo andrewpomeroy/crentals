@@ -2,9 +2,10 @@
 	<?php the_content(); ?>
 	<?php
 		$category = get_field('category_id');
-		$children = get_posts(array('orderby' => 'menu_order', 'order' => 'ASC','showposts' => 1, 'post_parent' => $post->ID, 'post_type' => 'page'));
+		$childs = get_posts(array('orderby' => 'menu_order', 'order' => 'ASC','showposts' => 1, 'post_parent' => $post->ID, 'post_type' => 'page'));
+		wp_reset_query();	
 		$childrenIDs = [];
-		foreach ($children as $key => $apost) {
+		foreach ($childs as $key => $apost) {
 			$childrenIDs[] = get_field('product_id', $apost->ID);
 		};
 	?>
@@ -58,8 +59,8 @@
 					<h5 class="debug">$childrenIDs</h5>
 					<pre class="debug"><?php echo print_r($childrenIDs); ?></pre>
 
-					<h5 class="debug">$children</h5>
-					<pre class="debug"><?php echo print_r($children); ?></pre>
+					<h5 class="debug">$childs</h5>
+					<pre class="debug"><?php echo print_r($childs); ?></pre>
 
 					<h5 class="debug">Products</h5>
 					<pre class="debug">{{productGroup | json}}</pre>

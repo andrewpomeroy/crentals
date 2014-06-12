@@ -3,11 +3,11 @@
 
 <?php
 $args = array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' => null, 'orderby' => 'rand', 'post_parent' => null);
-			$attachments = get_posts($args);
-			if ($attachments) {
+			$theattachments = get_posts($args);
+			if ($theattachments) {
 				echo '';
 				// count number of available images and change if less than the specified limit
-				foreach ($attachments as $post) {
+				foreach ($theattachments as $post) {
 						setup_postdata($post);
 						$image = wp_get_attachment_image_src( $post->ID, 'thumbnail', false );
 						?>
@@ -24,6 +24,7 @@ $args = array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' =
 				echo '';
 			}
 
+			wp_reset_query();
 				?>
 
 <?php endwhile; ?>

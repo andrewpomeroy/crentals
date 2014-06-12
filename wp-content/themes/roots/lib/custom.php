@@ -35,7 +35,7 @@ function php_vars_go() {
     </script>
     <?php // echo print_r(get_fields('option'));
 }
-add_filter('the_content', 'php_vars_go');
+add_filter('wp_head', 'php_vars_go');
 
 // function roots_scripts() {
 
