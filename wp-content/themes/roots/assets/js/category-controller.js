@@ -20,9 +20,10 @@ $scope.getProducts = function(category) {
 
 $scope.getTheStuff = function(category) {
 	GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
+		// debugger;
 		$scope.itemData = response;
 		$scope.getProducts(category);
-		buildProductPageObject($scope.ProductGroup);
+		buildProductPageObject($scope.productGroup);
 	});
 };
 
@@ -34,53 +35,66 @@ $scope.hasProductPage = function(id) {
 };
 
 var buildProductPageObject = function() {
+	debugger;
 	var counter = 0;
-	$scope.productPageObject = "";
-	angular.forEach($scope.productGroup.items, function(key, value) {
+	$scope.productPageObject = [];
+	angular.forEach($scope.productGroup.items, function(value, key) {
 		if ($scope.hasProductPage(value.id)) {
 			$scope.productPageObject.push(value);
 		}
 	});
 };
 
-
+			$scope.category = "vehicles";
+			$scope.getTheStuff("vehicles");
 $scope.productPageIDs = "";
 
 }]);
 
-app.directive('getCategory', function() {
-  return {
-	restrict: 'A',
-	link: function($scope, elem, attrs) {
-		attrs.$observe('getCategory', function(value) {
-			$scope.category = value;
-			$scope.getTheStuff(value);
-		});
-	}
-  };
-});
+// app.directive('getCategory', function() {
+//   return {
+// 	restrict: 'A',
+// 	link: function($scope, elem, attr) {
+// 		// debugger;
+// 		var observer = function(value) {
+// 			$scope.category = value;
+// 			$scope.getTheStuff(value);
+// 			// attr.$observe();
+// 			// debugger;
+// 		};
+// 		attr.$observe('getCategory', observer);
+// 		// debugger;
+// 	}
+//   };
+// });
 
-app.directive('getProductIds', function() {
-  return {
-	restrict: 'A',
-	link: function($scope, elem, attrs) {
-		$scope.productPageIDs = attrs.value.split(",");
-	}
-  };
-});
+// app.directive('getProductIds', function() {
+//   return {
+// 	restrict: 'A',
+// 	link: function($scope, elem, attrs) {
+// 		// debugger;
+// 		$scope.productPageIDs = attrs.value.split(",");
+// 	}
+//   };
+// });
 
-app.directive('thumbSrc', function() {
-	return {
-		restrict: 'A',
-		link: function(scope, element, attrs) {
-			attrs.$observe('thumbSrc', function(value) {
-				if (value) {
-					var file = value;
-					var appendage = "-150x150.jpg";
-					file = file.replace(/(\.[\w\d_-]+)$/i, appendage);
-					angular.element(element).attr('src', file).removeClass('no-image');
-				}
-			});			
-		}
-	};
-});
+// app.directive('thumbSrc', function() {
+// 	return {
+// 		restrict: 'A',
+// 		link: function(scope, element, attr) {
+// 			// debugger;
+// 			var observer = function(value) {
+//   				if (value) {
+// 					var file = value;
+// 					var appendage = "-150x150.jpg";
+// 					file = file.replace(/(\.[\w\d_-]+)$/i, appendage);
+// 					angular.element(element).attr('src', file).removeClass('no-image');
+// 					// attr.$observe();
+// 					// debugger;
+// 				}
+// 			};
+// 			attr.$observe('thumbSrc', observer);
+// 			// debugger;
+// 		}
+// 	};
+// });
