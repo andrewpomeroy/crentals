@@ -111,4 +111,4 @@ function wpse_126886_ajax_handler() {
 function livereload_script() { ?>
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 <?php }
-add_filter( 'wp_footer', 'livereload_script' );
+// add_filter( 'wp_footer', 'livereload_script' );
