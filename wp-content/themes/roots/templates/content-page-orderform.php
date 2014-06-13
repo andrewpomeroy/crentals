@@ -86,8 +86,11 @@
 						<section class="order-form row">
 							<div class="col-sm-12">
 								<h2>Selection</h2>
-								<table class="order-form table">
+								<table class="order-form table" ng-repeat="group in itemData" ng-if="categoryHasItems(group)">
 									<thead>
+										<tr class="section-heading-row">
+											<th colspan="8" class="section-heading"><h3 class="section-heading">{{group.type}}</h3></th>
+										</tr>
 										<tr>
 											<th>Item</th>
 											<th>Quantity</th>
@@ -99,11 +102,11 @@
 											<th>Notes</th>
 										</tr>
 									</thead>
-									<tbody ng-repeat="group in itemData" ng-if="group.items">
-										<tr class="section-heading-row">
-											<td colspan="8" class="section-heading"><h4 class="section-heading">{{group.type}}</h4></td>
+									<tbody ng-repeat="subcat in group.subcats">
+										<tr>
+											<td colspan="8" class="subcat-heading"><h5 class="subcat-heading" ng-if="subcat.type">{{subcat.type}}</h5></td>
 										</tr>
-										<tr ng-repeat="item in group.items" class="item-row" ng-class="{'has-error': (item.estimate === null)}">
+										<tr ng-repeat="item in subcat.items" class="item-row" ng-class="{'has-error': (item.estimate === null)}">
 											<td class="data static">
 												<a href class="item-name linked" ng-if="item.description || item.image" ng-click="infoModal(item)">{{item.name}}</a>
 												<span class="item-name no-image no-description" ng-if="!item.description && !item.image">{{item.name}}</span>

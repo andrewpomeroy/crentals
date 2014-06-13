@@ -156,6 +156,20 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		}
 	};
 
+	$scope.categoryHasItems = function(category) {
+		for (var group in $scope.itemData) {
+			if ($scope.itemData[group].type === category.type) {
+				for (var subcat in $scope.itemData[group].subcats) {
+					if ($scope.itemData[group].subcats[subcat].items.length > 0) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	};
+
+
 	$scope.showWeeks = true;
 	$scope.toggleWeeks = function () {
 		$scope.showWeeks = ! $scope.showWeeks;
