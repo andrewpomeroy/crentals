@@ -34,16 +34,19 @@
 						</ul>
 					</div>
 					<div class="products">
-						<ul class="product-list">
-							<li class="Media product" ng-repeat="product in productGroup.items" ng-class="{'opens-page clickable': product.image}" ng-if="!hasProductPage(product.id)">
-								<img class="Media-figure product image" thumb-src="{{product.image}}" ng-if="product.image">
-								<span class="Media-figure placeholder product image" ng-if="!product.image"></span>
-								<span class="Media-body">
-									<h4 class="heading product-heading">{{product.name}}</h4>
-									<p class="product-description">{{product.description}}</p>
-								</span>
-							</li>
-						</ul>
+						<div class="subcategory" ng-repeat="subcat in productGroup.subcats">
+							<h3 class="subcategory-heading">{{subcat.type}}</h3>
+							<ul class="product-list">
+								<li class="Media product" ng-repeat="product in subcat.items" ng-class="{'opens-page clickable': product.image}" ng-if="!hasProductPage(product.id)">
+									<img class="Media-figure product image" thumb-src="{{product.image}}" ng-if="product.image">
+									<span class="Media-figure placeholder product image" ng-if="!product.image"></span>
+									<span class="Media-body">
+										<h4 class="heading product-heading">{{product.name}}</h4>
+										<p class="product-description">{{product.description}}</p>
+									</span>
+								</li>
+							</ul>
+						</div>
 					</div>
 
 				</div>
@@ -59,8 +62,8 @@
 					<h5 class="debug">$childrenIDs</h5>
 					<pre class="debug"><?php echo print_r($childrenIDs); ?></pre>
 
-					<h5 class="debug">$childs</h5>
-					<pre class="debug"><?php echo print_r($childs); ?></pre>
+					<?php /* <h5 class="debug">$childs</h5>
+					<pre class="debug"><?php echo print_r($childs); ?></pre> */ ?>
 
 					<h5 class="debug">Products</h5>
 					<pre class="debug">{{productGroup | json}}</pre>
