@@ -7,6 +7,12 @@ nav > li, .nav > li, nav > li > a, .nav > li > a
 	text-transform: uppercase;
 	text-rendering: optimizeLegibility;
 }
+.navbar-default .navbar-brand
+{
+	text-transform: uppercase;
+	font-weight: 700;
+	color: $brand-primary;
+}
 
 // ----- Order Form Page Layout
 
@@ -203,3 +209,7 @@ body:not(.estimate-form)
 	overflow-y: auto;
 }
 
+.debug
+{
+	display: none;
+}

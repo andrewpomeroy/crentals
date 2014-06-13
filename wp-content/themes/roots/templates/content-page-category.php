@@ -2,7 +2,7 @@
 	<?php the_content(); ?>
 	<?php
 		$category = get_field('category_id');
-		$childs = get_posts(array('orderby' => 'menu_order', 'order' => 'ASC','showposts' => 1, 'post_parent' => $post->ID, 'post_type' => 'page'));
+		$childs = get_posts(array('orderby' => 'menu_order', 'order' => 'ASC','showposts' => -1, 'post_parent' => $post->ID, 'post_type' => 'page'));
 		wp_reset_query();	
 		$childrenIDs = [];
 		$GUIDmap = [];
@@ -21,7 +21,6 @@
 					<input type="hidden" id="secret-category" name="secret-category" value="<?php echo implode(",", $childrenGUIDs) ?>" get-guids />
 					<input type="hidden" id="secret-category" name="secret-category" value="<?php echo $category ?>" get-category="<?php echo $category ?>" />
 				</form>
-				<pre><?php echo implode(",", $childrenGUIDs) ?></pre>
 				<div class="main-app category-page">
 
 					<!-- <div class="product-pages">

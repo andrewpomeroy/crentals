@@ -6294,6 +6294,12 @@ nav > li, .nav > li, nav > li > a, .nav > li > a {
   text-rendering: optimizeLegibility;
 }
 
+.navbar-default .navbar-brand {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #d4202b;
+}
+
 body {
   position: relative;
   background-color: #fafafa;
@@ -6558,6 +6564,10 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
 
 .modal {
   overflow-y: auto;
+}
+
+.debug {
+  display: none;
 }
 
 td.input.dynamic {
