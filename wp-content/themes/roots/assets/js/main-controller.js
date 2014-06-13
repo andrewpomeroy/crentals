@@ -61,10 +61,12 @@ app.service('dataTransform', function() {
 				return item;
 			};
 			for (var entry in obj) {
-				if (obj[entry].items) {
-					for (var item in obj[entry].items)
-					{
-						item = checkEmptyItem(obj[entry].items[item]);
+				for (var subcat in obj[entry].subcats) {
+					if (obj[entry].subcats[subcat].items) {
+						for (var item in obj[entry].subcats[subcat].items)
+						{
+							item = checkEmptyItem(obj[entry].subcats[subcat].items[item]);
+						}
 					}
 				}
 			}
