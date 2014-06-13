@@ -98,16 +98,37 @@ app.service('dataTransform', function() {
 				type: 'uncategorized',
 				items: []
 			});
+
 			for (var entry in obj) {
 				if (obj[entry].type === "Section") {
+					// Create Obj for new Section
 					output.push({
+						// Type == name of section
+						type: obj[entry].name,
+						id: obj[entry].id,
+						items: [],
+						subcats: []
+					});
+				}
+				if (obj[entry].type === "Subcategory") {
+					output[output.length - 1].subcats.push({
 						type: obj[entry].name,
 						id: obj[entry].id,
 						items: []
 					});
 				}
 				else if (obj[entry].type === "Item") {
-					output[output.length - 1].items.push(obj[entry]);
+					// Are there any subcats in the last Section we created?
+					// debugger;
+					if (output[output.length - 1].subcats.length > 0) {
+						// Put em in there
+						var subCatIndex = output[output.length - 1].subcats.length - 1;
+						output[output.length - 1].subcats[subCatIndex].items.push(obj[entry]);
+					}
+					else {
+						// Otherwise, just put em in the Section.
+						output[output.length - 1].items.push(obj[entry]);
+					}
 				}
 			}
 			return output;

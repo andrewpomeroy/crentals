@@ -163,9 +163,9 @@
 			<!-- <pre class="debug">{{orderMeta.orderReturnDate | json}}</pre> -->
 			<h5 class="debug">Debug</h5>
 			<pre class="debug">{{itemData | json}}</pre>
-			<h5 class="debug">orderFormForm</h5>
+<!-- 			<h5 class="debug">orderFormForm</h5>
 			<pre class="debug">{{orderFormForm | json}}</pre>
-	<!-- 		<h5 class="debug">Scope</h5>
+ -->	<!-- 		<h5 class="debug">Scope</h5>
 			<pre class="debug">{{}}</pre> -->
 		</section>
 		<button class="btn" ng-click="resetForm()">Reset Form</button>
