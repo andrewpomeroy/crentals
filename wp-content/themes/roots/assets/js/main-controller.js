@@ -28,8 +28,7 @@ app.service('dataTransform', function() {
 			opened: false,
 			date: undefined
 		},
-		endDate: function() {return new Date();}
-		,
+		endDate: function() {return new Date();},
 		days: undefined,
 		daysweek: 7,
 		notes: "",
@@ -96,7 +95,11 @@ app.service('dataTransform', function() {
 			var output = [];
 			output.push({
 				type: 'uncategorized',
-				items: []
+				subcats: [
+					{
+						"items": []
+					}
+				]
 			});
 
 			for (var entry in obj) {
@@ -106,8 +109,11 @@ app.service('dataTransform', function() {
 						// Type == name of section
 						type: obj[entry].name,
 						id: obj[entry].id,
-						items: [],
-						subcats: []
+						subcats: [
+							{
+								items: []
+							}
+						]
 					});
 				}
 				if (obj[entry].type === "Subcategory") {
@@ -120,15 +126,15 @@ app.service('dataTransform', function() {
 				else if (obj[entry].type === "Item") {
 					// Are there any subcats in the last Section we created?
 					// debugger;
-					if (output[output.length - 1].subcats.length > 0) {
+					// if (output[output.length - 1].subcats.length > 0) {
 						// Put em in there
 						var subCatIndex = output[output.length - 1].subcats.length - 1;
 						output[output.length - 1].subcats[subCatIndex].items.push(obj[entry]);
-					}
-					else {
-						// Otherwise, just put em in the Section.
-						output[output.length - 1].items.push(obj[entry]);
-					}
+					// }
+					// else {
+					// 	// Otherwise, just put em in the Section.
+					// 	output[output.length - 1].items.push(obj[entry]);
+					// }
 				}
 			}
 			return output;
@@ -145,7 +151,12 @@ app.service('GSLoader', ['dataTransform', '$http', '$q', function(dataTransform,
 		groups: [
 		{
 			"type": "uncategorized",
-			"items": []
+			"id": "uncategorized",
+			"subcats" : [
+				{
+					"items": []
+				}
+			]
 		},
 		{
 			"type": "Vehicles",
@@ -197,53 +208,7 @@ app.service('GSLoader', ['dataTransform', '$http', '$q', function(dataTransform,
 
 app.controller('mainCtrl', ['$scope', 'GSLoader', '$http', '$modal', function($scope, GSLoader, $http, $modal) {
 
-	valueTypesOrdered = [
-		{
-			col: "type",
-			colName: false,
-			name: "item",
-			order: false,
-		},
-		{
-			order: 0,
-			col: "name",
-			colName: "Name",
-			defValue: "Unnamed",
-		},
-		{
-			order: 1,
-			col: "qty",
-			colName: "Quantity",
-			defValue: 0
-		},
-		{
-			order: 2,
-			col: "rate",
-			colName: "Rate",
-			defValue: 0
-		},
-		{
-			order: 3,
-			colName: "daysweek",
-			defValue: 0
-		},
-		{
-			order: 0,
-			colName: "notes",
-			defValue: ""
-		}
-	];
 
-	var valueTypeOrder = [
-		"type", "name,"
-	];
-
-	// 	var getOrdered(array, key) {
-	// 	for (entry in array) {
-	// 		if (entry === key)
-	// 			return array[entry]
-	// 	}
-	// }
 
 }]);
 

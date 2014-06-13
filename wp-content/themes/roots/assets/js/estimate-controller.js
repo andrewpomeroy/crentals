@@ -4,11 +4,13 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date)/one_day) + 1;
 		resetTotal();
 		for(var i = 0; i < $scope.itemData.length; i++) {
-			for (var x= 0;x< $scope.itemData[i].items.length;x++) {
-				var _item = $scope.itemData[i].items[x];
-				flushIndividualDate(_item);
-				$scope.changeQty(_item);
-				addToTotal(_item);
+			for (var x= 0;x< $scope.itemData[i].subcats.length;x++) {
+				for (var y= 0;y< $scope.itemData[i].subcats[x].length;y++) {
+					var _item = $scope.itemData[i].subcats[x].items[y];
+					flushIndividualDate(_item);
+					$scope.changeQty(_item);
+					addToTotal(_item);
+				}
 			}
 		}
 	};
@@ -138,15 +140,17 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 	loopThroughItems = function(itemFunctions) {
 		// console.log($scope.itemData);
 		for (var group in $scope.itemData) {
-			for (var item in $scope.itemData[group].items) {
-				var theItem = $scope.itemData[group].items[item];
-				// loop through specific item functions and execute each on found item
-				for (var passedFunction in itemFunctions) {
-					itemFunctions[passedFunction](theItem);
-					// console.log("Called: ");
-					// console.log(itemFunctions[passedFunction]);
-					// console.log("with: ");
-					// console.log(theItem);
+			for (var subcat in $scope.itemData[group]) {
+				for (var item in $scope.itemData[group][subcat]) {
+					var theItem = $scope.itemData[group][subcat].items[item];
+					// loop through specific item functions and execute each on found item
+					for (var passedFunction in itemFunctions) {
+						itemFunctions[passedFunction](theItem);
+						// console.log("Called: ");
+						// console.log(itemFunctions[passedFunction]);
+						// console.log("with: ");
+						// console.log(theItem);
+					}
 				}
 			}
 		}
