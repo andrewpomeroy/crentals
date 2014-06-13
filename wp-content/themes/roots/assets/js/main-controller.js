@@ -208,7 +208,31 @@ app.service('GSLoader', ['dataTransform', '$http', '$q', function(dataTransform,
 
 app.controller('mainCtrl', ['$scope', 'GSLoader', '$http', '$modal', function($scope, GSLoader, $http, $modal) {
 
+	// MODAL STUFF
 
+	 $scope.infoModal = function (item) {
+
+		var modalInstance = $modal.open({
+		  templateUrl: '/wp-content/themes/roots/templates/myModalContent.html',
+		  controller: ModalInstanceCtrl,
+		  item: item,
+		  resolve: {
+			theItem: function () {
+			  return item;
+			}
+		  }
+		});
+	}
+
+	var ModalInstanceCtrl = function ($scope, $modalInstance, theItem) {
+
+	$scope.theItem = theItem;
+
+	  $scope.ok = function () {
+		$modalInstance.close();
+	  };
+
+	};
 
 }]);
 

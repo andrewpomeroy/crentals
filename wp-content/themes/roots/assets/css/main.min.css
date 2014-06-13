@@ -6556,6 +6556,10 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   margin-top: 0;
 }
 
+.modal {
+  overflow-y: auto;
+}
+
 td.input.dynamic {
   max-width: 2em;
 }
