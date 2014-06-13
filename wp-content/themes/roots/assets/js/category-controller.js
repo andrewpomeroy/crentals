@@ -22,30 +22,23 @@ $scope.getTheStuff = function(category) {
 	GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
 		$scope.itemData = response;
 		$scope.getProducts(category);
-		buildProductPageObject($scope.productGroup.items);
 	});
 };
 
 $scope.hasProductPage = function(id) {
-	if ($scope.productPageIDs.indexOf(id) === -1) {
+	var theIndex = $scope.productPageIDs.indexOf(id);
+	if (theIndex === -1) {
 		return false;
 	}
-	else {return true};
+	else {return $scope.productPageGUIDs[theIndex]};
 };
 
-var buildProductPageObject = function(obj) {
-	var counter = 0;
-	$scope.productPageObject = [];
-	angular.forEach(obj, function(value, key) {
-		if ($scope.hasProductPage(value.id)) {
-			$scope.productPageObject.push(value);
-		}
-	});
-};
 
-			$scope.category = "vehicles";
-			$scope.getTheStuff("vehicles");
+$scope.category = "vehicles";
+$scope.getTheStuff("vehicles");
 $scope.productPageIDs = "";
+$scope.productPageGUIDs = {};
+
 
 }]);
 
@@ -63,11 +56,21 @@ app.directive('getCategory', function() {
   };
 });
 
+app.directive('getGuids', function() {
+  return {
+	restrict: 'A',
+	link: function($scope, elem, attrs) {
+		$scope.productPageGUIDs = attrs.value.split(",");
+	}
+  };
+});
+
 app.directive('getProductIds', function() {
   return {
 	restrict: 'A',
 	link: function($scope, elem, attrs) {
 		$scope.productPageIDs = attrs.value.split(",");
+
 	}
   };
 });
