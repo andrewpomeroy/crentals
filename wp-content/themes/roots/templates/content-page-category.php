@@ -4,8 +4,8 @@
 		$category = get_field('category_id');
 		$childs = get_posts(array('orderby' => 'menu_order', 'order' => 'ASC','showposts' => -1, 'post_parent' => $post->ID, 'post_type' => 'page'));
 		wp_reset_query();	
-		$childrenIDs = [];
-		$GUIDmap = [];
+		$childrenIDs = array();
+		$GUIDmap = array();
 		foreach ($childs as $key => $apost) {
 			$anID = get_field('product_id', $apost->ID);
 			$childrenIDs[] = $anID;
