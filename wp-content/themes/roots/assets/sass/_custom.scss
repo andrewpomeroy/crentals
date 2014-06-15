@@ -9,11 +9,39 @@ nav > li, .nav > li, nav > li > a, .nav > li > a
 	text-transform: uppercase;
 	text-rendering: optimizeLegibility;
 }
+.navbar.navbar-static-top
+{
+	background-color: #fafafa;
+	border-bottom: 7px solid $brand-primary;
+	box-shadow: 0px 4px #3C2323;
+}
 .navbar-default .navbar-brand
 {
+	color: #252525;
+	&:hover
+	{
+		color: #111;
+	}
 	text-transform: uppercase;
 	font-weight: 700;
-	color: $brand-primary;
+	// color: $brand-primary;
+	height: auto; // w/ svg
+	.logo
+	{
+		display: inline-block;
+		vertical-align: middle;
+		height: 113px;
+		width: 100px;
+		width: 11.3vw;
+		height: 10vw;
+		margin: .5em 0;
+	}
+	span
+	{
+		font-size: 32px;
+		white-space: nowrap;
+		font-size: 5vw;
+	}
 }
 h1, h2, .navbar-default .navbar-brand {
 	font-family: 'TW Cen MT';
@@ -24,9 +52,30 @@ h1, h2, .navbar-default .navbar-brand {
 
 @include media-query-min($screen-sm + 1px) 
 {
-	.navbar-static-top
+	.navbar.navbar-static-top
 	{
+		border-bottom-width: 10px;
+		box-shadow: 0px 8px #3C2323;
 		// display: none;
+		nav.navbar-collapse
+		{
+			display: none !important;
+		}
+		.navbar-brand
+		{
+			span
+			{
+				font-size: 64px;
+				font-size: 5vw;
+			}
+			.logo
+			{
+				width: 142px;
+				height: 125px;
+				width: 11.3vw;
+				height: 10vw;
+			}
+		}
 	}
 }
 
@@ -218,7 +267,27 @@ body:not(.estimate-form)
   }
 }
 
+// HELPER CLASSES
+
+.v-align-middle
+{
+	vertical-align: middle;
+}
+.v-align-top
+{
+	vertical-align: top;
+}
+.v-align-bottom
+{
+	vertical-align: bottom;
+}
+
 // HAX
+
+.svg img.svg-inject
+{
+	visibility: hidden !important;
+}
 
 .modal
 {
@@ -229,3 +298,4 @@ body:not(.estimate-form)
 {
 	display: none;
 }
+

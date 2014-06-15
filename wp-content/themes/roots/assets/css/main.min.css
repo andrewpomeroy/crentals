@@ -6301,10 +6301,34 @@ nav > li, .nav > li, nav > li > a, .nav > li > a {
   text-rendering: optimizeLegibility;
 }
 
+.navbar.navbar-static-top {
+  background-color: #fafafa;
+  border-bottom: 7px solid #d4202b;
+  box-shadow: 0px 4px #3C2323;
+}
+
 .navbar-default .navbar-brand {
+  color: #252525;
   text-transform: uppercase;
   font-weight: 700;
-  color: #d4202b;
+  height: auto;
+}
+.navbar-default .navbar-brand:hover {
+  color: #111;
+}
+.navbar-default .navbar-brand .logo {
+  display: inline-block;
+  vertical-align: middle;
+  height: 113px;
+  width: 100px;
+  width: 11.3vw;
+  height: 10vw;
+  margin: .5em 0;
+}
+.navbar-default .navbar-brand span {
+  font-size: 32px;
+  white-space: nowrap;
+  font-size: 5vw;
 }
 
 h1, h2, .navbar-default .navbar-brand {
@@ -6312,6 +6336,25 @@ h1, h2, .navbar-default .navbar-brand {
   font-weight: 800;
 }
 
+@media screen and (min-width: 769px) {
+  .navbar.navbar-static-top {
+    border-bottom-width: 10px;
+    box-shadow: 0px 8px #3C2323;
+  }
+  .navbar.navbar-static-top nav.navbar-collapse {
+    display: none !important;
+  }
+  .navbar.navbar-static-top .navbar-brand span {
+    font-size: 64px;
+    font-size: 5vw;
+  }
+  .navbar.navbar-static-top .navbar-brand .logo {
+    width: 142px;
+    height: 125px;
+    width: 11.3vw;
+    height: 10vw;
+  }
+}
 body {
   position: relative;
   background-color: #fafafa;
@@ -6572,6 +6615,22 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
 }
 .Media-body .heading:first-child {
   margin-top: 0;
+}
+
+.v-align-middle {
+  vertical-align: middle;
+}
+
+.v-align-top {
+  vertical-align: top;
+}
+
+.v-align-bottom {
+  vertical-align: bottom;
+}
+
+.svg img.svg-inject {
+  visibility: hidden !important;
 }
 
 .modal {

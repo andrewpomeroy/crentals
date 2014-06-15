@@ -50,6 +50,7 @@ add_filter('show_admin_bar', '__return_false');
 function my_scripts_init() {
 	$scriptinitDir = get_bloginfo('template_directory').'/assets/js/';
     // wp_enqueue_script('phpvars', $scriptinitDir.'phpvars.js', array('jquery'), false);
+    wp_enqueue_script('svginject', get_bloginfo('template_directory').'/bower_components/svg-injector/dist/svg-injector.min.js', array('jquery'), false);
     // wp_register_script('jquery', $scriptinitDir.'vendor/jquery-1.11.0.min.js', array(), null, false);
 
     if ( (is_page_template('template-orderform.php') || is_page_template('template-category.php')) ) {
@@ -112,3 +113,13 @@ function livereload_script() { ?>
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 <?php }
 // add_filter( 'wp_footer', 'livereload_script' );
+
+function svg_inject_script() { ?>
+<script>
+var mySVGsToInject = document.querySelectorAll('img.svg-inject');
+SVGInjector(mySVGsToInject);
+</script>
+
+
+<?php }
+add_filter( 'wp_footer', 'svg_inject_script' );
