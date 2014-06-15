@@ -15,6 +15,21 @@
   }
 }
 
+// Font Face
+
+@mixin fontFace($family,$src,$weight: normal,$style: normal) {
+  @font-face {
+    font-family: $family;
+    src: url('../fonts/#{$src}.eot'); // IE9 compat
+    src: url('../fonts/#{$src}.eot?#iefix') format('embedded-opentype'), // IE8 and below
+      url('../fonts/#{$src}.woff') format('woff'), // standards
+      url('../fonts/#{$src}.ttf') format('truetype'); // Safari, Android, iOS
+      // url('../fonts/#{$src}.svg##{$family}') format('svg'); // legacy iOS
+
+    font-style: $style;
+    font-weight: $weight;
+  }
+}
 
 // Placeholder replacements
 
