@@ -6331,6 +6331,16 @@ nav > li, .nav > li, nav > li > a, .nav > li > a {
   font-size: 5vw;
 }
 
+.nav-pills > li > a, .nav-pills > li.active > a {
+  border-radius: 0;
+  border-bottom: 1px rgba(212, 32, 43, 0.2) solid;
+  margin-left: -2.6em;
+  padding-left: 2.6em;
+}
+.nav-pills > li + li {
+  margin-top: 0;
+}
+
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   color: #e3444e;
   background-color: transparent;
@@ -6338,7 +6348,7 @@ nav > li, .nav > li, nav > li > a, .nav > li > a {
 .nav-pills > li.active > a:before, .nav-pills > li.active > a:hover:before, .nav-pills > li.active > a:focus:before {
   content: '★';
   position: absolute;
-  left: -1.3em;
+  left: 1em;
 }
 .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   background-color: rgba(212, 32, 43, 0.1);

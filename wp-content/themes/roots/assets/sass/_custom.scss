@@ -43,6 +43,25 @@ nav > li, .nav > li, nav > li > a, .nav > li > a
 		font-size: 5vw;
 	}
 }
+
+.nav-pills > li
+{
+	&, &.active
+	{
+		> a
+		{
+			border-radius: 0;
+			border-bottom: 1px rgba($brand-primary, .2) solid;
+			margin-left: -2.6em;
+			padding-left: 2.6em;
+		}
+	}
+	+ li
+	{
+		margin-top: 0;
+	}
+}
+
 .nav-pills > li.active > a
 {
 	&, &:hover, &:focus
@@ -53,7 +72,7 @@ nav > li, .nav > li, nav > li > a, .nav > li > a
 		{
 			content: '★';
 			position: absolute;
-			left: -1.3em;
+			left: 1em;
 		}
 	}
 	&:hover, &:focus
