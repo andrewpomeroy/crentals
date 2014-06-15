@@ -108,7 +108,7 @@
 										</tr>
 										<tr ng-repeat="item in subcat.items" class="item-row" ng-class="{'has-error': (item.estimate === null)}">
 											<td class="data static">
-												<a href class="item-name linked" ng-if="item.description || item.image" ng-click="infoModal(item)">{{item.name}}</a>
+												<a href class="item-name linked" ng-if="item.description || item.image" ng-click="infoModal(item)">{{item.name}}<i class="glyphicon glyphicon-camera text-muted" ng-if="item.image"></i></a>
 												<span class="item-name no-image no-description" ng-if="!item.description && !item.image">{{item.name}}</span>
 											</td>
 											<td class="data dynamic input" ng-class="{'has-error': (
@@ -126,7 +126,7 @@
 												</div>
 												<div class="date-controls right">
 													<button class="btn date-mode-control glyphicon glyphicon-pencil" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;"></button>
-													<button class="btn date-mode-control glyphicon glyphicon-remove-circle" ng-if="item.customRentalPeriod" ng-click="item.customRentalPeriod=false; flushIndividualItem(item)" title="Reset"></button>
+													<button class="btn date-mode-control glyphicon glyphicon-remove-circle" ng-if="item.customRentalPeriod" ng-click="flushIndividualDate(item, true)" title="Reset"></button>
 												</div>
 											</div>
 										</td>

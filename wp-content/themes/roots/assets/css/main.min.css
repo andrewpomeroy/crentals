@@ -6545,13 +6545,6 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
     opacity: 1;
   }
 }
-.flex {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .item-image {
   max-width: 100%;
 }
@@ -6618,6 +6611,14 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
 }
 .Media-body .heading:first-child {
   margin-top: 0;
+}
+
+.text-color {
+  color: #333333;
+}
+
+.text-muted {
+  color: #999999;
 }
 
 .v-align-middle {
@@ -6736,6 +6737,10 @@ td.rental-period .date-controls.right {
 }
 td.rental-period .date-controls.right .date-mode-control {
   min-height: 100%;
+}
+
+.item-name.linked i {
+  margin-left: .3em;
 }
 
 .product .no-photo {

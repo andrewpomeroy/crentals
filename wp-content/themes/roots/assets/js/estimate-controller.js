@@ -7,7 +7,7 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 			for (var x = 0; x < $scope.itemData[i].subcats.length;x++) {
 				for (var y = 0; y < $scope.itemData[i].subcats[x].items.length;y++) {
 					var _item = $scope.itemData[i].subcats[x].items[y];
-					flushIndividualDate(_item);
+					$scope.flushIndividualDate(_item);
 					$scope.changeQty(_item);
 					addToTotal(_item);
 				}
@@ -82,9 +82,12 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		$scope.calcRentalDates();
 	};
 
-	flushIndividualDate = function(item) {
+	$scope.flushIndividualDate = function(item, disableCustomRentalPeriod) {
 		// console.log("ITEM OBJECT TO BE FLUSHED:");
 		// console.log(item);
+		if (disableCustomRentalPeriod) {
+			item.customRentalPeriod = false;
+		}
 		if (item.customRentalPeriod) {
 			if ((!item.startDate) && (!item.endDate)) {
 				console.log("no item start/end dates");
@@ -143,7 +146,7 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 			for (var subcat in $scope.itemData[group].subcats) {
 				for (var item in $scope.itemData[group].subcats[subcat].items) {
 					var theItem = $scope.itemData[group].subcats[subcat].items[item];
-					debugger;
+					// debugger;
 					// loop through specific item functions and execute each on found item
 					for (var passedFunction in itemFunctions) {
 						itemFunctions[passedFunction](theItem);

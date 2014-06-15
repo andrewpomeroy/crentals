@@ -184,13 +184,6 @@ body:not(.estimate-form)
 
 }
 
-
-
-.flex
-{
-	display: flex;
-}
-
 // MODAL VIEW
 
 .item-image
@@ -274,6 +267,14 @@ body:not(.estimate-form)
 
 // HELPER CLASSES
 
+.text-color
+{
+	color: $text-color;
+}
+.text-muted
+{
+	color: $text-muted;
+}
 .v-align-middle
 {
 	vertical-align: middle;
