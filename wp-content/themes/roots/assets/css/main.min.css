@@ -6482,6 +6482,9 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   }
 }
 @media screen and (min-width: 993px) {
+  .estimate-form .navbar.navbar-static-top {
+    padding-left: 30px;
+  }
   .estimate-form .clmn-sidebar-pull, .estimate-form .clmn-sidebar {
     position: relative;
     min-height: 1px;

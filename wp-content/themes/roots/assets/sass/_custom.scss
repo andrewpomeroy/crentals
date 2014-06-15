@@ -117,10 +117,15 @@ body:not(.estimate-form)
 	}
 	.estimate-form
 	{
+
 		.clmn-main-push, .clmn-main
 		{
 			@include make-md-column(12);
 			padding-left: ($grid-gutter-width / 2) + $sidebar-minimized; 
+		}
+		.navbar.navbar-static-top
+		{
+			padding-left: $grid-gutter-width;
 		}
 		.clmn-sidebar-pull, .clmn-sidebar
 		{
