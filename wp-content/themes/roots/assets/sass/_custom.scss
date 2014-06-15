@@ -43,6 +43,24 @@ nav > li, .nav > li, nav > li > a, .nav > li > a
 		font-size: 5vw;
 	}
 }
+.nav-pills > li.active > a
+{
+	&, &:hover, &:focus
+	{
+		color: lighten($brand-primary, 10%);
+		background-color: transparent;
+		&:before
+		{
+			content: '★';
+			position: absolute;
+			left: -1.3em;
+		}
+	}
+	&:hover, &:focus
+	{
+		background-color: rgba($brand-primary, .1);
+	}
+}
 h1, h2, .navbar-default .navbar-brand {
 	font-family: 'TW Cen MT';
 	font-weight: 800;
@@ -305,3 +323,9 @@ body:not(.estimate-form)
 	display: none;
 }
 
+footer.content-info
+{
+	text-align: center;
+	color: #ccc;
+	margin-top: 2em;
+}

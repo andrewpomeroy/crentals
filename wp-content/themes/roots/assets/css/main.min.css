@@ -6331,6 +6331,19 @@ nav > li, .nav > li, nav > li > a, .nav > li > a {
   font-size: 5vw;
 }
 
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  color: #e3444e;
+  background-color: transparent;
+}
+.nav-pills > li.active > a:before, .nav-pills > li.active > a:hover:before, .nav-pills > li.active > a:focus:before {
+  content: '★';
+  position: absolute;
+  left: -1.3em;
+}
+.nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: rgba(212, 32, 43, 0.1);
+}
+
 h1, h2, .navbar-default .navbar-brand {
   font-family: 'TW Cen MT';
   font-weight: 800;
@@ -6643,6 +6656,12 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
 
 .debug {
   display: none;
+}
+
+footer.content-info {
+  text-align: center;
+  color: #ccc;
+  margin-top: 2em;
 }
 
 td.input.dynamic {
