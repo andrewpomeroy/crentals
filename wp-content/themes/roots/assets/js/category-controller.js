@@ -10,7 +10,6 @@ $scope.getProducts = function(category) {
 		console.log("$scope.itemData", $scope.itemData);
 		angular.forEach($scope.itemData, function(group) {
 			console.log(group);
-			debugger;
 			if (group.id === $scope.category) {
 				$scope.productGroup = angular.copy(group);
 				console.log("Products: ", $scope.productGroup);
