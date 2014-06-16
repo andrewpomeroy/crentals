@@ -13,7 +13,7 @@ $args = array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' =
 						$imgsrc = wp_get_attachment_image_src( $post->ID, 'full', false );
 						?>
 						<div class="demo-image">
-							<a class="demo-image__img-wrap" href ng-click="infoModal({name:'<?php echo get_the_title()?>', image: '<?php echo $imgsrc[0] ?>'})">
+							<a class="demo-image__img-wrap" href="<?php echo $imgsrc[0] ?>" target="_blank">
 								<img class="demo-image__img" src="<?php echo $imgthumb[0] ?>">
 							</a>
 							<p class="demo-image__title"><?php get_the_title() ?></p>
