@@ -45,7 +45,9 @@
   } 
   .clmn-main-push, .clmn-main
   {
-    @include make-md-column(9);
+    @include make-md-column(9, $grid-gutter-width);
+    // padding-left: $grid-gutter-width;
+    // padding-right: $grid-gutter-width;
   }
   .clmn-main-push
   {
@@ -53,7 +55,7 @@
   }
   .clmn-sidebar-pull, .clmn-sidebar
   {
-    @include make-md-column(3);
+    @include make-md-column(3, $grid-gutter-width);
   }
   .clmn-sidebar-pull
   {

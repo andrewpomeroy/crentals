@@ -123,3 +123,12 @@ SVGInjector(mySVGsToInject);
 
 <?php }
 add_filter( 'wp_footer', 'svg_inject_script' );
+
+function home_title_option($classes) {
+    if (is_home()) {
+        $classes[] = 'home';
+        $classes[] = 'home_title_'.get_field('home_page_title', 'option');
+    }
+    return $classes;
+}
+add_filter('body_class', 'home_title_option');

@@ -4,6 +4,16 @@
  */
 function roots_title() {
   if (is_home()) {
+    $home_title_option = get_field('home_page_title', 'option');
+    if ($home_title_option && ($home_title_option != 'default')) {
+      if ($home_title_option == 'hidden') {
+        return;
+      }
+      else {
+        return get_field('custom_home_page_title', 'option');
+      }
+    }
+
     if (get_option('page_for_posts', true)) {
       return get_the_title(get_option('page_for_posts', true));
     } else {
