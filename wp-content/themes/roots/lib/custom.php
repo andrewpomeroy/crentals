@@ -109,6 +109,29 @@ function wpse_126886_ajax_handler() {
     exit; // important
 }
 
+// CUSTOM IMAGE THUMBNAIL SIZES
+
+if ( function_exists( 'add_image_size' ) ) { 
+    add_image_size( 'width_960', 960, 9999 ); //600 pixels wide (and unlimited height)
+}
+if ( function_exists( 'add_image_size' ) ) { 
+    add_image_size( 'width_1280', 1280, 9999 ); //600 pixels wide (and unlimited height)
+}
+if ( function_exists( 'add_image_size' ) ) { 
+    add_image_size( 'width_1920', 1920, 9999 ); //600 pixels wide (and unlimited height)
+}
+if ( function_exists( 'add_image_size' ) ) { 
+    add_image_size( 'width_800', 800, 9999 ); //600 pixels wide (and unlimited height)
+}
+if ( function_exists( 'add_image_size' ) ) { 
+    add_image_size( 'width_1600', 1600, 9999 ); //600 pixels wide (and unlimited height)
+}
+if ( function_exists( 'add_image_size' ) ) { 
+    add_image_size( 'width_640', 640, 9999 ); //600 pixels wide (and unlimited height)
+}
+
+
+
 function livereload_script() { ?>
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 <?php }
