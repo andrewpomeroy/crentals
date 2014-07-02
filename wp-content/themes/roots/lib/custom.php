@@ -148,7 +148,7 @@ SVGInjector(mySVGsToInject);
 add_filter( 'wp_footer', 'svg_inject_script' );
 
 function home_title_option($classes) {
-    if (is_home()) {
+    if (is_front_page()) {
         $classes[] = 'home';
         $classes[] = 'home_title_'.get_field('home_page_title', 'option');
     }

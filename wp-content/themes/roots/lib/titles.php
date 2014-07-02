@@ -3,7 +3,14 @@
  * Page titles
  */
 function roots_title() {
+
   if (is_home()) {
+    if (get_option('page_for_posts', true)) {
+      return get_the_title(get_option('page_for_posts', true));
+    } else {
+      return __('Latest Posts', 'roots');
+    }
+  } elseif (is_front_page()) {
     $home_title_option = get_field('home_page_title', 'option');
     if ($home_title_option && ($home_title_option != 'default')) {
       if ($home_title_option == 'hidden') {
@@ -14,11 +21,6 @@ function roots_title() {
       }
     }
 
-    if (get_option('page_for_posts', true)) {
-      return get_the_title(get_option('page_for_posts', true));
-    } else {
-      return __('Latest Posts', 'roots');
-    }
   } elseif (is_archive()) {
     $term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
     if ($term) {
