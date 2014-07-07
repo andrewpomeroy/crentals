@@ -61,13 +61,16 @@ function my_scripts_init() {
         wp_enqueue_script('mainController', $scriptinitDir.'main-controller.js', array('angular'), false);
     }
     if ( is_page_template('template-orderform.php') ) {
-		wp_enqueue_script('estimateController', $scriptinitDir.'estimate-controller.js', array('angular'), false);
-	}
+        wp_enqueue_script('estimateController', $scriptinitDir.'estimate-controller.js', array('angular'), false);
+    }
     if ( is_page_template('template-category.php')) {
             // wp_enqueue_script('orderform', $scriptinitDir.'orderform.js', array('jquery'), false);
         // wp_register_script('jquery', $scriptinitDir.'vendor/jquery-1.11.0.min.js', array(), null, false);
         wp_enqueue_script('categoryController', $scriptinitDir.'category-controller.js', array('mainController'), false);
     }
+    if (is_single() && !is_page_template()) {
+		wp_enqueue_script('QTObject', $scriptinitDir.'qtobject.js', array('jquery'), false);
+	}
 }
 
 add_action('wp_print_scripts', 'my_scripts_init');
