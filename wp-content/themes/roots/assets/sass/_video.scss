@@ -1,0 +1,55 @@
+.project-video-wrapper
+{
+	margin-bottom: 2em;
+}
+.work-videos-list
+{
+	margin-top: 2em;
+}
+.videos-list-link { 
+	padding: 0 0 10px 0;
+	text-transform: uppercase;
+	// background: url('/images/bg-rule-2px-dimensional-horizontal.png') 0px 100% repeat-x;
+}
+.project-videos  { 
+	margin: 10px 0 0 0;
+	list-style: none;
+	padding: 0 0 15px 0;
+	// background: url('/images/bg-rule-2px-dimensional-horizontal.png') 0px 100% repeat-x;
+}
+.project-videos li { 
+}
+.project-videos li span { 
+	float: right;
+}
+.project-videos a { 
+	line-height: 2em;
+	text-decoration: none;
+	display: block;
+	padding: 0 2em;
+}
+.project-videos a:hover { 
+	color: $link-hover-color;
+	background-color: $bg-hover;
+}
+.project-videos li
+{
+	// position: relative;
+	&.current a
+	{
+		color: $color-current;
+		background-color: $bg-current;
+	}
+	&.current a, &:hover a
+	{
+		&:before
+		{
+			content: '★';
+			position: absolute;
+			left: 2em;
+		}
+	}
+}
+	// background-color: #64000a !important;
+	// color: #fff;
+	// background: url('/images/star-12.png') 3px 50% no-repeat;

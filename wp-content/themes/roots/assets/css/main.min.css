@@ -6343,9 +6343,11 @@ nav > li, .nav > li, nav > li > a, .nav > li > a {
 
 .nav-pills > li > a, .nav-pills > li.active > a {
   border-radius: 0;
-  border-bottom: 1px rgba(212, 32, 43, 0.2) solid;
   margin-left: -2.6em;
   padding-left: 2.6em;
+}
+.nav-pills > li > a:hover {
+  background-color: #f4f4f4;
 }
 .nav-pills > li > a:hover:before {
   content: '★';
@@ -6361,7 +6363,7 @@ nav > li, .nav > li, nav > li > a, .nav > li > a {
   background-color: transparent;
 }
 .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-  background-color: rgba(212, 32, 43, 0.1);
+  background-color: #f4f4f4;
 }
 .nav-pills > li.active > a:before {
   content: '★';
@@ -6835,6 +6837,51 @@ td.rental-period .date-controls.right .date-mode-control {
 }
 .category-page .product-list .product .product-description {
   font-size: 1em;
+}
+
+.project-video-wrapper {
+  margin-bottom: 2em;
+}
+
+.work-videos-list {
+  margin-top: 2em;
+}
+
+.videos-list-link {
+  padding: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.project-videos {
+  margin: 10px 0 0 0;
+  list-style: none;
+  padding: 0 0 15px 0;
+}
+
+.project-videos li span {
+  float: right;
+}
+
+.project-videos a {
+  line-height: 2em;
+  text-decoration: none;
+  display: block;
+  padding: 0 2em;
+}
+
+.project-videos a:hover {
+  color: #92161e;
+  background-color: #f4f4f4;
+}
+
+.project-videos li.current a {
+  color: #e3444e;
+  background-color: rgba(212, 32, 43, 0.1);
+}
+.project-videos li.current a:before, .project-videos li:hover a:before {
+  content: '★';
+  position: absolute;
+  left: 2em;
 }
 
 /* ==========================================================================

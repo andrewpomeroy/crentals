@@ -8,6 +8,9 @@ $headings-font-weight: 700;
 // COLOR
 $brand-primary: #d4202b;
 $background-color: hsl(0,0%,98%);
+$color-current: lighten($brand-primary, 10%);
+$bg-current: rgba($brand-primary, .1);
+$bg-hover: darken($background-color, 2.5%);
 
 // LAYOUT
 $sidebar-minimized: 42px;

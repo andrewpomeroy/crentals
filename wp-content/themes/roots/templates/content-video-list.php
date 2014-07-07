@@ -10,8 +10,8 @@ if (( $workvideos ) && (count($workvideos) > 1)) { ?>
  	<?php 
 	$videocount = 0;
 		?>
-		<h3 id="videos_list_link">Videos (<?php echo count($workvideos); ?>)</h3>
-		<ol id="project-videos" class="c">
+		<h3 id="videos_list_link" class="videos-list-link">Videos (<?php echo count($workvideos); ?>)</h3>
+		<ol id="project-videos" class="project-videos" class="c">
 	<?php foreach ($workvideos as $workvideo ) { ?>
 	
 		<?php if ( $videocount == $videoid ) {

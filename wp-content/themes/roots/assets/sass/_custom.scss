@@ -62,13 +62,14 @@ aside.sidebar
 		> a
 		{
 			border-radius: 0;
-			border-bottom: 1px rgba($brand-primary, .2) solid;
+			// border-bottom: 1px rgba($brand-primary, .2) solid;
 			margin-left: -2.6em;
 			padding-left: 2.6em;
 		}
 	}
 	& > a:hover
 	{
+		background-color: $bg-hover;
 		&:before
 		{
 			content: '★';
@@ -91,7 +92,7 @@ aside.sidebar
 	}
 	&:hover, &:focus
 	{
-		background-color: rgba($brand-primary, .1);
+		background-color: $bg-hover;
 	}
 	&:before
 	{

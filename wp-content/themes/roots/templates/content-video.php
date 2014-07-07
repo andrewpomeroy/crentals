@@ -34,7 +34,7 @@
  	// echo print_r(wp_get_attachment_metadata( $workvideo['work-video-upload']['id'] ) );
  	// echo '</pre>';
  	?>
- 	<div id="project-video-wrapper">
+ 	<div id="project-video-wrapper" class="project-video-wrapper">
 		<script type="text/javascript">
 		// <![CDATA[
 			
