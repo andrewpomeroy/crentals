@@ -3,11 +3,12 @@
  * Custom functions
  */
 
-/* ----- Themeing ----- */
+/* Settings / Flags */
 
-if (!is_page(9)) {
-	
-}
+/* ----- Advanced Custom Fields - activate Options screen ----- */
+acf_add_options_page();
+
+/* ----- Themeing ----- */
 
 // // Import webfonts
 

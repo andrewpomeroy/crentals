@@ -6,12 +6,12 @@ if (isset($_GET['videoid'])) {
 }
 if (( $workvideos ) && (count($workvideos) > 1)) { ?>
 
- <div class="work-videos-list">
+ <div class="work-videos-list work-content-list">
  	<?php 
 	$videocount = 0;
 		?>
-		<h3 id="videos_list_link" class="videos-list-link">Videos (<?php echo count($workvideos); ?>)</h3>
-		<ol id="project-videos" class="project-videos" class="c">
+		<h3 id="videos_list_link" class="videos-list-link content-list-link">Videos (<?php echo count($workvideos); ?>)</h3>
+		<ol id="project-videos" class="project-videos project-content" class="c">
 	<?php foreach ($workvideos as $workvideo ) { ?>
 	
 		<?php if ( $videocount == $videoid ) {

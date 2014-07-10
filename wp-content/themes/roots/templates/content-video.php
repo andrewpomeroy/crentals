@@ -21,8 +21,8 @@
  	$workvideo = $workvideos[$videoid];
  	$workvideourl = $workvideo['work-video-upload']['url'];
  	$workvideotitle = $workvideo['video-title'];
- 	$attachment = get_post( $workvideo['work-video-upload']['id'] );
- 	$metadata = wp_get_attachment_metadata($workvideo['work-video-upload']['id']);
+ 	$attachment = get_post( $workvideo['work-video-upload']['ID'] );
+ 	$metadata = wp_get_attachment_metadata($workvideo['work-video-upload']['ID']);
  	// echo '<p>Video URL: ';
  	// echo $workvideo['work-video-upload']['url'];
  	// echo '</p>';
@@ -31,7 +31,7 @@
  	// echo print_r($workvideo);
  	// echo '</pre>';
  	// echo '<pre>';
- 	// echo print_r(wp_get_attachment_metadata( $workvideo['work-video-upload']['id'] ) );
+ 	// echo print_r(wp_get_attachment_metadata( $workvideo['work-video-upload']['ID'] ) );
  	// echo '</pre>';
  	?>
  	<div id="project-video-wrapper" class="project-video-wrapper">

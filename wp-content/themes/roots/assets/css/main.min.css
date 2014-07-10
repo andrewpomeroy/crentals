@@ -6843,45 +6843,52 @@ td.rental-period .date-controls.right .date-mode-control {
   margin-bottom: 2em;
 }
 
-.work-videos-list {
+.work-content-list {
   margin-top: 2em;
 }
 
-.videos-list-link {
+.content-list-link {
   padding: 0 0 10px 0;
   text-transform: uppercase;
 }
 
-.project-videos {
+.project-content {
   margin: 10px 0 0 0;
   list-style: none;
   padding: 0 0 15px 0;
 }
 
-.project-videos li span {
+.project-content li span {
   float: right;
 }
 
-.project-videos a {
+.project-content a {
   line-height: 2em;
   text-decoration: none;
   display: block;
   padding: 0 2em;
 }
 
-.project-videos a:hover {
+.project-content a:hover {
   color: #92161e;
   background-color: #f4f4f4;
 }
 
-.project-videos li.current a {
+.project-content li.current a {
   color: #e3444e;
   background-color: rgba(212, 32, 43, 0.1);
 }
+
 .project-videos li.current a:before, .project-videos li:hover a:before {
   content: '★';
   position: absolute;
   left: 2em;
+}
+
+.project-files li a {
+  background-image: url("../img/Pdf_16x16_Crystal_SVG.png");
+  background-position: 3px 50%;
+  background-repeat: no-repeat;
 }
 
 /* ==========================================================================

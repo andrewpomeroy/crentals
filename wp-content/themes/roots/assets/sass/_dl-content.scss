@@ -2,37 +2,37 @@
 {
 	margin-bottom: 2em;
 }
-.work-videos-list
+.work-content-list
 {
 	margin-top: 2em;
 }
-.videos-list-link { 
+.content-list-link { 
 	padding: 0 0 10px 0;
 	text-transform: uppercase;
 	// background: url('/images/bg-rule-2px-dimensional-horizontal.png') 0px 100% repeat-x;
 }
-.project-videos  { 
+.project-content  { 
 	margin: 10px 0 0 0;
 	list-style: none;
 	padding: 0 0 15px 0;
 	// background: url('/images/bg-rule-2px-dimensional-horizontal.png') 0px 100% repeat-x;
 }
-.project-videos li { 
+.project-content li { 
 }
-.project-videos li span { 
+.project-content li span { 
 	float: right;
 }
-.project-videos a { 
+.project-content a { 
 	line-height: 2em;
 	text-decoration: none;
 	display: block;
 	padding: 0 2em;
 }
-.project-videos a:hover { 
+.project-content a:hover { 
 	color: $link-hover-color;
 	background-color: $bg-hover;
 }
-.project-videos li
+.project-content li
 {
 	// position: relative;
 	&.current a
@@ -40,6 +40,9 @@
 		color: $color-current;
 		background-color: $bg-current;
 	}
+}
+.project-videos li
+{
 	&.current a, &:hover a
 	{
 		&:before
@@ -49,6 +52,13 @@
 			left: 2em;
 		}
 	}
+}
+
+.project-files li a
+{
+	background-image: url('../img/Pdf_16x16_Crystal_SVG.png');
+	background-position: 3px 50%;
+	background-repeat: no-repeat;
 }
 	// background-color: #64000a !important;
 	// color: #fff;
