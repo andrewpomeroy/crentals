@@ -1,5 +1,6 @@
 <div class="page-header">
-  <h1>
+  <h1 class="title main-title">
     <?php echo roots_title(); ?>
   </h1>
-</div>
+  <?php get_template_part('templates/content', 'subtitle'); ?>
+</div> 
