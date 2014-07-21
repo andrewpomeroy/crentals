@@ -1,6 +1,6 @@
 <?php // create $mhfiles array ?>
 <?php
- if (get_field('enable_files')) {
+ if (get_field('enable_files') && get_field('files')) {
 	$mhfiles = get_field('files');
 	$filecount = 0;
 	?>
