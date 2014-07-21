@@ -6705,7 +6705,8 @@ footer.content-info {
 }
 
 section.order-form {
-  margin: 12px 0;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 section.order-form:before, section.order-form:after {
   content: " ";

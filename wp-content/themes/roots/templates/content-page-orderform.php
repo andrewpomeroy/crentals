@@ -159,6 +159,7 @@
 									<h4 class="pull-right">Total Estimate: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
 								</div>
 								<div class="submit-bar">
+									<button class="btn" ng-click="resetForm()">Reset Form</button>
 									<button class="btn btn-submit submit" ng-click="submitOrder()" ng-disabled="orderFormForm.$invalid">Submit</button>
 							</div>
 						</section>
@@ -176,7 +177,6 @@
  -->	<!-- 		<h5 class="debug">Scope</h5>
 			<pre class="debug">{{}}</pre> -->
 		</section>
-		<button class="btn" ng-click="resetForm()">Reset Form</button>
 	</div>
 
 </div>
