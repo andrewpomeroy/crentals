@@ -116,22 +116,22 @@ function wpse_126886_ajax_handler() {
 // CUSTOM IMAGE THUMBNAIL SIZES
 
 if ( function_exists( 'add_image_size' ) ) { 
-    add_image_size( 'width_960', 960, 9999 ); //600 pixels wide (and unlimited height)
+    add_image_size( 'width_960', 960, 9999 ); //960 pixels wide (and unlimited height)
 }
 if ( function_exists( 'add_image_size' ) ) { 
-    add_image_size( 'width_1280', 1280, 9999 ); //600 pixels wide (and unlimited height)
+    add_image_size( 'width_1280', 1280, 9999 ); //1280 pixels wide (and unlimited height)
 }
 if ( function_exists( 'add_image_size' ) ) { 
-    add_image_size( 'width_1920', 1920, 9999 ); //600 pixels wide (and unlimited height)
+    add_image_size( 'width_1920', 1920, 9999 ); //1920 pixels wide (and unlimited height)
 }
 if ( function_exists( 'add_image_size' ) ) { 
-    add_image_size( 'width_800', 800, 9999 ); //600 pixels wide (and unlimited height)
+    add_image_size( 'width_800', 800, 9999 ); //800 pixels wide (and unlimited height)
 }
 if ( function_exists( 'add_image_size' ) ) { 
-    add_image_size( 'width_1600', 1600, 9999 ); //600 pixels wide (and unlimited height)
+    add_image_size( 'width_1600', 1600, 9999 ); //1600 pixels wide (and unlimited height)
 }
 if ( function_exists( 'add_image_size' ) ) { 
-    add_image_size( 'width_640', 640, 9999 ); //600 pixels wide (and unlimited height)
+    add_image_size( 'width_640', 640, 9999 ); //640 pixels wide (and unlimited height)
 }
 
 
