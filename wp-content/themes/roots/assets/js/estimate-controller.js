@@ -1,5 +1,7 @@
 app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', function($scope, GSLoader, $http, $modal) {
 
+	$scope.dataStatus = null;
+
 	$scope.calcRentalDates = function() {
 		$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date)/one_day) + 1;
 		resetTotal();
@@ -213,6 +215,7 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		};
 		GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
 			$scope.itemData = response;
+			$scope.dataStatus = "loaded";
 			$scope.calcRentalDates();
 		});
 
