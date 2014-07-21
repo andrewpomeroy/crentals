@@ -242,6 +242,11 @@ body:not(.estimate-form)
 					opacity: 1;
 				}
 			}
+			.nav-pills li > a
+			{
+				padding-top: $nav-link-padding / 2;
+				padding-bottom: $nav-link-padding / 2;
+			}
 		}
 	}
 
@@ -330,6 +335,10 @@ body:not(.estimate-form)
 
 // HELPER CLASSES
 
+.display-block
+{
+	display: block;
+}
 .text-color
 {
 	color: $text-color;

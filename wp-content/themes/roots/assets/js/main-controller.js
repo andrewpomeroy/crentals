@@ -31,6 +31,7 @@ app.service('dataTransform', function() {
 		endDate: function() {return new Date();},
 		days: undefined,
 		daysweek: 7,
+		clientnotes: "",
 		notes: "",
 		estimate: 0
 	};

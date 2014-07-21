@@ -5,87 +5,91 @@
 
 		<div ng-controller="mainCtrl">
 			<div ng-controller="estimateForm">
-				<section class="main-app">
+				<section class="loading" ng-if="!dataStatus">
+					<div class="loading-spinner"></div>
+					<h4 class="loading-status">Loading product data</h2>
+				</section>
+				<section class="main-app" ng-if="dataStatus === 'loaded'">
 					<form name="orderFormForm" novalidate>
 
-					<section class="applicant-info order-form">
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="jobName" class="control-label">Job Name</label><input type="text" name="jobName" id="jobName" class="form-control" ng-model="orderMeta.jobName"></div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group"><label for="companyName" class="control-label">Company Name</label><input type="text" name="companyName" id="companyName" class="form-control" ng-model="orderMeta.companyName"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="contactName" class="control-label">Contact Name</label><input type="text" name="contactName" id="contactName" class="form-control" ng-model="orderMeta.contactName"></div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group"><label for="contactPosition" class="control-label">Contact Position</label><input type="text" name="contactPosition" id="contactPosition" class="form-control" ng-model="orderMeta.contactPosition"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="email" class="control-label">Email Address</label><input type="text" name="email" id="email" class="form-control" ng-model="orderMeta.email"></div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group"><label for="phone" class="control-label">Phone Number</label><input type="text" name="phone" id="phone" class="form-control" ng-model="orderMeta.phone"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="jobNumber" class="control-label">Job #</label><input type="text" name="jobNumber" id="jobNumber" class="form-control" ng-model="orderMeta.jobNumber"></div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group"><label for="fax" class="control-label">Fax</label><input type="text" name="fax" id="fax" class="form-control" ng-model="orderMeta.fax"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="PONumber" class="control-label">PO #</label><input type="text" name="PONumber" id="PONumber" class="form-control" ng-model="orderMeta.PONumber"></div>
-							</div>
-							<div class="col-sm-6">
-								<!-- <div class="form-group"><label for="shootDays" class="control-label">Shoot Days</label><input type="text" name="shootDays" id="shootDays" class="form-control" ng-model="orderMeta.shootDays"></div> -->
-
-							</div>
-						</div>
-					</section>
-
-					<section class="rental-dates">
-						<div class="row">
-							<div class="col-sm-6">
-								<h4>First Working Day</h4>
-								<div class="form-group">
-									<p class="input-group">
-										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderMeta.orderPickupDate.date" name="orderMeta.orderPickupDate" is-open="orderMeta.orderPickupDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
-										<span class="input-group-btn">
-											<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-										</span>
-									</p>
+						<section class="rental-dates order-form">
+							<div class="row">
+								<div class="col-sm-6">
+									<h4>First Working Day</h4>
+									<div class="form-group">
+										<p class="input-group">
+											<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderMeta.orderPickupDate.date" name="orderMeta.orderPickupDate" is-open="orderMeta.orderPickupDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
+											<span class="input-group-btn">
+												<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+											</span>
+										</p>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<h4>Last Working Day</h4>
+									<div class="form-group">
+										<p class="input-group" ng-class="{'has-error': (orderMeta.orderReturnDate.date < orderMeta.orderPickupDate.date)}">
+											<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderMeta.orderReturnDate.date" name="orderMeta.orderReturnDate" is-open="orderMeta.orderReturnDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
+											<span class="input-group-btn">
+												<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+											</span>
+										</p>
+										<div class="help-block" ng-if="orderMeta.orderReturnDate.date < orderMeta.orderPickupDate.date">End date cannot be earlier than start date.</div>
+									</div>
 								</div>
 							</div>
-							<div class="col-sm-6">
-								<h4>Last Working Day</h4>
-								<div class="form-group">
-									<p class="input-group" ng-class="{'has-error': (orderMeta.orderReturnDate.date < orderMeta.orderPickupDate.date)}">
-										<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="orderMeta.orderReturnDate.date" name="orderMeta.orderReturnDate" is-open="orderMeta.orderReturnDate.opened" min="minDate" max="'2020-06-22'" datepicker-options="dateOptions" close-text="Close" ng-change="calcRentalDates()" />
-										<span class="input-group-btn">
-											<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-										</span>
-									</p>
-									<div class="help-block" ng-if="orderMeta.orderReturnDate.date < orderMeta.orderPickupDate.date">End date cannot be earlier than start date.</div>
+							<div ng-if="orderMeta.totalRentalDays > 0">
+								<h4 class="pull-right">Total Rental Days: <strong>{{orderMeta.totalRentalDays}}</strong></h4>
+								</div>
+							</section>
+
+						<section class="applicant-info order-form">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group"><label for="jobName" class="control-label">Job Name</label><input type="text" name="jobName" id="jobName" class="form-control" ng-model="orderMeta.jobName"></div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group"><label for="companyName" class="control-label">Company Name</label><input type="text" name="companyName" id="companyName" class="form-control" ng-model="orderMeta.companyName"></div>
 								</div>
 							</div>
-						</div>
-						<div ng-if="orderMeta.totalRentalDays > 0">
-							<h4 class="pull-right">Total Rental Days: <strong>{{orderMeta.totalRentalDays}}</strong></h4>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group"><label for="contactName" class="control-label">Contact Name</label><input type="text" name="contactName" id="contactName" class="form-control" ng-model="orderMeta.contactName"></div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group"><label for="contactPosition" class="control-label">Contact Position</label><input type="text" name="contactPosition" id="contactPosition" class="form-control" ng-model="orderMeta.contactPosition"></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group"><label for="email" class="control-label">Email Address</label><input type="text" name="email" id="email" class="form-control" ng-model="orderMeta.email"></div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group"><label for="phone" class="control-label">Phone Number</label><input type="text" name="phone" id="phone" class="form-control" ng-model="orderMeta.phone"></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group"><label for="jobNumber" class="control-label">Job #</label><input type="text" name="jobNumber" id="jobNumber" class="form-control" ng-model="orderMeta.jobNumber"></div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group"><label for="fax" class="control-label">Fax</label><input type="text" name="fax" id="fax" class="form-control" ng-model="orderMeta.fax"></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group"><label for="PONumber" class="control-label">PO #</label><input type="text" name="PONumber" id="PONumber" class="form-control" ng-model="orderMeta.PONumber"></div>
+								</div>
+								<div class="col-sm-6">
+									<!-- <div class="form-group"><label for="shootDays" class="control-label">Shoot Days</label><input type="text" name="shootDays" id="shootDays" class="form-control" ng-model="orderMeta.shootDays"></div> -->
+
+								</div>
 							</div>
 						</section>
 
 						<section class="order-form row">
 							<div class="col-sm-12">
-								<h2>Selection</h2>
+								<h2>Item Selection</h2>
 								<table class="order-form table" ng-repeat="group in itemData" ng-if="categoryHasItems(group)">
 									<thead>
 										<tr class="section-heading-row">
@@ -111,10 +115,10 @@
 												<a href class="item-name linked" ng-if="item.description || item.image" ng-click="infoModal(item)">{{item.name}}<i class="glyphicon glyphicon-camera text-muted" ng-if="item.image"></i></a>
 												<span class="item-name no-image no-description" ng-if="!item.description && !item.image">{{item.name}}</span>
 											</td>
-											<td class="data dynamic input" ng-class="{'has-error': (
+											<td class="data dynamic input number" ng-class="{'has-error': (
 											(orderFormForm[item.name + '_qty'].$invalid) )
 										}"><input type="number" ng-model="item.qty" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_qty'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_qty'].$invalid">Must be a non-negative integer</div></td>
-										<td class="data static">{{item.rate | currency:"$"}}</td>
+										<td class="data static number">{{item.rate | currency:"$"}}</td>
 										<td class="data static rental-period" ng-class="{'edit-mode': item.customRentalPeriod}">
 											<div class="date-controls-container">
 												<div class="date-controls left">
@@ -133,11 +137,12 @@
 										<!-- <td class="data static">{{item.startDate}}</td> -->
 										<!-- <td class="data static">{{item.endDate}}</td> -->
 										<!-- <td class="data dynamic input" ng-class="{'has-error': ((orderFormForm[item.name + '_days'].$invalid) )}"><input type="number" ng-model="item.days" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_days'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_days'].$invalid">Must be a non-negative integer</div></td> -->
-										<td class="data static">{{item.days}}</td>
-									<td class="data static item-days">{{item.daysweek}}</td>
+										<td class="data static number" ng-bind="item.days"></td>
+									<td class="data static item-days number" ng-bind="item.daysweek"></td>
 									<td class="data dynamic"><span ng-show="!!(item.estimate)">{{item.estimate | currency:"$"}}</span></td>
-									<td class="input dynamic notes">
-										<span><textarea dynamic-name="item.name + '_notes'" ng-model="item.notes" ng-class="{'only-hover': !item.notes}"/></textarea></span>
+									<td class="notes">
+										<span class="static notes display-block" ng-if="item.notes" ng-bind="item.notes"></span>
+										<span><textarea class="dynamic notes" dynamic-name="item.name + '_notes'" ng-model="item.clientnotes" ng-class="{'only-hover': !item.clientnotes}" placeholder="Enter any custom note..."/></textarea></span>
 									</td>
 										</tr>
 									</tbody>

@@ -6542,8 +6542,8 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
     min-height: 100%;
     box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
     z-index: 1001;
-    -webkit-transition: 450ms 400ms -webkit-transform cubic-bezier(0.2, 0.865, 0.72, 1.01);
-    transition: 450ms 400ms transform cubic-bezier(0.2, 0.865, 0.72, 1.01);
+    -webkit-transition: 450ms 50ms -webkit-transform cubic-bezier(0.2, 0.865, 0.72, 1.01);
+    transition: 450ms 50ms transform cubic-bezier(0.2, 0.865, 0.72, 1.01);
   }
 }
 @media screen and (min-width: 993px) and (min-width: 992px) {
@@ -6557,8 +6557,8 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
     opacity: 0;
   }
   .estimate-form .clmn-sidebar-pull .widget, .estimate-form .clmn-sidebar-pull:after, .estimate-form .clmn-sidebar .widget, .estimate-form .clmn-sidebar:after {
-    -webkit-transition: 450ms 200ms opacity cubic-bezier(0.2, 0.865, 0.72, 1.01);
-    transition: 450ms 200ms opacity cubic-bezier(0.2, 0.865, 0.72, 1.01);
+    -webkit-transition: 450ms 25ms opacity cubic-bezier(0.2, 0.865, 0.72, 1.01);
+    transition: 450ms 25ms opacity cubic-bezier(0.2, 0.865, 0.72, 1.01);
   }
   .estimate-form .clmn-sidebar-pull:after, .estimate-form .clmn-sidebar:after {
     color: #d4202b;
@@ -6588,6 +6588,10 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   }
   .estimate-form .clmn-sidebar-pull:hover .widget, .estimate-form .clmn-sidebar:hover .widget {
     opacity: 1;
+  }
+  .estimate-form .clmn-sidebar-pull .nav-pills li > a, .estimate-form .clmn-sidebar .nav-pills li > a {
+    padding-top: 10px 15px/2;
+    padding-bottom: 10px 15px/2;
   }
 }
 .item-image {
@@ -6658,6 +6662,10 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   margin-top: 0;
 }
 
+.display-block {
+  display: block;
+}
+
 .text-color {
   color: #333333;
 }
@@ -6694,6 +6702,37 @@ footer.content-info {
   text-align: center;
   color: #ccc;
   margin-top: 2em;
+}
+
+section.order-form {
+  margin: 12px 0;
+}
+section.order-form:before, section.order-form:after {
+  content: " ";
+  display: table;
+}
+section.order-form:after {
+  clear: both;
+}
+section.order-form:not(:last-child) {
+  border-bottom: 1px solid #eeeeee;
+}
+section.order-form.ng-enter, section.order-form.ng-enter-active, section.order-form.ng-leave, section.order-form.ng-leave-active {
+  display: block !important;
+}
+section.order-form.ng-leave, section.order-form.ng-enter {
+  -webkit-transition: .75s linear opacity;
+  transition: .75s linear opacity;
+}
+section.order-form.ng-leave, section.order-form.ng-enter-active {
+  opacity: 1;
+}
+section.order-form.ng-leave-active, section.order-form.ng-enter {
+  opacity: 0;
+}
+
+td.number {
+  text-align: right;
 }
 
 td.input.dynamic {
@@ -6889,6 +6928,62 @@ td.rental-period .date-controls.right .date-mode-control {
   background-image: url("../img/Pdf_16x16_Crystal_SVG.png");
   background-position: 3px 50%;
   background-repeat: no-repeat;
+}
+
+.loading {
+  padding: 2em 0;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+.loading-status {
+  text-align: center;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  margin: 5rem auto;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-bottom: 6px solid #d4202b;
+  border-top: 6px solid #d4202b;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-name: spin;
+  animation-name: spin;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+
+*, *::before, *::after {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* ==========================================================================

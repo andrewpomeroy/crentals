@@ -1,5 +1,36 @@
 // ----- Order Form Table
 
+section.order-form
+{
+	@include clearfix();
+	margin: floor($line-height-computed / 2) 0;
+	&:not(:last-child)
+	{
+		border-bottom: 1px solid $page-header-border-color;
+	}
+	&.ng-enter, &.ng-enter-active, &.ng-leave, &.ng-leave-active
+	{
+		display: block !important;
+	}
+	&.ng-leave, &.ng-enter
+	{
+		transition: .75s linear opacity;
+	}
+	&.ng-leave, &.ng-enter-active
+	{
+		opacity: 1;
+	}
+	&.ng-leave-active, &.ng-enter
+	{
+		opacity: 0;
+	}
+}
+
+td.number
+{
+	text-align: right;
+}
+
 // Fitting inputs in cells
 td.input.dynamic
 {
