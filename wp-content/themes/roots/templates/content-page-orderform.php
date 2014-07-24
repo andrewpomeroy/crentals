@@ -102,8 +102,8 @@
 											<th>Working Dates</th>
 											<th>Days</th>
 											<th>Days/Week</th>
-											<th>Estimate</th>
 											<th>Notes</th>
+											<th>Estimate</th>
 										</tr>
 									</thead>
 									<tbody ng-repeat="subcat in group.subcats">
@@ -139,11 +139,11 @@
 										<!-- <td class="data dynamic input" ng-class="{'has-error': ((orderFormForm[item.name + '_days'].$invalid) )}"><input type="number" ng-model="item.days" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_days'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_days'].$invalid">Must be a non-negative integer</div></td> -->
 										<td class="data static number" ng-bind="item.days"></td>
 									<td class="data static item-days number" ng-bind="item.daysweek"></td>
-									<td class="data dynamic"><span ng-show="!!(item.estimate)">{{item.estimate | currency:"$"}}</span></td>
 									<td class="notes">
 										<span class="static notes display-block" ng-if="item.notes" ng-bind="item.notes"></span>
 										<span><textarea class="dynamic notes" dynamic-name="item.name + '_notes'" ng-model="item.clientnotes" ng-class="{'only-hover': !item.clientnotes}" placeholder="Enter any custom note..."/></textarea></span>
 									</td>
+									<td class="data dynamic"><span ng-show="!!(item.estimate)"><strong>{{item.estimate | currency:"$"}}</strong></span></td>
 										</tr>
 									</tbody>
 
@@ -155,12 +155,22 @@
 								</div> 
 							</div> -->
 								</table>
+							</div>
+						</section>
+						<section class="order-form row">
+							<div class="col-sm-12">
+								<?php if (get_field('disclaimer')) { ?>
+								<h5 class="disclaimer align-center">
+									<?php echo get_field('disclaimer')?>
+								</h5>
+								<?php } ?>
 								<div ng-if="totalEstimate > 0">
-									<h4 class="pull-right">Total Estimate: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
+									<h4 class="align-right">Total Estimate: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
+									<div class="submit-bar align-right">
+										<button class="btn" ng-click="resetForm()">Reset Form</button>
+										<button class="btn btn-info submit" ng-click="submitOrder()" ng-disabled="orderFormForm.$invalid">Submit</button>
+									</div>
 								</div>
-								<div class="submit-bar">
-									<button class="btn" ng-click="resetForm()">Reset Form</button>
-									<button class="btn btn-submit submit" ng-click="submitOrder()" ng-disabled="orderFormForm.$invalid">Submit</button>
 							</div>
 						</section>
 					</form>

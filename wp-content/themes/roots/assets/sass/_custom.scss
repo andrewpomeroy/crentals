@@ -6,9 +6,14 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6,
 nav > li, .nav > li, nav > li > a, .nav > li > a
 {
-	text-transform: uppercase;
 	text-rendering: optimizeLegibility;
 }
+h1, h2, h3, h4,
+nav > li, .nav > li, nav > li > a, .nav > li > a
+{
+	text-transform: uppercase;
+}
+
 .home.home_title_hidden .page-header
 {
 	display: none;
@@ -244,8 +249,8 @@ body:not(.estimate-form)
 			}
 			.nav-pills li > a
 			{
-				padding-top: $nav-link-padding / 2;
-				padding-bottom: $nav-link-padding / 2;
+				padding-top: ceil($nav-link-padding-v / 2);
+				padding-bottom: floor($nav-link-padding-v / 2);
 			}
 		}
 	}
@@ -346,6 +351,14 @@ body:not(.estimate-form)
 .text-muted
 {
 	color: $text-muted;
+}
+.align-right
+{
+	text-align: right;
+}
+.align-center
+{
+	text-align: center;
 }
 .v-align-middle
 {

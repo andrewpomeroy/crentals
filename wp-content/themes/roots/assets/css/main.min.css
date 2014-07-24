@@ -6297,8 +6297,12 @@ button.close {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6,
 nav > li, .nav > li, nav > li > a, .nav > li > a {
-  text-transform: uppercase;
   text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4,
+nav > li, .nav > li, nav > li > a, .nav > li > a {
+  text-transform: uppercase;
 }
 
 .home.home_title_hidden .page-header {
@@ -6590,8 +6594,8 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
     opacity: 1;
   }
   .estimate-form .clmn-sidebar-pull .nav-pills li > a, .estimate-form .clmn-sidebar .nav-pills li > a {
-    padding-top: 10px 15px/2;
-    padding-bottom: 10px 15px/2;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 }
 .item-image {
@@ -6674,6 +6678,14 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   color: #999999;
 }
 
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
 .v-align-middle {
   vertical-align: middle;
 }
@@ -6702,6 +6714,13 @@ footer.content-info {
   text-align: center;
   color: #ccc;
   margin-top: 2em;
+}
+
+.main-app {
+  max-width: 90%;
+}
+.main-app .table.order-form {
+  font-size: 16px;
 }
 
 section.order-form {
@@ -6758,7 +6777,7 @@ td.input.dynamic.notes textarea:focus {
   min-height: 10em;
 }
 
-tr .only-hover {
+tr .only-hover:not(:focus) {
   opacity: 0;
 }
 
@@ -6832,6 +6851,15 @@ td.rental-period .date-controls.right .date-mode-control {
 
 .item-name.linked i {
   margin-left: .3em;
+}
+
+.disclaimer, .gray-box {
+  padding: 1em;
+  background-color: #eeeeee;
+}
+
+.disclaimer {
+  margin: 1em 0;
 }
 
 .product .no-photo {

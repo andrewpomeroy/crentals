@@ -1,5 +1,14 @@
 // ----- Order Form Table
 
+.main-app
+{
+	max-width: 90%;
+	.table.order-form
+	{
+		font-size: 16px;
+	}
+}
+
 section.order-form
 {
 	@include clearfix();
@@ -58,7 +67,7 @@ td.input.dynamic.notes
 		}
 	}
 }
-tr .only-hover
+tr .only-hover:not(:focus)
 {
 	opacity: 0;
 }
@@ -160,4 +169,13 @@ td.rental-period
 .item-name.linked i
 {
 	margin-left: .3em;
+}
+.disclaimer, .gray-box
+{
+	padding: 1em;
+	background-color: $gray-lighter;
+}
+.disclaimer
+{
+	margin: 1em 0;
 }
