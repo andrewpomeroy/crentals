@@ -51,8 +51,8 @@ add_filter('show_admin_bar', '__return_false');
 function my_scripts_init() {
 	$scriptinitDir = get_bloginfo('template_directory').'/assets/js/';
     // wp_enqueue_script('phpvars', $scriptinitDir.'phpvars.js', array('jquery'), false);
+    wp_register_script('jquery', $scriptinitDir.'vendor/jquery-1.11.0.min.js', array(), null, false);
     wp_enqueue_script('svginject', get_bloginfo('template_directory').'/bower_components/svg-injector/dist/svg-injector.min.js', array('jquery'), false);
-    // wp_register_script('jquery', $scriptinitDir.'vendor/jquery-1.11.0.min.js', array(), null, false);
 
     if ( (is_page_template('template-orderform.php') || is_page_template('template-category.php')) ) {
         wp_enqueue_script('angular', get_bloginfo('template_directory').'/bower_components/angular/angular.js', array('jquery'), false);
@@ -78,13 +78,25 @@ add_action('wp_print_scripts', 'my_scripts_init');
 
 // -- Ajax -- //
 
+
+
+// Add PHP functions for AJAX
+$dirName = dirname(__FILE__);
+$baseName = basename(realpath($dirName));
+require_once ("$dirName/MyFunctions.php");
+
+add_action("wp_ajax_nopriv_make_est_post", "make_est_post");
+add_action("wp_ajax_make_est_post", "make_est_post");
+
 // Init
 function add_ajax() 
 {
-
-     wp_localize_script( 'function', 'my_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-
+     wp_enqueue_script( 'ajax_post_function', get_template_directory_uri().'/assets/js/ajax_test.js', array('jquery'), true);
+     wp_localize_script( 'ajax_post_function', 'my_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
+add_action('template_redirect', 'add_ajax');
+
+/* --- this is where stuff gets weird --- */
 
 add_action( 'admin_ajax_your_form_action', 'wpse_126886_ajax_handler' );
 
