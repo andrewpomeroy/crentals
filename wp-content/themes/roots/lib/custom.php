@@ -117,6 +117,49 @@ if ( function_exists( 'add_image_size' ) ) {
     add_image_size( 'width_640', 640, 9999 ); //640 pixels wide (and unlimited height)
 }
 
+// CUSTOM POST TYPE CREATE
+
+// Review Post type
+
+add_action('init', 'estimate_posttype');
+
+function estimate_posttype() {
+
+    $labels = array(
+        'name' => _x('Estimates', 'post type general name'),
+        'singular_name' => _x('Estimate', 'post type singular name'),
+        'add_new' => _x('Add New', 'estimate'),
+        'add_new_item' => __('Add New Estimate'),
+        'edit_item' => __('Edit Estimate'),
+        'new_item' => __('New Estimate'),
+        'view_item' => __('View Estimate'),
+        'search_items' => __('Search Estimate'),
+        'not_found' =>  __('Nothing found'),
+        'not_found_in_trash' => __('Nothing found in Trash'),
+        'parent_item_colon' => ''
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'query_var' => true,
+        'menu_icon' => null,
+        'rewrite' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'menu_position' => 10,
+        'supports' => array('title','editor','thumbnail')
+      ); 
+
+    register_post_type( 'estimate' , $args );
+}
+
+add_action('init','add_category_to_estimate');
+function add_category_to_estimate() {
+    register_taxonomy_for_object_type('category','estimate');
+}
 
 
 function livereload_script() { ?>
