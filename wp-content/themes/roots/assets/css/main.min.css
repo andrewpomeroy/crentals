@@ -6706,10 +6706,6 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
   overflow-y: auto;
 }
 
-.debug {
-  display: none;
-}
-
 footer.content-info {
   text-align: center;
   color: #ccc;
