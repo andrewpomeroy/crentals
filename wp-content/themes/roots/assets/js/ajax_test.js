@@ -1,8 +1,9 @@
-function my_js_function(testVarFrontEnd) 
+function js_create_post(title) 
 {
      jQuery.ajax({
+     type: 'POST',
      url: my_ajax_script.ajaxurl,
-     data: ({action : "make_est_post", testVar: testVarFrontEnd}),
+     data: ({action : "make_est_post", title: title}),
      success: function(response) {
      	console.log('Success!', response)
       //Do stuff here
@@ -14,5 +15,3 @@ function my_js_function(testVarFrontEnd)
 
      });
 }
-my_js_function("hello");
-debugger;

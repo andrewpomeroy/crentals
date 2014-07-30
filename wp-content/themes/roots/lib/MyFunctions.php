@@ -1,78 +1,68 @@
 <?php
-function make_est_post($testVar)
-{
-	 echo roots_title();
-	PostCreator($testVar, 'page', 'This is a test page.');
-     // $var = get_option('my_var');
-     // echo json_encode($var);
-     die();
-}
 
-if(!function_exists('PostCreator')) {
-	function PostCreator(
-		$name = 'AUTO POST',
-		$type = 'post',
-		$content = 'DUMMY CONTENT',
-		$category = array(1,2),
-		$template = NULL,
-		$author_id = '1',
-		$status = 'publish') {
+/**
+ * A function used to programmatically create a post in WordPress. The slug, author ID, and title
+ * are defined within the context of the function.
+ *
+ * @returns -1 if the post was never created, -2 if a post with the same title exists, or the ID
+ *          of the post if successful.
+ */
+function make_est_post() {
 
-		define(POST_NAME, $name);
-		define(POST_TYPE, $type);
-		define(POST_CONTENT, $content);
-		define(POST_CATEGORY, $category);
-		define(POST_TEMPLATE, '');
-		define(POST_AUTH_ID, $author_id);
-		define(POST_STATUS, $status);
+	// Initialize the page ID to -1. This indicates no action has been taken.
 
-		if ($type == 'page') {
-			$post = get_page_by_title( POST_NAME, 'OBJECT', $type  );
-			$post_id = $post->ID;
-			$post_data = get_page($post_id);
-			define(POST_TEMPLATE, $template);
-		}
-		else {
-			$post = get_page_by_title( POST_NAME, 'OBJECT', $type  );
-			$post_id = $post->ID;
-			$post_data = get_post($post_id);
-		}
-		function hbt_create_post() {
-			$post_data = array(
-				'post_title'    => wp_strip_all_tags(POST_NAME),
-				'post_content'  => POST_CONTENT,
-				'post_status'   => POST_STATUS,
-				'post_type'     => POST_TYPE,
-				'post_author'   => POST_AUTH_ID,
-				'post_category' => POST_CATEGORY,
-				'page_template' => POST_TEMPLATE
-			);
-			wp_insert_post( $post_data, $error_obj );
-		}
-		if(!isset($post))
-			add_action('admin_init', 'hbt_create_post' );
-		return $error_obj;
-	}
-}
+	$post_id = -1;
 
-/* All available options for PostCreator()
+	// Setup the author, slug, and title for the post
+	$author_id = 1;
+	$slug = -1;
+	$title = $_POST['title'];
 
-PostCreator( 'TITLE' , 'POST TYPE' , 'POST CONTENT' , 'POST CATEGORY' , 'TEMPLATE FILE NAME' , 'AUTHOR ID NUMBER' , 'POST STATUS');
+	$response = array(
+    'status' => '200',
+    'message' => 'Dunno',
+    'new_post_ID' => $post_id
+	);
 
-TITLE - HTML Stripped Out. Simple String.
-POST TYPE - Post type slug. Eg 'post' or 'page'. Custom Post Types are supported.
-POST CONTENT - Content of the Post/Page. HTML allowed.
-POST CATEGORY - An array of the integer ID's  of the category/categories you want to link to your post
-TEMPLATE FILE NAME - File name of the template. Only for Pages. In the format 'file_name.php'.
-AUTHOR ID NUMBER - Integer value. Default is 1.
-POST STATUS - Available options; [ 'draft' | 'publish' | 'pending'| 'future' | 'private' | custom registered status ]
+	$response['titleget'] = get_page_by_title(
+	array(
+		'page_title' => $title,
+		'post_type' => 'post'
+		)
+	);
 
-If successful, PostCreator() returns nothing.
-If there is an error PostCreator() returns a WP_error object.
+	// If the page doesn't already exist, then create it
+	if ( get_page_by_title(array('page_title' => $title, 'post_type' => 'post')) == null ) {
+		// Set the post ID so that we know the post was created successfully
+		$post_id = wp_insert_post(
+			array(
+				'comment_status'	=>	'closed',
+				'ping_status'		=>	'closed',
+				'post_author'		=>	$author_id,
+				'post_name'		=>	$slug,
+				'post_title'		=>	$title,
+				'post_status'		=>	'publish',
+				'post_type'		=>	'post'
+			)
+		);
 
-*/
+		$response['message'] = 'OK';
+		$response['new_post_ID'] = $post_id;
 
-// PostCreator('My Lorem Ipsum', 'page', 'With a sizable serving of Dolor. This was created using Harri Bell-Thomas\'s PostCreator function.');
+	// Otherwise, we'll stop
+	} else {
 
+    		// Arbitrarily use -2 to indicate that the page with the title already exists
+    		$post_id = -2;
+
+
+	} // end if
+
+	header( 'Content-Type: application/json; charset=utf-8' );
+	echo json_encode( $response );
+	exit;
+
+} // end programmatically_create_post
+// add_filter( 'after_setup_theme', 'programmatically_create_post' );
 
 ?>
