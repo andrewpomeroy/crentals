@@ -42,7 +42,7 @@ function make_est_post() {
 				'post_title'		=>	$title,
 				'post_content'		=>	$content,
 				'post_status'		=>	'publish',
-				'post_category'     =>  ['10'],
+				'post_category'     =>  array(10),
 				'post_type'		=>	'estimate'
 			)
 		);
