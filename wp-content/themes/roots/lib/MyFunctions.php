@@ -43,7 +43,7 @@ function make_est_post() {
 				'post_content'		=>	$content,
 				'post_status'		=>	'publish',
 				'post_category'     =>  array(10),
-				'post_type'		=>	'estimate'
+				'post_type'		=>	'post'
 			)
 		);
 
