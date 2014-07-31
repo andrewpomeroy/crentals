@@ -1,6 +1,5 @@
 function js_create_post(title, content) 
 {
-	debugger;
      jQuery.ajax({
      type: 'POST',
      url: my_ajax_script.ajaxurl,
