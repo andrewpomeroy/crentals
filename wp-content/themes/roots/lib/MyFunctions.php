@@ -16,6 +16,7 @@ function make_est_post() {
 	// Setup the author, slug, and title for the post
 	$author_id = 1;
 	$title = $_POST['title'];
+	$content = $_POST['content'];
 
 	$response = array(
     'status' => '200',
@@ -39,8 +40,10 @@ function make_est_post() {
 				'ping_status'		=>	'closed',
 				'post_author'		=>	$author_id,
 				'post_title'		=>	$title,
+				'post_content'		=>	$content,
 				'post_status'		=>	'publish',
-				'post_type'		=>	'post'
+				'post_category'     =>  ['10'],
+				'post_type'		=>	'estimate'
 			)
 		);
 

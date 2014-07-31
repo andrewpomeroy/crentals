@@ -1,6 +1,6 @@
 <?php get_template_part('templates/page', 'header'); ?>
 
-<?php query_posts('cat=-8'); ?>
+<?php query_posts('cat=-10'); ?>
 
 <?php if (!have_posts()) : ?>
   <div class="alert alert-warning">

@@ -17,6 +17,7 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		}
 	};
 
+	$scope.orderItemList = [];
 
 	// $scope.GSurl = 'https://spreadsheets.google.com/feeds/list/0Ase_pp75HN9MdGlpbkZmZmVTUGU2MElkOEktVUxyQWc/od6/public/values?alt=json';
 	$scope.GSurl = globalGSUrl;
@@ -50,28 +51,22 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		init();
 	};
 
-	// Submit Order to Wordpress Backend
-	$scope.submitOrder = function() {
-		doAjaxRequest();
-	}
-
-	var doAjaxRequest = function() {
-		$.ajax({
-			url: '/wp-admin/admin-ajax.php',
-			data: {
-				'theItemData': $scope.itemData,
-				dataType: 'JSON',
-				success: function(data) {
-					console.log(data);
-				},
-				error: function(errorThrown) {
-					alert('error');
-					console.log(errorThrown);
-				}
-			}
-		});
+	var addQuantityToOrderObj = function(item) {
+		if (item.qty > 0) {
+			$scope.orderItemList.push(item);
+			debugger;
+		}
 	};
 
+	// Submit Order to Wordpress Backend
+	$scope.submitOrder = function() {
+		loopThroughItems([addQuantityToOrderObj]);
+		var newDate = new Date();
+		var titleStr = newDate.toLocaleString();
+		var contentStr = JSON.stringify($scope.orderItemList);
+		js_create_post(titleStr, contentStr);
+		$scope.orderItemList = [];
+	};
 
 	// --- DATEPICKER FUNCTIONS ---
 
