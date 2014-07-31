@@ -48,6 +48,11 @@ add_filter('wp_head', 'php_vars_go');
 // Hide Admin Bar
 add_filter('show_admin_bar', '__return_false');
 
+// Disable auto <p>
+// TODO:
+// http://stackoverflow.com/questions/7697465/wordpress-remove-auto-generated-paragraphs-for-speciffic-custom-post-type
+remove_filter('the_content','wpautop');
+
 function my_scripts_init() {
 	$scriptinitDir = get_bloginfo('template_directory').'/assets/js/';
     // wp_enqueue_script('phpvars', $scriptinitDir.'phpvars.js', array('jquery'), false);
