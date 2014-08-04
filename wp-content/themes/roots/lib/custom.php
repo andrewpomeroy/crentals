@@ -92,8 +92,6 @@ add_action('wp_print_scripts', 'my_scripts_init');
 
 // -- Ajax -- //
 
-
-
 // Add PHP functions for AJAX
 $dirName = dirname(__FILE__);
 $baseName = basename(realpath($dirName));
@@ -101,14 +99,6 @@ require_once ("$dirName/MyFunctions.php");
 
 add_action("wp_ajax_nopriv_make_est_post", "make_est_post");
 add_action("wp_ajax_make_est_post", "make_est_post");
-
-// Init
-function add_ajax() 
-{
-     wp_enqueue_script( 'ajax_post_function', get_template_directory_uri().'/assets/js/ajax_test.js', array('jquery'), true);
-     wp_localize_script( 'ajax_post_function', 'my_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-}
-add_action('template_redirect', 'add_ajax');
 
 // CUSTOM IMAGE THUMBNAIL SIZES
 

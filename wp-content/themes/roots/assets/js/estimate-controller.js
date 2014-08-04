@@ -74,10 +74,22 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		var titleStr = newDate.toLocaleString();
 		var contentStr = JSON.stringify($scope.orderData);
 		// js_create_post(titleStr, contentStr, $scope.ajaxSuccess, $scope.ajaxFail);
-		js_create_post(titleStr, contentStr, $http, $scope);
+		$scope.js_create_post(titleStr, contentStr, $http, $scope);
 		// $scope.orderData = [];
 	};
-
+	$scope.js_create_post = function(title, content, $http, $scope) {
+		$http({
+			url: '/wp-admin/admin-ajax.php',
+			method: "POST",
+			params: {action : "make_est_post", title: title, content: content}
+		}).success(function(response) {
+			// debugger;
+			console.log(response);
+			$scope.isOrderGood = 1;
+		}).error(function(data) {
+			$scope.isOrderGood = -1;
+		});
+	};
 
 	// --- DATEPICKER FUNCTIONS ---
 
