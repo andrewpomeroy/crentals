@@ -17,8 +17,6 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		}
 	};
 
-	$scope.orderItemList = [];
-
 	// $scope.GSurl = 'https://spreadsheets.google.com/feeds/list/0Ase_pp75HN9MdGlpbkZmZmVTUGU2MElkOEktVUxyQWc/od6/public/values?alt=json';
 	$scope.GSurl = globalGSUrl;
 	$scope.dataRetreived = {};
@@ -53,20 +51,33 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 
 	var addQuantityToOrderObj = function(item) {
 		if (item.qty > 0) {
-			$scope.orderItemList.push(item);
-			debugger;
+			$scope.orderData.items.push(item);
 		}
 	};
 
+	$scope.ajaxSuccess = function() {
+		$scope.isOrderGood = 1;
+	}
+	$scope.ajaxFail = function() {
+		$scope.isOrderGood = -1;
+	}
+	$scope.responseVar = 0;
 	// Submit Order to Wordpress Backend
 	$scope.submitOrder = function() {
+		$scope.isOrderGood = 0;
+		$scope.orderData = {
+			orderMeta: $scope.orderMeta,
+			items: []
+		}
 		loopThroughItems([addQuantityToOrderObj]);
 		var newDate = new Date();
 		var titleStr = newDate.toLocaleString();
-		var contentStr = JSON.stringify($scope.orderItemList);
-		js_create_post(titleStr, contentStr);
-		$scope.orderItemList = [];
+		var contentStr = JSON.stringify($scope.orderData);
+		// js_create_post(titleStr, contentStr, $scope.ajaxSuccess, $scope.ajaxFail);
+		js_create_post(titleStr, contentStr, $http, $scope);
+		// $scope.orderData = [];
 	};
+
 
 	// --- DATEPICKER FUNCTIONS ---
 
@@ -143,7 +154,6 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 			for (var subcat in $scope.itemData[group].subcats) {
 				for (var item in $scope.itemData[group].subcats[subcat].items) {
 					var theItem = $scope.itemData[group].subcats[subcat].items[item];
-					// debugger;
 					// loop through specific item functions and execute each on found item
 					for (var passedFunction in itemFunctions) {
 						itemFunctions[passedFunction](theItem);

@@ -8,7 +8,7 @@ nav > li, .nav > li, nav > li > a, .nav > li > a
 {
 	text-rendering: optimizeLegibility;
 }
-h1, h2, h3, h4,
+h1.title, h2.title, h3.title, h4.title,
 nav > li, .nav > li, nav > li > a, .nav > li > a
 {
 	text-transform: uppercase;
@@ -388,6 +388,7 @@ body:not(.estimate-form)
 .debug
 {
 	// display: none;
+	font-size: 14px;
 }
 
 footer.content-info

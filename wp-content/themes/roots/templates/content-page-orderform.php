@@ -7,7 +7,7 @@
 			<div ng-controller="estimateForm">
 				<section class="loading" ng-if="!dataStatus">
 					<div class="loading-spinner"></div>
-					<h4 class="loading-status">Loading product data</h2>
+					<h4 class="loading-status">Loading product data</h4>
 				</section>
 				<section class="main-app" ng-if="dataStatus === 'loaded'">
 					<form name="orderFormForm" novalidate>
@@ -159,24 +159,41 @@
 						</section>
 						<section class="order-form row">
 							<div class="col-sm-12">
-								<?php if (get_field('disclaimer')) { ?>
-								<h5 class="disclaimer align-center">
-									<?php echo get_field('disclaimer')?>
-								</h5>
-								<?php } ?>
 								<div ng-if="totalEstimate > 0">
 									<h4 class="align-right">Total Estimate: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
 									<div class="submit-bar align-right">
-										<button class="btn" ng-click="resetForm()">Reset Form</button>
-										<button class="btn btn-info submit" ng-click="submitOrder()" ng-disabled="orderFormForm.$invalid">Submit</button>
+									<!-- <div class="submit-bar align-right" ng-if="isOrderGood !== 1"> -->
+										<button class="btn" ng-click="resetForm()" ng-disabled="isOrderGood === 0">Reset Form</button>
+										<button class="btn btn-info submit" ng-click="submitOrder()" ng-disabled="orderFormForm.$invalid || (isOrderGood === 0)" ng-class="{'processing': isOrderGood === 0}">
+											<span ng-if="(isOrderGood === undefined) || (isOrderGood === -1)">Submit</span>
+											<span ng-if="(isOrderGood === 0)">
+												<span class="processing-spinner inline-spinner"></span>
+												 Processing..
+											</span>
+										</button>
 									</div>
+								</div>
+								<div class="gray-box align-center">
+									<span ng-if="!isOrderGood">
+										<?php if (get_field('disclaimer')) { ?>
+										<h5><?php echo get_field('disclaimer')?></h5>
+										<?php } ?>
+									</span>
+									<div class="success" ng-if="isOrderGood === 1">
+										<h4>Estimate request submitted successfully.</h4>
+										<a class="print-styles-toggle">View printable order summary</a>
+									</div>
+									<h4 ng-if="isOrderGood === -1"><strong>Error</strong> – Unable to process estimate request.</h4>
 								</div>
 							</div>
 						</section>
 					</form>
 			</section>
 		<section class="debug">
-			<pre class="debug">{{orderItemList | json}}</pre>
+			<h4>$scope.isOrderGood</h4>
+			<pre class="debug">{{isOrderGood | json}}</pre>
+			<h4>$scope.orderData</h4>
+			<pre class="debug">{{orderData | json}}</pre>
 			<pre class="debug">{{totalEstimate}}</pre>
 			<pre class="debug">{{orderMeta | json}}</pre>
 			<!-- <pre class="debug">{{orderMeta.orderPickupDate | json}}</pre> -->

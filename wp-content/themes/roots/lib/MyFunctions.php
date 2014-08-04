@@ -11,12 +11,19 @@ function make_est_post() {
 
 	// Initialize the page ID to -1. This indicates no action has been taken.
 
+	// $postdata = file_get_contents("php://input");
+	// $request = json_decode($postdata);
+	header( 'Content-Type: application/json; charset=utf-8' );
+	// $postdata = $_POST;
+	$postdata = $_REQUEST;
+	// echo var_dump($postdata);
+	$request = $postdata;
 	$post_id = -1;
 
 	// Setup the author, slug, and title for the post
 	$author_id = 1;
-	$title = $_POST['title'];
-	$content = $_POST['content'];
+	$title = $request['title'];
+	$content = $request['content'];
 
 	$response = array(
     'status' => '200',
@@ -59,7 +66,6 @@ function make_est_post() {
 
 	} // end if
 
-	header( 'Content-Type: application/json; charset=utf-8' );
 	echo json_encode( $response );
 	exit;
 

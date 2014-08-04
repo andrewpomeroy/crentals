@@ -49,9 +49,18 @@ add_filter('wp_head', 'php_vars_go');
 add_filter('show_admin_bar', '__return_false');
 
 // Disable auto <p>
-// TODO:
 // http://stackoverflow.com/questions/7697465/wordpress-remove-auto-generated-paragraphs-for-speciffic-custom-post-type
 remove_filter('the_content','wpautop');
+
+//decide when you want to apply the auto paragraph
+
+add_filter('the_content','my_custom_formatting');
+function my_custom_formatting($content){
+if(!is_category('10')) //if it does not work, you may want to pass the current post object to get_post_type
+    return $content;//no autop
+else
+ return wpautop($content);
+}
 
 function my_scripts_init() {
 	$scriptinitDir = get_bloginfo('template_directory').'/assets/js/';

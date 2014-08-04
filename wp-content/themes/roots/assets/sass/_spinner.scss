@@ -22,19 +22,31 @@
   }
 }
 
-.loading-spinner {
-  width: 32px;
-  height: 32px;
-  margin: 5rem auto;
+@mixin makeSpinner($size: 32px, $color: $brand-primary, $border: $size/6, $duration: 1.5s) {
+  width: $size;
+  height: $size;
   border-radius: 50%;
-  border: 6px solid transparent;
-  border-bottom: 6px solid $brand-primary;
-  border-top: 6px solid $brand-primary;
+  border: $border solid transparent;
+  border-bottom: $border solid $color;
+  border-top: $border solid $color;
   animation-duration: 1.5s;
   animation-name: spin;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   // animation: spin 1s infinite linear;
+}
+
+.loading-spinner {
+  @include makeSpinner();
+  margin: 5rem auto;
+}
+.processing-spinner {
+  @include makeSpinner($size: $font-size-base, $color: $gray-light);
+}
+.inline-spinner
+{
+  display: inline-block;
+  vertical-align: middle;
 }
 
 *, *::before, *::after {
