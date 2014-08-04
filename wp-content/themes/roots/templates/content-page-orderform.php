@@ -89,11 +89,11 @@
 
 						<section class="order-form row">
 							<div class="col-sm-12">
-								<h2 class="title">Item Selection</h2>
+								<h3 class="title">Item Selection</h3>
 								<table class="order-form table" ng-repeat="group in itemData" ng-if="categoryHasItems(group)">
 									<thead>
 										<tr class="section-heading-row">
-											<th colspan="8" class="section-heading"><h3 class="section-heading">{{group.type}}</h3></th>
+											<th colspan="8" class="section-heading"><h4 class="section-heading">{{group.type}}</h4></th>
 										</tr>
 										<tr>
 											<th>Item</th>
