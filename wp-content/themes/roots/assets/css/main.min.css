@@ -6707,6 +6707,7 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
 }
 
 .debug {
+  display: none;
   font-size: 14px;
 }
 

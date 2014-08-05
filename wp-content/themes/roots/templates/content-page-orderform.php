@@ -161,8 +161,8 @@
 							<div class="col-sm-12">
 								<div ng-if="totalEstimate > 0">
 									<h4 class="align-right">Total Estimate: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
-									<div class="submit-bar align-right">
-									<!-- <div class="submit-bar align-right" ng-if="isOrderGood !== 1"> -->
+									<!-- <div class="submit-bar align-right"> -->
+									<div class="submit-bar align-right" ng-if="isOrderGood !== 1">
 										<button class="btn" ng-click="resetForm()" ng-disabled="isOrderGood === 0">Reset Form</button>
 										<button class="btn btn-info submit" ng-click="submitOrder()" ng-disabled="orderFormForm.$invalid || (isOrderGood === 0)" ng-class="{'processing': isOrderGood === 0}">
 											<span ng-if="(isOrderGood === undefined) || (isOrderGood === -1)">Submit</span>
@@ -180,7 +180,7 @@
 										<?php } ?>
 									</span>
 									<div class="success" ng-if="isOrderGood === 1">
-										<h4>Estimate request submitted successfully.</h4>
+										<h4>Your estimate form has been submitted.</h4>
 										<a class="print-styles-toggle">View printable order summary</a>
 									</div>
 									<h4 ng-if="isOrderGood === -1"><strong>Error</strong> – Unable to process estimate request.</h4>
