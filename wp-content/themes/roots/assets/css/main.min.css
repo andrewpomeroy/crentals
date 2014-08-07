@@ -6994,7 +6994,7 @@ td.rental-period .date-controls.right .date-mode-control {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 5.33333px solid transparent;
+  border: 5.33333px solid rgba(212, 32, 43, 0.1);
   border-bottom: 5.33333px solid #d4202b;
   border-top: 5.33333px solid #d4202b;
   -webkit-animation-duration: 1.5s;

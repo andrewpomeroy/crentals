@@ -22,11 +22,11 @@
   }
 }
 
-@mixin makeSpinner($size: 32px, $color: $brand-primary, $border: $size/6, $duration: 1.5s) {
+@mixin makeSpinner($size: 32px, $color: $brand-primary, $color2: transparent, $border: $size/6, $duration: 1.5s) {
   width: $size;
   height: $size;
   border-radius: 50%;
-  border: $border solid transparent;
+  border: $border solid $color2;
   border-bottom: $border solid $color;
   border-top: $border solid $color;
   animation-duration: 1.5s;
@@ -37,7 +37,7 @@
 }
 
 .loading-spinner {
-  @include makeSpinner();
+  @include makeSpinner($color2: rgba($brand-primary,.1));
   margin: 5rem auto;
 }
 .processing-spinner {

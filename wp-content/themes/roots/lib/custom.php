@@ -56,6 +56,10 @@ remove_filter('the_content','wpautop');
 
 add_filter('the_content','my_custom_formatting');
 function my_custom_formatting($content){
+//     include 'ChromePhp.php';
+// ChromePhp::log('Hello console!');
+// ChromePhp::log($_SERVER);
+// ChromePhp::warn('something went wrong!');
 // PC::debug(has_category('10'));
 if(has_category('10')) //if it does not work, you may want to pass the current post object to get_post_type
     return $content;//no autop

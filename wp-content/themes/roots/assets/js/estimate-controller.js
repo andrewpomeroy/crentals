@@ -92,8 +92,7 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 	};
 
 	// --- DATEPICKER FUNCTIONS ---
-
-	var one_day = 1000*60*60*24;
+ var one_day = 1000*60*60*24;
 
 	$scope.incrementIndividualDate = function(date, amount) {
 		console.log(date);
