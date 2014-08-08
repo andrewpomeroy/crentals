@@ -65,6 +65,7 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 	// Submit Order to Wordpress Backend
 	$scope.submitOrder = function() {
 		$scope.isOrderGood = 0;
+		$scope.orderMeta.totalEstimate = $scope.totalEstimate;
 		$scope.orderData = {
 			orderMeta: $scope.orderMeta,
 			items: []
