@@ -118,7 +118,7 @@
 										}"><input type="number" ng-model="item.qty" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_qty'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_qty'].$invalid">Must be a non-negative integer</div></td>
 										<td class="data static number">{{item.rate | currency:"$"}}</td>
 										<td class="data static rental-period" ng-class="{'edit-mode': item.customRentalPeriod}">
-											<div class="date-controls-container">
+											<div class="date-controls-container" ng-if="item.daysweek != 0">
 												<div class="date-controls left">
 													<span class="date-type-label edit-mode">First Day</span>
 													<span class="individual-date">{{item.startDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.startDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.startDate, 1)" ng-if="item.customRentalPeriod"></button>

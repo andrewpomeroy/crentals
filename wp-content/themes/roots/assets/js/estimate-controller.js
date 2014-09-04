@@ -24,19 +24,26 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 	$scope.changeQty = function(item) {
 
 		// ---  calculate Days/Week
-		// Begin with assumption of normal day-counting
-		var daysCounted = item.days;
-		// When days/week restriction is enabled for this item..
-		if (item.daysweek < 7) {
-			// Start out with the number of days counted in all complete weeks
-			daysCounted = Math.floor(item.days/7) * item.daysweek;
-			// In the case that the days in final week exceed specified days/week..
-			if ((item.days%7) > item.daysweek) {
-				// Add only the specified days in final week
-				daysCounted += parseInt(item.daysweek);
+		var daysCounted;
+		// Parse out sale items
+		if (item.daysweek == 0) {
+			daysCounted = 1;
+		}
+		else {
+			// Otherwise, begin with assumption of normal day-counting
+			daysCounted = item.days;
+			// When days/week restriction is enabled for this item..
+			if (item.daysweek < 7) {
+				// Start out with the number of days counted in all complete weeks
+				daysCounted = Math.floor(item.days/7) * item.daysweek;
+				// In the case that the days in final week exceed specified days/week..
+				if ((item.days%7) > item.daysweek) {
+					// Add only the specified days in final week
+					daysCounted += parseInt(item.daysweek);
+				}
+				// Otherwise, add the entire remainder of days in the final week
+				else {daysCounted += (item.days % 7);}
 			}
-			// Otherwise, add the entire remainder of days in the final week
-			else {daysCounted += (item.days % 7);}
 		}
 		// Total = Amount * Rate * Time
 		item.estimate = item.qty * item.rate * daysCounted;
