@@ -41,49 +41,7 @@
 							<div ng-if="orderMeta.totalRentalDays > 0">
 								<h4 class="pull-right">Total Rental Days: <strong>{{orderMeta.totalRentalDays}}</strong></h4>
 								</div>
-							</section>
-
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="jobName" class="control-label">Job Name</label><input type="text" name="jobName" id="jobName" class="form-control" ng-model="orderMeta.jobName"></div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group"><label for="companyName" class="control-label">Company Name</label><input type="text" name="companyName" id="companyName" class="form-control" ng-model="orderMeta.companyName"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="contactName" class="control-label">Contact Name</label><input type="text" name="contactName" id="contactName" class="form-control" ng-model="orderMeta.contactName"></div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group"><label for="contactPosition" class="control-label">Contact Position</label><input type="text" name="contactPosition" id="contactPosition" class="form-control" ng-model="orderMeta.contactPosition"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="email" class="control-label">Email Address</label><input type="text" name="email" id="email" class="form-control" ng-model="orderMeta.email"></div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group"><label for="phone" class="control-label">Phone Number</label><input type="text" name="phone" id="phone" class="form-control" ng-model="orderMeta.phone"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="jobNumber" class="control-label">Job #</label><input type="text" name="jobNumber" id="jobNumber" class="form-control" ng-model="orderMeta.jobNumber"></div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group"><label for="fax" class="control-label">Fax</label><input type="text" name="fax" id="fax" class="form-control" ng-model="orderMeta.fax"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group"><label for="PONumber" class="control-label">PO #</label><input type="text" name="PONumber" id="PONumber" class="form-control" ng-model="orderMeta.PONumber"></div>
-							</div>
-							<div class="col-sm-6">
-								<!-- <div class="form-group"><label for="shootDays" class="control-label">Shoot Days</label><input type="text" name="shootDays" id="shootDays" class="form-control" ng-model="orderMeta.shootDays"></div> -->
-						
-							</div>
-						</div>
+						</section>
 
 						<section class="order-form row">
 							<div class="col-sm-12">
@@ -155,6 +113,48 @@
 								</table>
 							</div>
 						</section>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group"><label for="jobName" class="control-label">Job Name</label><input type="text" name="jobName" id="jobName" class="form-control" ng-model="orderMeta.jobName"></div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group"><label for="companyName" class="control-label">Company Name</label><input type="text" name="companyName" id="companyName" class="form-control" ng-model="orderMeta.companyName"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group"><label for="contactName" class="control-label">Contact Name</label><input type="text" name="contactName" id="contactName" class="form-control" ng-model="orderMeta.contactName"></div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group"><label for="contactPosition" class="control-label">Contact Position</label><input type="text" name="contactPosition" id="contactPosition" class="form-control" ng-model="orderMeta.contactPosition"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group"><label for="email" class="control-label">Email Address</label><input type="text" name="email" id="email" class="form-control" ng-model="orderMeta.email"></div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group"><label for="phone" class="control-label">Phone Number</label><input type="text" name="phone" id="phone" class="form-control" ng-model="orderMeta.phone"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group"><label for="jobNumber" class="control-label">Job #</label><input type="text" name="jobNumber" id="jobNumber" class="form-control" ng-model="orderMeta.jobNumber"></div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group"><label for="fax" class="control-label">Fax</label><input type="text" name="fax" id="fax" class="form-control" ng-model="orderMeta.fax"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group"><label for="PONumber" class="control-label">PO #</label><input type="text" name="PONumber" id="PONumber" class="form-control" ng-model="orderMeta.PONumber"></div>
+							</div>
+							<div class="col-sm-6">
+								<!-- <div class="form-group"><label for="shootDays" class="control-label">Shoot Days</label><input type="text" name="shootDays" id="shootDays" class="form-control" ng-model="orderMeta.shootDays"></div> -->
+						
+							</div>
+						</div>
+
 						<section class="order-form row">
 							<div class="col-sm-12">
 								<div ng-if="totalEstimate > 0">

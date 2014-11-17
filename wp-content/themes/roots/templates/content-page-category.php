@@ -50,7 +50,11 @@
 										<h4 class="heading product-heading" ng-if="hasProductPage(product.id)">
 											<a ng-href="/?page_id={{hasProductPage(product.id)}}" class="product-link">{{product.name}}</a>
 										</h4>
-										<h4 class="heading product-heading" ng-if="!hasProductPage(product.id)">{{product.name}}</h4>
+										<h4 class="heading product-heading" ng-if="!hasProductPage(product.id)">
+											<a href ng-click="infoModal(product)" ng-if="product.image">{{product.name}} <i class="glyphicon glyphicon-camera text-muted"></i></a>
+											<span ng-if="!product.image">{{product.name}}</span>
+										</h4>
+										<h6 class="product-rate">{{product.rate}}/day</h6>
 										<p class="product-description">{{product.description}}</p>
 									</span>
 								</li>

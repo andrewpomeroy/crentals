@@ -6904,6 +6904,9 @@ td.rental-period .date-controls.right .date-mode-control {
 .category-page .product-list .product .product-description {
   font-size: 1em;
 }
+.category-page .product-list .product .product-rate {
+  text-transform: uppercase;
+}
 
 .project-video-wrapper {
   margin-bottom: 2em;
