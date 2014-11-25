@@ -9,8 +9,11 @@ $args = array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' =
 				// count number of available images and change if less than the specified limit
 				foreach ($theattachments as $post) {
 						setup_postdata($post);
-						$imgthumb = wp_get_attachment_image_src( $post->ID, 'thumbnail', false );
-						$imgsrc = wp_get_attachment_image_src( $post->ID, 'full', false );
+						if (wp_get_attachment_image_src( $post->ID)) {
+							$imgthumb = wp_get_attachment_image_src( $post->ID, 'thumbnail', false );
+							$imgsrc = wp_get_attachment_image_src( $post->ID, 'full', false );
+							$img = wp_get_attachment_image_src( $post->ID, 'full', false );
+						}
 						?>
 						<div class="demo-image">
 							<a class="demo-image__img-wrap" href="<?php echo $imgsrc[0] ?>" target="_blank">
