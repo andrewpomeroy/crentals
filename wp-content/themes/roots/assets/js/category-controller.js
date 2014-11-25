@@ -82,7 +82,7 @@ app.directive('thumbSrc', function() {
 			var observer = function(value) {
   				if (value) {
 					var file = value;
-					var appendage = "-150x150.jpg";
+					var appendage = "-150x84.jpg";
 					file = file.replace(/(\.[\w\d_-]+)$/i, appendage);
 					file = "/" + file.split("/").slice(3).join("/");
 					angular.element(element).attr('src', file).removeClass('no-image');
