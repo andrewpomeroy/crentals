@@ -1,10 +1,8 @@
-	        <div class="modal-header" ng-click="ok()">
+	        <div class="modal-header">
+	        	<button type="button" class="close" ng-click="ok()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	            <h3 class="modal-title">{{theItem.name}}</h3>
 	        </div>
-	        <div class="modal-body" ng-click="ok()">
+	        <div class="modal-body">
 	        	<img class="item-image" ng-if="theItem.image" ng-src="{{theItem.image}}">
 				<p class="item-description" ng-if="theItem.description">{{theItem.description}}</p>
-	        </div>
-	        <div class="modal-footer" ng-click="ok()">
-	        	<span class="muted close-message">Click anywhere to close</span>
 	        </div>
