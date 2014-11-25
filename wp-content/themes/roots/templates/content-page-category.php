@@ -54,7 +54,8 @@
 											<a href ng-click="infoModal(product)" ng-if="product.image">{{product.name}} <i class="glyphicon glyphicon-camera text-muted"></i></a>
 											<span ng-if="!product.image">{{product.name}}</span>
 										</h4>
-										<h6 class="product-rate">{{product.rate}}/day</h6>
+										<h6 class="product-rate" ng-if="product.daysweek == 0">{{product.rate | currency:"$":2}}</h6>
+										<h6 class="product-rate" ng-if="product.daysweek > 0">{{product.rate | currency:"$":0}}/day</h6>
 										<p class="product-description">{{product.description}}</p>
 									</span>
 								</li>
