@@ -6850,6 +6850,10 @@ td.rental-period .date-controls.right .date-mode-control {
   min-height: 100%;
 }
 
+.notes.static {
+  white-space: pre-line;
+}
+
 .item-name.linked i {
   margin-left: .3em;
 }
