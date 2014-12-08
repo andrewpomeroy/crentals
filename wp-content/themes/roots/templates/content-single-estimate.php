@@ -1,13 +1,14 @@
 <?php while (have_posts()) : the_post(); ?>
   <article <?php post_class(); ?>>
-    <header>
-      <h1 class="entry-title">Estimate: <?php the_title(); ?></h1>
-      <?php // get_template_part('templates/entry-meta'); ?>
-    </header>
     <div ng-app="myApp">
       <div ng-controller="mainCtrl">
         <div ng-controller="estimateSingleCtrl">
           <script>theOrderData = <?php echo get_the_content(); ?>;</script>
+          <header>
+            <h1 class="entry-title title">Estimate</h1>
+            <h2 class="entry-title">{{orderData.orderMeta.companyName}} – {{orderData.orderMeta.jobName}}</h2>
+            <?php // get_template_part('templates/entry-meta'); ?>
+          </header>
           <div class="order-meta">
 
             <div class="row">
