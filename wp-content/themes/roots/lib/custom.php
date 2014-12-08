@@ -73,15 +73,18 @@ function my_scripts_init() {
     wp_register_script('jquery', $scriptinitDir.'vendor/jquery-1.11.0.min.js', array(), null, false);
     wp_enqueue_script('svginject', get_bloginfo('template_directory').'/bower_components/svg-injector/dist/svg-injector.min.js', array('jquery'), false);
 
-    if ( (is_page_template('template-orderform.php') || is_page_template('template-category.php')) ) {
+    if ( (is_page_template('template-orderform.php') || is_page_template('template-category.php')) || ( 'estimate' == get_post_type()) ) {
         wp_enqueue_script('angular', get_bloginfo('template_directory').'/bower_components/angular/angular.js', array('jquery'), false);
         wp_enqueue_script('uiBootstrap', get_bloginfo('template_directory').'/bower_components/angular-bootstrap/ui-bootstrap-tpls.js', array('angular'), false);
     }
-    if ( is_page_template('template-orderform.php') || is_page_template('template-category.php') ) {
+    if ( is_page_template('template-orderform.php') || is_page_template('template-category.php') || ( 'estimate' == get_post_type()) ) {
         wp_enqueue_script('mainController', $scriptinitDir.'main-controller.js', array('angular'), false);
     }
     if ( is_page_template('template-orderform.php') ) {
         wp_enqueue_script('estimateController', $scriptinitDir.'estimate-controller.js', array('angular'), false);
+    }
+    if ( 'estimate' == get_post_type()) {
+        wp_enqueue_script('estimateSingleController', $scriptinitDir.'estimate-single-controller.js', array('mainController'), false);
     }
     if ( is_page_template('template-category.php')) {
             // wp_enqueue_script('orderform', $scriptinitDir.'orderform.js', array('jquery'), false);
@@ -170,6 +173,16 @@ function add_category_to_estimate() {
     register_taxonomy_for_object_type('category','estimate');
 }
 
+// 'Estimate' Post type gets proper template
+// add_filter('roots_wrap_base', 'roots_wrap_base_cpts'); // Add our function to the roots_wrap_base filter
+
+// function roots_wrap_base_cpts($templates) {
+// $cpt = get_post_type(); // Get the current post type
+// if ($cpt) {
+//    array_unshift($templates, 'base-' . $cpt . '.php'); // Shift the template to the front of the array
+// }
+// return $templates; // Return our modified array with base-$cpt.php at the front of the queue
+// }
 
 function livereload_script() { ?>
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
