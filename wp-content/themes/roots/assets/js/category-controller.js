@@ -1,8 +1,11 @@
 app.controller('productCategory', ['GSLoader', '$scope', '$http', '$modal', function(GSLoader, $scope, $http, $modal) {
 
+$scope.dataStatus = null;
+
 $scope.getProducts = function(category) {
 
 	$scope.category = category;
+
 
 	console.log("Category");
 	console.log($scope.category);
@@ -21,6 +24,7 @@ $scope.getProducts = function(category) {
 $scope.getTheStuff = function(category) {
 	GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
 		$scope.itemData = response;
+		$scope.dataStatus = "loaded";
 		$scope.getProducts(category);
 	});
 };

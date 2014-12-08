@@ -37,7 +37,11 @@
 							</li>
 						</ul>
 					</div> -->
-					<div class="products">
+					<section class="loading" ng-if="!dataStatus">
+						<div class="loading-spinner"></div>
+						<h4 class="loading-status">Loading product data</h4>
+					</section>
+					<div class="products" ng-if="dataStatus === 'loaded'">
 						<div class="subcategory" ng-repeat="subcat in productGroup.subcats">
 							<h3 class="subcategory-heading">{{subcat.type}}</h3>
 							<ul class="product-list">
