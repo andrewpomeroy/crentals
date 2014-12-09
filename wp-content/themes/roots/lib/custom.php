@@ -162,6 +162,7 @@ function estimate_posttype() {
         'capability_type' => 'post',
         'hierarchical' => false,
         'menu_position' => 10,
+        'taxonomies' => array('category'),
         'supports' => array('title','editor','thumbnail')
       ); 
 
