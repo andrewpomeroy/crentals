@@ -133,6 +133,11 @@ if ( function_exists( 'add_image_size' ) ) {
 
 // Review Post type
 
+add_action('init','add_category_to_estimate');
+function add_category_to_estimate() {
+    register_taxonomy_for_object_type('category','estimate');
+}
+
 add_action('init', 'estimate_posttype');
 
 function estimate_posttype() {
@@ -169,10 +174,7 @@ function estimate_posttype() {
     register_post_type( 'estimate' , $args );
 }
 
-add_action('init','add_category_to_estimate');
-function add_category_to_estimate() {
-    register_taxonomy_for_object_type('category','estimate');
-}
+
 
 // 'Estimate' Post type gets proper template
 // add_filter('roots_wrap_base', 'roots_wrap_base_cpts'); // Add our function to the roots_wrap_base filter
