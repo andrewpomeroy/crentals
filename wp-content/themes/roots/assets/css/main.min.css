@@ -6598,6 +6598,15 @@ body:not(.estimate-form) .clmn-sidebar-pull, body:not(.estimate-form) .clmn-side
     padding-bottom: 5px;
   }
 }
+@media screen {
+  .order-summary {
+    background: white;
+    border: 1px solid #666;
+    padding: 3em;
+    border-radius: 5px;
+  }
+}
+
 .item-image {
   max-width: 100%;
 }
@@ -6717,6 +6726,17 @@ footer.content-info {
   margin-top: 2em;
 }
 
+@media print {
+  .estimate-form .page-header, .estimate-form aside.sidebar, .estimate-form .gray-box, .estimate-form .success, .single-estimate .page-header, .single-estimate aside.sidebar, .single-estimate .gray-box, .single-estimate .success {
+    display: none;
+  }
+  .estimate-form main.main:before, .single-estimate main.main:before {
+    content: 'Central Rentals';
+    font-size: 46px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+}
 .main-app {
   max-width: 90%;
 }

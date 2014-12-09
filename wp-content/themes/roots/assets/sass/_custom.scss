@@ -257,6 +257,16 @@ body:not(.estimate-form)
 
 }
 
+.order-summary
+{
+	@media screen {
+		background: white;
+		border: 1px solid #666;
+		padding: 3em;
+		border-radius: 5px;
+	}
+}
+
 // MODAL VIEW
 
 .item-image
@@ -396,4 +406,22 @@ footer.content-info
 	text-align: center;
 	color: #ccc;
 	margin-top: 2em;
+}
+
+// PRINT MEDIA
+
+@media print {
+	.estimate-form, .single-estimate
+	{
+		.page-header, aside.sidebar, .gray-box, .success {
+		    display: none;
+		}
+
+		main.main:before {
+		    content: 'Central Rentals';
+		    font-size: $font-size-h1;
+		    font-weight: 900;
+		    text-transform: uppercase;
+		}
+	}
 }

@@ -116,6 +116,9 @@
             </tbody>
           </table>
           <h4 class="align-right">Total Estimate: <strong>{{orderData.orderMeta.totalEstimate | currency:"$"}}</strong></h4>
+          <div class="gray-box align-center">
+              <a href="javascript:window.print();" class="btn btn-default print-styles-toggle">Print Order</a>
+          </div>
         </div>
       </div>
     </div>

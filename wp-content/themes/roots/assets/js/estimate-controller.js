@@ -62,6 +62,10 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		}
 	};
 
+	$scope.printOrder = function() {
+		window.print();
+	}
+
 	$scope.ajaxSuccess = function() {
 		$scope.isOrderGood = 1;
 	}
@@ -79,13 +83,14 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		}
 		loopThroughItems([addQuantityToOrderObj]);
 		var newDate = new Date();
-		var titleStr = newDate.toLocaleString();
+		var titleStr = $scope.orderMeta.companyName + " – " + $scope.orderMeta.jobName + " (" + newDate.toLocaleString() + ")";
 		var contentStr = JSON.stringify($scope.orderData);
 		// js_create_post(titleStr, contentStr, $scope.ajaxSuccess, $scope.ajaxFail);
 		$scope.js_create_post(titleStr, contentStr, $http, $scope);
 		// $scope.orderData = [];
 	};
 	$scope.js_create_post = function(title, content, $http, $scope) {
+
 		$http({
 			url: '/wp-admin/admin-ajax.php',
 			method: "POST",
