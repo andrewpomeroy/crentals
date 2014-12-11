@@ -14,13 +14,13 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label class="control-label">Order Pickup Date</label>
+                  <label class="control-label">First Working Day</label>
                   <p class="form-control-static" ng-bind="orderData.orderMeta.orderPickupDate.date | date:'MM/dd/yy'"></p>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label class="control-label">Order Return Date</label>
+                  <label class="control-label">Last Working Day</label>
                   <p class="form-control-static" ng-bind="orderData.orderMeta.orderReturnDate.date | date:'MM/dd/yy'"></p>
                 </div>
               </div>
