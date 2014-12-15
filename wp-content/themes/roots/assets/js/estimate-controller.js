@@ -244,6 +244,7 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		};
 		GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
 			$scope.itemData = response;
+			debugger;
 			$scope.dataStatus = "loaded";
 			$scope.calcRentalDates();
 		});
