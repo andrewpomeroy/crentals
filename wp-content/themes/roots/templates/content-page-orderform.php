@@ -46,10 +46,10 @@
 						<section class="order-form row">
 							<div class="col-sm-12">
 								<h3 class="title">Item Selection</h3>
-								<table class="order-form table" ng-repeat="group in itemData" ng-if="categoryHasItems(group) && (group.type === 'Vehicles')">
+								<table class="order-form table" ng-repeat="group in itemData" ng-if="categoryHasItems(group)" category-expand>
 									<thead>
 										<tr class="section-heading-row">
-											<th colspan="8" class="section-heading"><h4 class="section-heading">{{group.type}}</h4></th>
+											<th colspan="8" class="section-heading"><h4 class="section-heading">{{group.type}} <button class="btn btn-default expand-row" ng-click="toggleExpand()" ng-class="{'active': expanded}">{{expanded ? 'Collapse' : 'Expand' }}</button></h4></th>
 										</tr>
 										<tr>
 											<th>Item</th>
@@ -62,7 +62,7 @@
 											<th>Estimate</th>
 										</tr>
 									</thead>
-									<tbody ng-repeat="subcat in group.subcats">
+									<tbody ng-repeat="subcat in group.subcats" ng-if="expanded">
 										<tr>
 											<td colspan="8" class="subcat-heading"><h5 class="subcat-heading" ng-if="subcat.type">{{subcat.type}}</h5></td>
 										</tr>
@@ -73,7 +73,7 @@
 											</td>
 											<td class="data dynamic input number" ng-class="{'has-error': (
 											(orderFormForm[item.name + '_qty'].$invalid) )
-										}"><input type="number" ng-model="item.qty" ng-change="changeQty(item); calcTotal()" dynamic-name="item.name + '_qty'"/ ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_qty'].$invalid">Must be a non-negative integer</div></td>
+										}"><input type="number" ng-model="item.qty" ng-change="changeQty(item); calcTotal()" ng-pattern="/^[0-9][0-9]*$/" ><div class="help-block" ng-show="orderFormForm[item.name + '_qty'].$invalid">Must be a non-negative integer</div></td>
 										<td class="data static number">{{item.rate | currency:"$"}}</td>
 										<td class="data static rental-period" ng-class="{'edit-mode': item.customRentalPeriod}">
 											<div class="date-controls-container" ng-if="item.daysweek != 0">
@@ -201,13 +201,13 @@
 				    <div class="row">
 				      <div class="col-sm-6">
 				        <div class="form-group">
-				          <label class="control-label">Order Pickup Date</label>
+				          <label class="control-label">First Working Day</label>
 				          <p class="form-control-static" ng-bind="orderData.orderMeta.orderPickupDate.date | date:'MM/dd/yy'"></p>
 				        </div>
 				      </div>
 				      <div class="col-sm-6">
 				        <div class="form-group">
-				          <label class="control-label">Order Return Date</label>
+				          <label class="control-label">Last Working Day</label>
 				          <p class="form-control-static" ng-bind="orderData.orderMeta.orderReturnDate.date | date:'MM/dd/yy'"></p>
 				        </div>
 				      </div>

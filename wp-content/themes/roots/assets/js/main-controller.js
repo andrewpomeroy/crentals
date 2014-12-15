@@ -253,8 +253,17 @@ app.directive('dynamicName', function($compile, $parse) {
   };
 });
 
-
-
+app.directive('categoryExpand', function() {
+	return {
+		restrict: 'A',
+		link: function(scope, elem) {
+			scope.expanded = false;
+			scope.toggleExpand = function() {
+				scope.expanded = !scope.expanded;
+			};
+		}
+	};
+});
 
 
 

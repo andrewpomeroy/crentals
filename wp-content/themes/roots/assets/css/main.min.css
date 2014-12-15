@@ -6884,6 +6884,10 @@ td.rental-period .date-controls.right .date-mode-control {
   background-color: #eeeeee;
 }
 
+.btn.expand-row {
+  margin-left: 1em;
+}
+
 .product .no-photo {
   display: none;
 }
