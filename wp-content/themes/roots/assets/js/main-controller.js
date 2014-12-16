@@ -265,7 +265,12 @@ app.directive('categoryExpand', function() {
 	};
 });
 
-
+app.filter( 'nodomain', function () {
+  return function ( input ) {
+    var output = input.split("/").slice(3).join("/");
+    return "/" + output;
+  };
+});
 
 
 

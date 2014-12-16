@@ -5,5 +5,5 @@
 	        <div class="modal-body">
 	        	<img class="item-image" ng-if="theItem.image" ng-src="{{theItem.image}}">
 				<p class="item-description" ng-if="theItem.description">{{theItem.description}}</p>
-				<p class="item-description" ng-if="theItem.link"><a ng-href="{{theItem.link}}">Click here for more information</a></p>
+				<p class="item-description" ng-if="theItem.link"><a ng-href="{{theItem.link | nodomain}}">Click here for more information</a></p>
 	        </div>
