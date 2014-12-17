@@ -85,7 +85,7 @@ app.directive('thumbSrc', function() {
 		link: function(scope, element, attr) {
 			var observer = function(value) {
   				if (value) {
-					var file = value;
+					var file = value.trim();
 					var appendage = "-150x84.jpg";
 					file = file.replace(/(\.[\w\d_-]+)$/i, appendage);
 					file = "/" + file.split("/").slice(3).join("/");
