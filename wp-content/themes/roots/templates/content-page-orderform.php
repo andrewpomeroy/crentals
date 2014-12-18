@@ -198,7 +198,7 @@
 					<?php get_template_part('templates/content', 'summary'); ?>
 				</section>
 
-		<section class="debug">
+		<section class="debug" style="display:none;">
 			<!-- <h4>$scope.isOrderGood</h4> -->
 			<!-- <pre class="debug">{{isOrderGood | json}}</pre> -->
 			<h4>$scope.orderData</h4>
