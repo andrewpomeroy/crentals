@@ -1,4 +1,4 @@
-app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', function($scope, GSLoader, $http, $modal) {
+app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$modal', function($scope, $filter, GSLoader, $http, $modal) {
 
 	$scope.dataStatus = null;
 
@@ -62,6 +62,33 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 		}
 	};
 
+	var addOne = function(item) {
+		item.qty = 1;
+	}
+
+	var cleanItemProperties = function(item) {
+		// debugger;
+		if ((item.startDate.toDateString() === $scope.orderMeta.orderPickupDate.date.toDateString()) && (item.endDate.toDateString() === $scope.orderMeta.orderReturnDate.date.toDateString())) {
+			delete item.startDate;
+			delete item.endDate;
+		}
+		else {
+			item.startDate = $filter('date')(item.startDate, 'MM/dd');
+			item.endDate = $filter('date')(item.endDate, 'MM/dd');
+		}
+		if (!item.clientnotes.length) {
+			delete item.clientnotes;
+		}
+		delete item.customRentalPeriod;
+		delete item.notes;
+		delete item.description;
+		delete item.link;
+		delete item.type;
+		delete item.id;
+		delete item.image;
+		delete item.daysweek;
+	}
+
 	$scope.printOrder = function() {
 		window.print();
 	}
@@ -81,7 +108,15 @@ app.controller('estimateForm', ['$scope', 'GSLoader', '$http', '$modal', functio
 			orderMeta: $scope.orderMeta,
 			items: []
 		}
+		// loopThroughItems([addOne, addQuantityToOrderObj]);
 		loopThroughItems([addQuantityToOrderObj]);
+		// for (var item in $scope.orderData.items) {
+		// 	cleanItemProperties(item);
+		// }
+		angular.forEach($scope.orderData.items, function(value, key) {
+			// debugger;
+			cleanItemProperties(value);
+		});
 		var newDate = new Date();
 		var titleStr = $scope.orderMeta.companyName + " – " + $scope.orderMeta.jobName + " (" + newDate.toLocaleString() + ")";
 		var contentStr = JSON.stringify($scope.orderData);

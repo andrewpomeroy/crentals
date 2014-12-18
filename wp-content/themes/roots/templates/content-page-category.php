@@ -69,7 +69,7 @@
 
 				</div>
 
-				<div class="debug">
+				<div class="debug" style="display:none">
 
 					<h5 class="debug">productPageIDs</h5>
 					<pre class="debug">{{productPageIDs}}</pre>

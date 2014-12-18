@@ -51,7 +51,7 @@
 										<tr class="section-heading-row">
 											<th colspan="8" class="section-heading"><h4 class="section-heading">{{group.type}} <button class="btn btn-default expand-row" ng-click="toggleExpand()" ng-class="{'active': expanded}">{{expanded ? 'Collapse' : 'Expand' }}</button></h4></th>
 										</tr>
-										<tr>
+										<tr ng-if="expanded">
 											<th>Item</th>
 											<th>Quantity</th>
 											<th>Rate</th>
@@ -187,7 +187,11 @@
 						<h4>Your estimate has been submitted.  We'll contact you ASAP to confirm availability.  Thank you!</h4>
 						<button class="btn btn-default print-styles-toggle" ng-click="printOrder()">Print Order</a>
 					</div>
-					<h4 ng-if="isOrderGood === -1"><strong>Error</strong> – Unable to process estimate request.</h4>
+					<div ng-if="isOrderGood === -1">
+						<h4><strong>Error</strong> – Unable to process estimate request.</h4>
+						<h5>Order Data:</h5>
+ 						<pre class="debug client-debug">{{orderData | json}}</pre>
+ 					</div>
 				</div>
 
 				<section class="order-summary" ng-if="isOrderGood === 1">
@@ -195,12 +199,12 @@
 				</section>
 
 		<section class="debug">
-			<h4>$scope.isOrderGood</h4>
-			<pre class="debug">{{isOrderGood | json}}</pre>
+			<!-- <h4>$scope.isOrderGood</h4> -->
+			<!-- <pre class="debug">{{isOrderGood | json}}</pre> -->
 			<h4>$scope.orderData</h4>
 			<pre class="debug">{{orderData | json}}</pre>
-			<pre class="debug">{{totalEstimate}}</pre>
-			<pre class="debug">{{orderMeta | json}}</pre>
+			<!-- <pre class="debug">{{totalEstimate}}</pre> -->
+			<!-- <pre class="debug">{{orderMeta | json}}</pre> -->
 			<!-- <pre class="debug">{{orderMeta.orderPickupDate | json}}</pre> -->
 			<!-- <pre class="debug">{{orderMeta.orderReturnDate | json}}</pre> -->
 			<!-- <h5 class="debug">Debug</h5> -->
