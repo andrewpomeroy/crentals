@@ -256,8 +256,14 @@ app.directive('dynamicName', function($compile, $parse) {
 app.directive('categoryExpand', function() {
 	return {
 		restrict: 'A',
-		link: function(scope, elem) {
-			scope.expanded = false;
+		link: function(scope, elem, attr) {
+			debugger;
+			if (parseInt(attr.categoryExpand) === 1) {
+				scope.expanded = true;
+			}
+			else {
+				scope.expanded = false;
+			}
 			scope.toggleExpand = function() {
 				scope.expanded = !scope.expanded;
 			};

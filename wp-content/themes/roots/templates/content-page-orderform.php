@@ -46,7 +46,7 @@
 						<section class="order-form row">
 							<div class="col-sm-12">
 								<h3 class="title">Item Selection</h3>
-								<table class="order-form table" ng-repeat="group in itemData" ng-if="categoryHasItems(group)" category-expand>
+								<table class="order-form table" ng-repeat="group in itemData" ng-if="categoryHasItems(group)" category-expand="{{$index}}">
 									<thead>
 										<tr class="section-heading-row">
 											<th colspan="8" class="section-heading"><h4 class="section-heading">{{group.type}} <button class="btn btn-default expand-row" ng-click="toggleExpand()" ng-class="{'active': expanded}">{{expanded ? 'Collapse' : 'Expand' }}</button></h4></th>
