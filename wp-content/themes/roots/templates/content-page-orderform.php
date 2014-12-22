@@ -197,23 +197,7 @@
 				<section class="order-summary" ng-if="isOrderGood === 1">
 					<?php get_template_part('templates/content', 'summary'); ?>
 				</section>
-
-		<section class="debug">
-			<!-- <h4>$scope.isOrderGood</h4> -->
-			<!-- <pre class="debug">{{isOrderGood | json}}</pre> -->
-			<!-- <h4>$scope.orderData</h4> -->
-			<!-- <pre class="debug">{{orderData | json}}</pre> -->
-			<!-- <pre class="debug">{{totalEstimate}}</pre> -->
-			<!-- <pre class="debug">{{orderMeta | json}}</pre> -->
-			<!-- <pre class="debug">{{orderMeta.orderPickupDate | json}}</pre> -->
-			<!-- <pre class="debug">{{orderMeta.orderReturnDate | json}}</pre> -->
-			<!-- <h5 class="debug">Debug</h5> -->
-			<pre class="debug">{{itemData | json}}</pre>
-<!-- 			<h5 class="debug">orderFormForm</h5>
-			<pre class="debug">{{orderFormForm | json}}</pre>
- -->	<!-- 		<h5 class="debug">Scope</h5>
-			<pre class="debug">{{}}</pre> -->
-		</section>
+				
 	</div>
 
 </div>
