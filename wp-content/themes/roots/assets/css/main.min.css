@@ -6742,9 +6742,14 @@ footer.content-info {
     width: 50%;
     float: left;
   }
-
-  .container, .content, .main, body, div[ng-controller], section {
+  .estimate-form, .estimate-form .container, .estimate-form .content, .estimate-form .main, .estimate-form div[ng-controller], .estimate-form section, .single-estimate, .single-estimate .container, .single-estimate .content, .single-estimate .main, .single-estimate div[ng-controller], .single-estimate section {
     max-width: 100%;
+  }
+
+  .single-estimate .clmn-main-push, .single-estimate .main {
+    float: none !important;
+    width: 100% !important;
+    left: 0 !important;
   }
 }
 .main-app {
