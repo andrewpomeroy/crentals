@@ -200,7 +200,10 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		$scope.totalEstimate = 0;
 	};
 	addToTotal = function(item) {
-		if (item.estimate > 0) {$scope.totalEstimate += item.estimate;}
+		if (item.qty > 0) {
+			console.table(item);
+			$scope.totalEstimate += item.estimate;
+		}
 	};
 	$scope.calcTotal = function() {
 		resetTotal();

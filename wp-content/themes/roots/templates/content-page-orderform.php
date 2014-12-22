@@ -158,7 +158,7 @@
 						<section class="order-form row">
 							<div class="col-sm-12">
 								<div>
-									<h4 class="align-right" ng-if="totalEstimate > 0">Total: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
+									<h4 class="align-right" ng-if="totalEstimate !== 0">Total: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
 									<!-- <div class="submit-bar align-right"> -->
 									<div class="submit-bar align-right" ng-if="isOrderGood !== 1">
 										<button class="btn" ng-click="resetForm()" ng-disabled="(isOrderGood === 0)">Reset Form</button>
@@ -198,17 +198,17 @@
 					<?php get_template_part('templates/content', 'summary'); ?>
 				</section>
 
-		<section class="debug" style="display:none;">
+		<section class="debug">
 			<!-- <h4>$scope.isOrderGood</h4> -->
 			<!-- <pre class="debug">{{isOrderGood | json}}</pre> -->
-			<h4>$scope.orderData</h4>
-			<pre class="debug">{{orderData | json}}</pre>
+			<!-- <h4>$scope.orderData</h4> -->
+			<!-- <pre class="debug">{{orderData | json}}</pre> -->
 			<!-- <pre class="debug">{{totalEstimate}}</pre> -->
 			<!-- <pre class="debug">{{orderMeta | json}}</pre> -->
 			<!-- <pre class="debug">{{orderMeta.orderPickupDate | json}}</pre> -->
 			<!-- <pre class="debug">{{orderMeta.orderReturnDate | json}}</pre> -->
 			<!-- <h5 class="debug">Debug</h5> -->
-			<!-- <pre class="debug">{{itemData | json}}</pre> -->
+			<pre class="debug">{{itemData | json}}</pre>
 <!-- 			<h5 class="debug">orderFormForm</h5>
 			<pre class="debug">{{orderFormForm | json}}</pre>
  -->	<!-- 		<h5 class="debug">Scope</h5>
