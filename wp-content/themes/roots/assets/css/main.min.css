@@ -6726,6 +6726,9 @@ footer.content-info {
 }
 
 @media print {
+  .estimate-form, .single-estimate {
+    font-size: 12px;
+  }
   .estimate-form .page-header, .estimate-form aside.sidebar, .estimate-form .gray-box, .estimate-form .success, .single-estimate .page-header, .single-estimate aside.sidebar, .single-estimate .gray-box, .single-estimate .success {
     display: none;
   }
@@ -6734,6 +6737,14 @@ footer.content-info {
     font-size: 46px;
     font-weight: 900;
     text-transform: uppercase;
+  }
+  .estimate-form .col-sm-6, .single-estimate .col-sm-6 {
+    width: 50%;
+    float: left;
+  }
+
+  .container, .content, .main, body, div[ng-controller], section {
+    max-width: 100%;
   }
 }
 .main-app {

@@ -413,6 +413,7 @@ footer.content-info
 @media print {
 	.estimate-form, .single-estimate
 	{
+		font-size: 12px;
 		.page-header, aside.sidebar, .gray-box, .success {
 		    display: none;
 		}
@@ -423,5 +424,14 @@ footer.content-info
 		    font-weight: 900;
 		    text-transform: uppercase;
 		}
+		.col-sm-6
+		{
+			width: 50%;
+			float: left;
+		}
+	}
+	.container, .content, .main, body, div[ng-controller], section
+	{
+		max-width: 100%;
 	}
 }

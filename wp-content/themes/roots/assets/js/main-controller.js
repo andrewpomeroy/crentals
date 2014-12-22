@@ -257,7 +257,6 @@ app.directive('categoryExpand', function() {
 	return {
 		restrict: 'A',
 		link: function(scope, elem, attr) {
-			debugger;
 			if (parseInt(attr.categoryExpand) === 1) {
 				scope.expanded = true;
 			}

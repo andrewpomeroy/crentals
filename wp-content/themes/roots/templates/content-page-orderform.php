@@ -59,7 +59,7 @@
 											<th>Days</th>
 											<th>Days/Week</th>
 											<th>Notes</th>
-											<th>Estimate</th>
+											<th>Amount</th>
 										</tr>
 									</thead>
 									<tbody ng-repeat="subcat in group.subcats" ng-if="expanded">
@@ -158,7 +158,7 @@
 						<section class="order-form row">
 							<div class="col-sm-12">
 								<div>
-									<h4 class="align-right" ng-if="totalEstimate > 0">Total Estimate: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
+									<h4 class="align-right" ng-if="totalEstimate > 0">Total: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
 									<!-- <div class="submit-bar align-right"> -->
 									<div class="submit-bar align-right" ng-if="isOrderGood !== 1">
 										<button class="btn" ng-click="resetForm()" ng-disabled="(isOrderGood === 0)">Reset Form</button>

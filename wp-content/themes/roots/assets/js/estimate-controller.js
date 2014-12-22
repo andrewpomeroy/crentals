@@ -249,10 +249,11 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		$scope.dt = null;
 	};
 
-	$scope.toggleMin = function() {
-		$scope.minDate = ( $scope.minDate ) ? null : new Date();
-	};
-	$scope.toggleMin();
+	// $scope.toggleMin = function() {
+	// 	$scope.minDate = ( $scope.minDate ) ? null : new Date();
+	// };
+	// $scope.toggleMin();
+	$scope.minDate = null;
 
 	$scope.dateOptions = {
 		'year-format': "'yy'",
