@@ -6729,7 +6729,7 @@ footer.content-info {
   .estimate-form, .single-estimate {
     font-size: 12px;
   }
-  .estimate-form .page-header, .estimate-form aside.sidebar, .estimate-form .gray-box, .estimate-form .success, .single-estimate .page-header, .single-estimate aside.sidebar, .single-estimate .gray-box, .single-estimate .success {
+  .estimate-form .page-header, .estimate-form aside.sidebar, .estimate-form .gray-box, .estimate-form .success, .estimate-form .btn-print, .single-estimate .page-header, .single-estimate aside.sidebar, .single-estimate .gray-box, .single-estimate .success, .single-estimate .btn-print {
     display: none;
   }
   .estimate-form main.main:before, .single-estimate main.main:before {
@@ -6750,6 +6750,12 @@ footer.content-info {
     float: none !important;
     width: 100% !important;
     left: 0 !important;
+  }
+
+  footer.content-info:before {
+    content: 'www.centralrentals.tv';
+    margin-bottom: 1em;
+    display: block;
   }
 }
 .main-app {

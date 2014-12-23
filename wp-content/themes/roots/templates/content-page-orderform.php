@@ -185,7 +185,7 @@
 					</span>
 					<div class="success" ng-if="isOrderGood === 1">
 						<h4>Your estimate has been submitted.  We'll contact you ASAP to confirm availability.  Thank you!</h4>
-						<button class="btn btn-default print-styles-toggle" ng-click="printOrder()">Print Order</a>
+						<button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Order</a>
 					</div>
 					<div ng-if="isOrderGood === -1">
 						<h4><strong>Error</strong> – Unable to process estimate request.</h4>
@@ -197,7 +197,7 @@
 				<section class="order-summary" ng-if="isOrderGood === 1">
 					<?php get_template_part('templates/content', 'summary'); ?>
 				</section>
-				
+
 	</div>
 
 </div>
