@@ -6758,6 +6758,10 @@ footer.content-info {
     display: block;
   }
 }
+.nav-pills > li.secret > a, .nav-pills > li.secret > a:focus, .nav-pills > li.secret > a:hover {
+  color: rgba(255, 255, 255, 0);
+}
+
 .main-app {
   max-width: 90%;
 }
