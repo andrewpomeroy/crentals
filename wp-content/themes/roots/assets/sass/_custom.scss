@@ -451,3 +451,11 @@ footer.content-info
 		display: block;
 	}
 }
+
+.nav-pills > li.secret > a
+{
+	&, &:focus, &:hover
+	{
+		color: rgba(255,255,255, 0);
+	}
+}
