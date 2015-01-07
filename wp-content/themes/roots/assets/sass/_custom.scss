@@ -155,7 +155,7 @@ body
 	background: $background-color;
 }
 
-body:not(.estimate-form)
+body:not(.page-template-template-orderform)
 {
 	@include regular-ass-columns();
 }
@@ -183,7 +183,7 @@ body:not(.estimate-form)
 		padding-left: 30px;
 		padding-right: 30px;
 	}
-	.estimate-form
+	.page-template-template-orderform
 	{
 
 		.clmn-main-push, .clmn-main
@@ -411,7 +411,7 @@ footer.content-info
 // PRINT MEDIA
 
 @media print {
-	.estimate-form, .single-estimate
+	.page-template-template-orderform, .single-estimate
 	{
 
 		font-size: 12px;
