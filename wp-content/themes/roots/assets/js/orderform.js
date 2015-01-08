@@ -15,7 +15,7 @@ var orderForm = (function($) {
 				// console.log(data);
 				$(document).ready( function() {
 					feedJSON = data.feed.entry;
-					console.table(flattenGSFeed(feedJSON));
+					// console.table(flattenGSFeed(feedJSON));
 					var properFormObj = groupObjects(flattenGSFeed(feedJSON));
 					console.log(properFormObj);
 					// popFields(feedJSON);
@@ -25,9 +25,9 @@ var orderForm = (function($) {
 				});
 			},
 			error: function(thiss, that, other) {
-				console.log(thiss);
-				console.log(that);
-				console.log(other);
+				// console.log(thiss);
+				// console.log(that);
+				// console.log(other);
 			}
 		});
 	};
@@ -74,8 +74,8 @@ var orderForm = (function($) {
 			// console.log('Obj-entry:');
 			// console.log(obj[entry]);
 			if (obj[entry].type === "Section") {
-				console.log("found section");
-				console.log(obj[entry]);
+				// console.log("found section");
+				// console.log(obj[entry]);
 				output.push({
 					type: obj[entry].name,
 					items: []
@@ -83,8 +83,8 @@ var orderForm = (function($) {
 				// entryDepth++;
 			}
 			else if (obj[entry].type === "Item") {
-				console.log("found item");
-				console.table(obj[entry]);
+				// console.log("found item");
+				// console.table(obj[entry]);
 				output[output.length - 1].items.push(obj[entry]);
 			}
 		}

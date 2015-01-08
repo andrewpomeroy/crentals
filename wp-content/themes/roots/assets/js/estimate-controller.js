@@ -67,7 +67,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	}
 
 	var cleanItemProperties = function(item) {
-		// debugger;
 		if ((item.startDate.toDateString() === $scope.orderMeta.orderPickupDate.date.toDateString()) && (item.endDate.toDateString() === $scope.orderMeta.orderReturnDate.date.toDateString())) {
 			delete item.startDate;
 			delete item.endDate;
@@ -113,13 +112,11 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		// 	cleanItemProperties(item);
 		// }
 		angular.forEach($scope.orderData.items, function(value, key) {
-			// debugger;
 			cleanItemProperties(value);
 		});
 		var newDate = new Date();
 		var titleStr = $scope.orderMeta.companyName + " – " + $scope.orderMeta.jobName + " (" + newDate.toLocaleString() + ")";
 		var contentStr = JSON.stringify($scope.orderData);
-		debugger;
 		// js_create_post(titleStr, contentStr, $scope.ajaxSuccess, $scope.ajaxFail);
 		$scope.js_create_post(titleStr, contentStr, $http, $scope);
 		// $scope.orderData = [];
@@ -131,8 +128,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			method: "POST",
 			params: {action : "make_est_post", title: title, content: content}
 		}).success(function(response) {
-			// debugger;
-			console.log(response);
 			$scope.isOrderGood = 1;
 		}).error(function(data) {
 			$scope.isOrderGood = -1;
@@ -201,7 +196,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	};
 	addToTotal = function(item) {
 		if (item.qty > 0) {
-			console.table(item);
 			$scope.totalEstimate += item.estimate;
 		}
 	};

@@ -108,7 +108,6 @@
         <td class="data static date" ng-if="!item.endDate" ng-bind="orderData.orderMeta.orderReturnDate.date | date:'MM/dd'"></td>
         <td class="data static" ng-bind="item.clientnotes"></td>
         <td class="data static number" ng-bind="item.estimate | currency:'$'"></td>
-        <td>{{item | json}}</td>
       </tr>
     </tbody>
   </table>

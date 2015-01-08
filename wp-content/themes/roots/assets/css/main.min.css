@@ -6762,6 +6762,10 @@ footer.content-info {
   color: rgba(255, 255, 255, 0);
 }
 
+.hide-dates .date {
+  visibility: hidden;
+}
+
 .main-app {
   max-width: 90%;
 }
