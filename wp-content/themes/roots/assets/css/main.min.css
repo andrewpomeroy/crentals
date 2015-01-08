@@ -6408,43 +6408,43 @@ body {
   background: #fafafa;
 }
 
-body:not(.page-template-template-orderform) aside.sidebar {
+body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) aside.sidebar {
   padding-top: 50px;
 }
-body:not(.page-template-template-orderform) aside.sidebar > section:first-child > h3:first-child {
+body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) aside.sidebar > section:first-child > h3:first-child {
   display: none;
 }
-body:not(.page-template-template-orderform) .clmn-main-push, body:not(.page-template-template-orderform) .clmn-main {
+body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-main-push, body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-main {
   position: relative;
   min-height: 1px;
   padding-left: 30px;
   padding-right: 30px;
 }
 @media (min-width: 992px) {
-  body:not(.page-template-template-orderform) .clmn-main-push, body:not(.page-template-template-orderform) .clmn-main {
+  body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-main-push, body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-main {
     float: left;
     width: 75%;
   }
 }
 @media (min-width: 992px) {
-  body:not(.page-template-template-orderform) .clmn-main-push {
+  body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-main-push {
     left: 25%;
   }
 }
-body:not(.page-template-template-orderform) .clmn-sidebar-pull, body:not(.page-template-template-orderform) .clmn-sidebar {
+body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-sidebar-pull, body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-sidebar {
   position: relative;
   min-height: 1px;
   padding-left: 30px;
   padding-right: 30px;
 }
 @media (min-width: 992px) {
-  body:not(.page-template-template-orderform) .clmn-sidebar-pull, body:not(.page-template-template-orderform) .clmn-sidebar {
+  body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-sidebar-pull, body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-sidebar {
     float: left;
     width: 25%;
   }
 }
 @media (min-width: 992px) {
-  body:not(.page-template-template-orderform) .clmn-sidebar-pull {
+  body:not(.page-template-template-orderform):not(.page-template-template-orderform-php) .clmn-sidebar-pull {
     right: 75%;
   }
 }
@@ -6499,7 +6499,7 @@ body:not(.page-template-template-orderform) .clmn-sidebar-pull, body:not(.page-t
 }
 
 @media screen and (min-width: 993px) {
-  .page-template-template-orderform .clmn-sidebar-pull:after, .page-template-template-orderform .clmn-sidebar:after {
+  .page-template-template-orderform .clmn-sidebar-pull:after, .page-template-template-orderform .clmn-sidebar:after, .page-template-template-orderform-php .clmn-sidebar-pull:after, .page-template-template-orderform-php .clmn-sidebar:after {
     position: relative;
     top: 1px;
     display: inline-block;
@@ -6516,7 +6516,7 @@ body:not(.page-template-template-orderform) .clmn-sidebar-pull, body:not(.page-t
     padding-right: 30px;
   }
 
-  .page-template-template-orderform .clmn-main-push, .page-template-template-orderform .clmn-main {
+  .page-template-template-orderform .clmn-main-push, .page-template-template-orderform .clmn-main, .page-template-template-orderform-php .clmn-main-push, .page-template-template-orderform-php .clmn-main {
     position: relative;
     min-height: 1px;
     padding-left: 30px;
@@ -6525,16 +6525,16 @@ body:not(.page-template-template-orderform) .clmn-sidebar-pull, body:not(.page-t
   }
 }
 @media screen and (min-width: 993px) and (min-width: 992px) {
-  .page-template-template-orderform .clmn-main-push, .page-template-template-orderform .clmn-main {
+  .page-template-template-orderform .clmn-main-push, .page-template-template-orderform .clmn-main, .page-template-template-orderform-php .clmn-main-push, .page-template-template-orderform-php .clmn-main {
     float: left;
     width: 100%;
   }
 }
 @media screen and (min-width: 993px) {
-  .page-template-template-orderform .navbar.navbar-static-top {
+  .page-template-template-orderform .navbar.navbar-static-top, .page-template-template-orderform-php .navbar.navbar-static-top {
     padding-left: 60px;
   }
-  .page-template-template-orderform .clmn-sidebar-pull, .page-template-template-orderform .clmn-sidebar {
+  .page-template-template-orderform .clmn-sidebar-pull, .page-template-template-orderform .clmn-sidebar, .page-template-template-orderform-php .clmn-sidebar-pull, .page-template-template-orderform-php .clmn-sidebar {
     position: relative;
     min-height: 1px;
     padding-left: 30px;
@@ -6551,20 +6551,20 @@ body:not(.page-template-template-orderform) .clmn-sidebar-pull, body:not(.page-t
   }
 }
 @media screen and (min-width: 993px) and (min-width: 992px) {
-  .page-template-template-orderform .clmn-sidebar-pull, .page-template-template-orderform .clmn-sidebar {
+  .page-template-template-orderform .clmn-sidebar-pull, .page-template-template-orderform .clmn-sidebar, .page-template-template-orderform-php .clmn-sidebar-pull, .page-template-template-orderform-php .clmn-sidebar {
     float: left;
     width: 25%;
   }
 }
 @media screen and (min-width: 993px) {
-  .page-template-template-orderform .clmn-sidebar-pull .widget, .page-template-template-orderform .clmn-sidebar .widget {
+  .page-template-template-orderform .clmn-sidebar-pull .widget, .page-template-template-orderform .clmn-sidebar .widget, .page-template-template-orderform-php .clmn-sidebar-pull .widget, .page-template-template-orderform-php .clmn-sidebar .widget {
     opacity: 0;
   }
-  .page-template-template-orderform .clmn-sidebar-pull .widget, .page-template-template-orderform .clmn-sidebar-pull:after, .page-template-template-orderform .clmn-sidebar .widget, .page-template-template-orderform .clmn-sidebar:after {
+  .page-template-template-orderform .clmn-sidebar-pull .widget, .page-template-template-orderform .clmn-sidebar-pull:after, .page-template-template-orderform .clmn-sidebar .widget, .page-template-template-orderform .clmn-sidebar:after, .page-template-template-orderform-php .clmn-sidebar-pull .widget, .page-template-template-orderform-php .clmn-sidebar-pull:after, .page-template-template-orderform-php .clmn-sidebar .widget, .page-template-template-orderform-php .clmn-sidebar:after {
     -webkit-transition: 450ms 25ms opacity cubic-bezier(0.2, 0.865, 0.72, 1.01);
     transition: 450ms 25ms opacity cubic-bezier(0.2, 0.865, 0.72, 1.01);
   }
-  .page-template-template-orderform .clmn-sidebar-pull:after, .page-template-template-orderform .clmn-sidebar:after {
+  .page-template-template-orderform .clmn-sidebar-pull:after, .page-template-template-orderform .clmn-sidebar:after, .page-template-template-orderform-php .clmn-sidebar-pull:after, .page-template-template-orderform-php .clmn-sidebar:after {
     color: #d4202b;
     content: "\e012";
     position: absolute;
@@ -6575,25 +6575,25 @@ body:not(.page-template-template-orderform) .clmn-sidebar-pull, body:not(.page-t
     line-height: 42px;
     text-align: center;
   }
-  .page-template-template-orderform .clmn-sidebar-pull:not(:hover), .page-template-template-orderform .clmn-sidebar:not(:hover) {
+  .page-template-template-orderform .clmn-sidebar-pull:not(:hover), .page-template-template-orderform .clmn-sidebar:not(:hover), .page-template-template-orderform-php .clmn-sidebar-pull:not(:hover), .page-template-template-orderform-php .clmn-sidebar:not(:hover) {
     -webkit-transform: translateX(-webkit-calc(-100% + 42px)) !important;
     transform: translateX(calc(-100% + 42px)) !important;
   }
-  .page-template-template-orderform .clmn-sidebar-pull:hover, .page-template-template-orderform .clmn-sidebar:hover {
+  .page-template-template-orderform .clmn-sidebar-pull:hover, .page-template-template-orderform .clmn-sidebar:hover, .page-template-template-orderform-php .clmn-sidebar-pull:hover, .page-template-template-orderform-php .clmn-sidebar:hover {
     -webkit-transform: translateX(0);
     transform: translateX(0);
   }
-  .page-template-template-orderform .clmn-sidebar-pull:hover, .page-template-template-orderform .clmn-sidebar-pull:hover:after, .page-template-template-orderform .clmn-sidebar-pull:hover .widget, .page-template-template-orderform .clmn-sidebar:hover, .page-template-template-orderform .clmn-sidebar:hover:after, .page-template-template-orderform .clmn-sidebar:hover .widget {
+  .page-template-template-orderform .clmn-sidebar-pull:hover, .page-template-template-orderform .clmn-sidebar-pull:hover:after, .page-template-template-orderform .clmn-sidebar-pull:hover .widget, .page-template-template-orderform .clmn-sidebar:hover, .page-template-template-orderform .clmn-sidebar:hover:after, .page-template-template-orderform .clmn-sidebar:hover .widget, .page-template-template-orderform-php .clmn-sidebar-pull:hover, .page-template-template-orderform-php .clmn-sidebar-pull:hover:after, .page-template-template-orderform-php .clmn-sidebar-pull:hover .widget, .page-template-template-orderform-php .clmn-sidebar:hover, .page-template-template-orderform-php .clmn-sidebar:hover:after, .page-template-template-orderform-php .clmn-sidebar:hover .widget {
     -webkit-transition-delay: 70ms;
     transition-delay: 70ms;
   }
-  .page-template-template-orderform .clmn-sidebar-pull:hover:after, .page-template-template-orderform .clmn-sidebar:hover:after {
+  .page-template-template-orderform .clmn-sidebar-pull:hover:after, .page-template-template-orderform .clmn-sidebar:hover:after, .page-template-template-orderform-php .clmn-sidebar-pull:hover:after, .page-template-template-orderform-php .clmn-sidebar:hover:after {
     opacity: 0;
   }
-  .page-template-template-orderform .clmn-sidebar-pull:hover .widget, .page-template-template-orderform .clmn-sidebar:hover .widget {
+  .page-template-template-orderform .clmn-sidebar-pull:hover .widget, .page-template-template-orderform .clmn-sidebar:hover .widget, .page-template-template-orderform-php .clmn-sidebar-pull:hover .widget, .page-template-template-orderform-php .clmn-sidebar:hover .widget {
     opacity: 1;
   }
-  .page-template-template-orderform .clmn-sidebar-pull .nav-pills li > a, .page-template-template-orderform .clmn-sidebar .nav-pills li > a {
+  .page-template-template-orderform .clmn-sidebar-pull .nav-pills li > a, .page-template-template-orderform .clmn-sidebar .nav-pills li > a, .page-template-template-orderform-php .clmn-sidebar-pull .nav-pills li > a, .page-template-template-orderform-php .clmn-sidebar .nav-pills li > a {
     padding-top: 5px;
     padding-bottom: 5px;
   }
@@ -6726,23 +6726,23 @@ footer.content-info {
 }
 
 @media print {
-  .page-template-template-orderform, .single-estimate {
+  .page-template-template-orderform, .page-template-template-orderform-php, .single-estimate {
     font-size: 12px;
   }
-  .page-template-template-orderform .page-header, .page-template-template-orderform aside.sidebar, .page-template-template-orderform .gray-box, .page-template-template-orderform .success, .page-template-template-orderform .btn-print, .single-estimate .page-header, .single-estimate aside.sidebar, .single-estimate .gray-box, .single-estimate .success, .single-estimate .btn-print {
+  .page-template-template-orderform .page-header, .page-template-template-orderform aside.sidebar, .page-template-template-orderform .gray-box, .page-template-template-orderform .success, .page-template-template-orderform .btn-print, .page-template-template-orderform-php .page-header, .page-template-template-orderform-php aside.sidebar, .page-template-template-orderform-php .gray-box, .page-template-template-orderform-php .success, .page-template-template-orderform-php .btn-print, .single-estimate .page-header, .single-estimate aside.sidebar, .single-estimate .gray-box, .single-estimate .success, .single-estimate .btn-print {
     display: none;
   }
-  .page-template-template-orderform main.main:before, .single-estimate main.main:before {
+  .page-template-template-orderform main.main:before, .page-template-template-orderform-php main.main:before, .single-estimate main.main:before {
     content: 'CENTRAL☆RENTALS';
     font-size: 46px;
     font-weight: 900;
     text-transform: uppercase;
   }
-  .page-template-template-orderform .col-sm-6, .single-estimate .col-sm-6 {
+  .page-template-template-orderform .col-sm-6, .page-template-template-orderform-php .col-sm-6, .single-estimate .col-sm-6 {
     width: 50%;
     float: left;
   }
-  .page-template-template-orderform, .page-template-template-orderform .container, .page-template-template-orderform .content, .page-template-template-orderform .main, .page-template-template-orderform div[ng-controller], .page-template-template-orderform section, .single-estimate, .single-estimate .container, .single-estimate .content, .single-estimate .main, .single-estimate div[ng-controller], .single-estimate section {
+  .page-template-template-orderform, .page-template-template-orderform .container, .page-template-template-orderform .content, .page-template-template-orderform .main, .page-template-template-orderform div[ng-controller], .page-template-template-orderform section, .page-template-template-orderform-php, .page-template-template-orderform-php .container, .page-template-template-orderform-php .content, .page-template-template-orderform-php .main, .page-template-template-orderform-php div[ng-controller], .page-template-template-orderform-php section, .single-estimate, .single-estimate .container, .single-estimate .content, .single-estimate .main, .single-estimate div[ng-controller], .single-estimate section {
     max-width: 100%;
   }
 

@@ -86,7 +86,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		delete item.type;
 		delete item.id;
 		delete item.image;
-		delete item.daysweek;
 	}
 
 	$scope.printOrder = function() {
@@ -120,6 +119,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		var newDate = new Date();
 		var titleStr = $scope.orderMeta.companyName + " – " + $scope.orderMeta.jobName + " (" + newDate.toLocaleString() + ")";
 		var contentStr = JSON.stringify($scope.orderData);
+		debugger;
 		// js_create_post(titleStr, contentStr, $scope.ajaxSuccess, $scope.ajaxFail);
 		$scope.js_create_post(titleStr, contentStr, $http, $scope);
 		// $scope.orderData = [];

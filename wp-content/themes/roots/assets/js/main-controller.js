@@ -237,6 +237,12 @@ app.controller('mainCtrl', ['$scope', 'GSLoader', '$http', '$modal', function($s
 
 	};
 
+	$scope.daysWeekZero = function(item) {
+		debugger;
+		return (parseInt(item.daysweek) === 0 && (typeof(item.daysweek) !== "undefined"));
+	}
+
+
 }]);
 
 app.directive('dynamicName', function($compile, $parse) {
@@ -276,8 +282,5 @@ app.filter( 'nodomain', function () {
     return "/" + output;
   };
 });
-
-
-
 
 
