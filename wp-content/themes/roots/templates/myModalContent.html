@@ -3,7 +3,7 @@
 	            <h3 class="modal-title">{{theItem.name}}</h3>
 	        </div>
 	        <div class="modal-body">
-	        	<img class="item-image" ng-if="theItem.image" ng-src="{{theItem.image}}">
+	        	<img class="item-image" ng-if="theItem.image" ng-src="{{theItem.image | nodomain}}">
 				<p class="item-description" ng-if="theItem.description">{{theItem.description}}</p>
 				<p class="item-description" ng-if="theItem.link"><a ng-href="{{theItem.link | nodomain}}" target="_blank">Click here for more information</a></p>
 	        </div>
