@@ -46,7 +46,7 @@ add_filter('wp_head', 'php_vars_go');
 // add_filter('script_loader_src', 'roots_jquery_local_fallback', 10, 2);
 
 // Hide Admin Bar
-add_filter('show_admin_bar', '__return_false');
+// add_filter('show_admin_bar', '__return_false');
 
 // Disable auto <p>
 // http://stackoverflow.com/questions/7697465/wordpress-remove-auto-generated-paragraphs-for-speciffic-custom-post-type
