@@ -115,15 +115,15 @@
 						</section>
 						<div class="row">
 							<div class="col-sm-6">
-								<div class="form-group"><label for="jobName" class="control-label">Job Name</label><input type="text" name="jobName" id="jobName" class="form-control" ng-model="orderMeta.jobName"></div>
+								<div class="form-group"><label for="companyName" class="control-label">Company Name</label><input type="text" name="companyName" id="companyName" class="form-control" ng-model="orderMeta.companyName"></div>
 							</div>
 							<div class="col-sm-6">
-								<div class="form-group"><label for="companyName" class="control-label">Company Name</label><input type="text" name="companyName" id="companyName" class="form-control" ng-model="orderMeta.companyName"></div>
+								<div class="form-group"><label for="contactName" class="control-label">Contact Name</label><input type="text" name="contactName" id="contactName" class="form-control" ng-model="orderMeta.contactName"></div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
-								<div class="form-group"><label for="contactName" class="control-label">Contact Name</label><input type="text" name="contactName" id="contactName" class="form-control" ng-model="orderMeta.contactName"></div>
+								<div class="form-group"><label for="address" class="control-label">Address</label><input type="text" name="address" id="address" class="form-control" ng-model="orderMeta.address"></div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group"><label for="contactPosition" class="control-label">Contact Position</label><input type="text" name="contactPosition" id="contactPosition" class="form-control" ng-model="orderMeta.contactPosition"></div>
@@ -131,10 +131,10 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
-								<div class="form-group"><label for="email" class="control-label">Email Address</label><input type="text" name="email" id="email" class="form-control" ng-model="orderMeta.email"></div>
+								<div class="form-group"><label for="jobName" class="control-label">Job Name</label><input type="text" name="jobName" id="jobName" class="form-control" ng-model="orderMeta.jobName"></div>
 							</div>
 							<div class="col-sm-6">
-								<div class="form-group"><label for="phone" class="control-label">Phone Number</label><input type="text" name="phone" id="phone" class="form-control" ng-model="orderMeta.phone"></div>
+								<div class="form-group"><label for="email" class="control-label">Email Address</label><input type="text" name="email" id="email" class="form-control" ng-model="orderMeta.email"></div>
 							</div>
 						</div>
 						<div class="row">
@@ -142,7 +142,7 @@
 								<div class="form-group"><label for="jobNumber" class="control-label">Job #</label><input type="text" name="jobNumber" id="jobNumber" class="form-control" ng-model="orderMeta.jobNumber"></div>
 							</div>
 							<div class="col-sm-6">
-								<div class="form-group"><label for="fax" class="control-label">Fax</label><input type="text" name="fax" id="fax" class="form-control" ng-model="orderMeta.fax"></div>
+								<div class="form-group"><label for="phone" class="control-label">Phone Number</label><input type="text" name="phone" id="phone" class="form-control" ng-model="orderMeta.phone"></div>
 							</div>
 						</div>
 						<div class="row">
@@ -150,8 +150,7 @@
 								<div class="form-group"><label for="PONumber" class="control-label">PO #</label><input type="text" name="PONumber" id="PONumber" class="form-control" ng-model="orderMeta.PONumber"></div>
 							</div>
 							<div class="col-sm-6">
-								<!-- <div class="form-group"><label for="shootDays" class="control-label">Shoot Days</label><input type="text" name="shootDays" id="shootDays" class="form-control" ng-model="orderMeta.shootDays"></div> -->
-						
+								<div class="form-group"><label for="notes" class="control-label">Notes</label><textarea name="notes" id="notes" class="form-control" ng-model="orderMeta.notes"></textarea></div>
 							</div>
 						</div>
 
