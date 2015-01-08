@@ -74,7 +74,7 @@ function my_scripts_init() {
     wp_enqueue_script('svginject', get_bloginfo('template_directory').'/bower_components/svg-injector/dist/svg-injector.min.js', array('jquery'), false);
 
     function add_google_analytics() {
-        wp_register_script('ga', $scriptinitDir.'ga.js', false, 1.0, false);
+        wp_register_script('ga', $scriptinitDir.'ga.js', array(), 1.0, false);
         wp_enqueue_script('ga');
     }
     add_action('wp_enqueue_scripts', 'add_google_analytics');
