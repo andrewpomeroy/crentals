@@ -37,7 +37,6 @@ function make_est_post() {
 		'post_type' => 'post'
 		)
 	);
-
 	// If the page doesn't already exist, then create it
 	if ( get_page_by_title(array('page_title' => $title, 'post_type' => 'post')) == null ) {
 		// Set the post ID so that we know the post was created successfully
@@ -71,5 +70,31 @@ function make_est_post() {
 
 } // end programmatically_create_post
 // add_filter( 'after_setup_theme', 'programmatically_create_post' );
+
+function get_image_size_src() {
+	
+	header( 'Content-Type: application/json; charset=utf-8' );
+	$postdata = $_REQUEST;
+	$request = $postdata;
+
+	$url = $request['url'];
+	$size = $request['size'];
+
+	$url = get_home_url() . "/" . $url;
+
+	$id = fjarrett_get_attachment_id_by_url($url);
+
+	$src = wp_get_attachment_image_src($id, $size);
+
+	$response = array(
+    'status' => '200',
+    'url' => $url,
+    'id' => $id,
+    'src' => $src
+	);
+
+	echo json_encode($response);
+	exit;
+}
 
 ?>

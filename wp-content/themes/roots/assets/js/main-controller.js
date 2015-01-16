@@ -275,6 +275,35 @@ app.directive('categoryExpand', function() {
 	};
 });
 
+
+app.directive('wpImgSrc', ['$http', function($http) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attr) {
+			var size,
+				url = attr.wpImgSrc;
+			size = attr.imageSize ? attr.imageSize : "width_960";
+			url = url.split("/").slice(3).join("/");
+			$http({
+				url: '/wp-admin/admin-ajax.php',
+				method: "POST",
+				params: {action : "get_image_size_src", url: url, size: size}
+			}).success(function(response) {
+				if (response.src === null) {
+					angular.element(element).addClass('no-image');
+				}
+				else {
+					angular.element(element).attr('src', response.src[0]).removeClass('no-image');
+				}
+				angular.element(element).removeClass('loading-spinner');
+			}).error(function(data) {
+				console.log("error", data);
+				angular.element(element).addClass('no-image').removeClass('loading-spinner');
+			})
+		}
+	};
+}]);
+
 app.filter( 'nodomain', function () {
   return function ( input ) {
     var output = input.split("/").slice(3).join("/");

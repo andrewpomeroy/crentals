@@ -7063,6 +7063,10 @@ td.rental-period .date-controls.right .date-mode-control {
   margin: 5rem auto;
 }
 
+img.loading-spinner {
+  display: block;
+}
+
 .processing-spinner {
   width: 18px;
   height: 18px;

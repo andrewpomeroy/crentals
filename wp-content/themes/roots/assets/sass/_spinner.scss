@@ -40,6 +40,9 @@
   @include makeSpinner($color2: rgba($brand-primary,.1));
   margin: 5rem auto;
 }
+img.loading-spinner {
+  display: block;
+}
 .processing-spinner {
   @include makeSpinner($size: $font-size-base, $color: $gray-light);
 }
