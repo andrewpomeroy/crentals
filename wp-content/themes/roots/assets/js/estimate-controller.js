@@ -126,7 +126,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 				cleanItemProperties(value);
 			});
 			newDate = new Date();
-			titleStr = $scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "" + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
+			titleStr = ($scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "") + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
 			contentStr = JSON.stringify($scope.orderData);
 		}
 		// js_create_post(titleStr, contentStr, $scope.142, $scope.ajaxFail);
