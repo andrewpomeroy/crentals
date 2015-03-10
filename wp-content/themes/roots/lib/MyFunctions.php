@@ -24,21 +24,34 @@ function make_est_post() {
 	$author_id = 1;
 	$title = $request['title'];
 	$content = $request['content'];
+	// $esttype = $request['type'];
+	$draft = $request['draft'];
 
 	$response = array(
     'status' => '200',
-    'message' => 'Dunno',
+    'message' => 'Error',
     'new_post_ID' => $post_id
 	);
 
 	$response['titleget'] = get_page_by_title(
 	array(
 		'page_title' => $title,
-		'post_type' => 'post'
+		'post_type' => 'estimate'
 		)
 	);
+
+	if ($draft != 'true') {
+		$category = array(27);
+	}
+	else {
+		$category = array(0);
+	}
+
+
+
+
 	// If the page doesn't already exist, then create it
-	if ( get_page_by_title(array('page_title' => $title, 'post_type' => 'post')) == null ) {
+	if ( get_page_by_title(array('page_title' => $title, 'post_type' => 'estimate')) == null ) {
 		// Set the post ID so that we know the post was created successfully
 		$post_id = wp_insert_post(
 			array(
@@ -48,18 +61,19 @@ function make_est_post() {
 				'post_title'		=>	$title,
 				'post_content'		=>	$content,
 				'post_status'		=>	'publish',
-				'post_category'     =>  array(10),
+				'post_category'     =>  $category,
 				'post_type'		=>	'estimate'
 			)
 		);
+		$catstring = implode("|",$category);
 
-		$response['message'] = 'OK';
+		$response['message'] = 'OK '.$catstring;
 		$response['new_post_ID'] = $post_id;
 
 	// Otherwise, we'll stop
 	} else {
 
-    		// Arbitrarily use -2 to indicate that the page with the title already exists
+    		// Arbitrarily use -2 to indicate that the catstring with the title already exists
     		$post_id = -2;
 
 

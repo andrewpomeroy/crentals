@@ -97,40 +97,58 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	$scope.ajaxFail = function() {
 		$scope.isOrderGood = -1;
 	}
+
 	$scope.responseVar = 0;
+	var newDate,
+		titleStr,
+		contentStr;
 	// Submit Order to Wordpress Backend
-	$scope.submitOrder = function() {
-		$scope.isOrderGood = 0;
-		$scope.orderMeta.totalEstimate = $scope.totalEstimate;
-		$scope.orderData = {
-			orderMeta: $scope.orderMeta,
-			items: []
+	$scope.submitOrder = function(obj) {
+		var draft = obj.draft;
+		if (!draft) {
+			$scope.isFinalOrderGood = 0;
+			titleStr = "SUBMITTED: " + titleStr;
 		}
-		// loopThroughItems([addOne, addQuantityToOrderObj]);
-		loopThroughItems([addQuantityToOrderObj]);
-		// for (var item in $scope.orderData.items) {
-		// 	cleanItemProperties(item);
-		// }
-		angular.forEach($scope.orderData.items, function(value, key) {
-			cleanItemProperties(value);
-		});
-		var newDate = new Date();
-		var titleStr = $scope.orderMeta.companyName + " – " + $scope.orderMeta.jobName + " (" + newDate.toLocaleString() + ")";
-		var contentStr = JSON.stringify($scope.orderData);
-		// js_create_post(titleStr, contentStr, $scope.ajaxSuccess, $scope.ajaxFail);
-		$scope.js_create_post(titleStr, contentStr, $http, $scope);
+		else
+		{
+			$scope.isOrderGood = 0;
+			$scope.orderMeta.totalEstimate = $scope.totalEstimate;
+			$scope.orderData = {
+				orderMeta: $scope.orderMeta,
+				items: []
+			}
+			// loopThroughItems([addOne, addQuantityToOrderObj]);
+			loopThroughItems([addQuantityToOrderObj]);
+			// for (var item in $scope.orderData.items) {
+			// 	cleanItemProperties(item);
+			// }
+			angular.forEach($scope.orderData.items, function(value, key) {
+				cleanItemProperties(value);
+			});
+			newDate = new Date();
+			titleStr = $scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "" + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
+			contentStr = JSON.stringify($scope.orderData);
+		}
+		// js_create_post(titleStr, contentStr, $scope.142, $scope.ajaxFail);
+		$scope.js_create_post(titleStr, contentStr, draft, $http, $scope);
 		// $scope.orderData = [];
 	};
-	$scope.js_create_post = function(title, content, $http, $scope) {
+	$scope.js_create_post = function(title, content, draft, $http, $scope) {
 
 		$http({
 			url: '/wp-admin/admin-ajax.php',
 			method: "POST",
-			params: {action : "make_est_post", title: title, content: content}
+			params: {action : "make_est_post", title: title, content: content, draft: draft}
 		}).success(function(response) {
 			$scope.isOrderGood = 1;
+			if (!draft) {
+				$scope.isFinalOrderGood = 1;
+			}
 		}).error(function(data) {
 			$scope.isOrderGood = -1;
+			if (!draft) {
+				$scope.isFinalOrderGood = -1;
+			}
 		});
 	};
 

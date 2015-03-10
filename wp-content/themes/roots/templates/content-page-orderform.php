@@ -161,8 +161,8 @@
 									<!-- <div class="submit-bar align-right"> -->
 									<div class="submit-bar align-right" ng-if="isOrderGood !== 1">
 										<button class="btn" ng-click="resetForm()" ng-disabled="(isOrderGood === 0)">Reset Form</button>
-										<button class="btn btn-info submit" ng-click="submitOrder()" ng-disabled="orderFormForm.$invalid || (isOrderGood === 0) || (totalEstimate <= 0)" ng-class="{'processing': isOrderGood === 0}">
-											<span ng-if="(isOrderGood === undefined) || (isOrderGood === -1)">Submit</span>
+										<button class="btn btn-info submit" ng-click="submitOrder({draft: true})" ng-disabled="orderFormForm.$invalid || (isOrderGood === 0) || (totalEstimate <= 0)" ng-class="{'processing': isOrderGood === 0}">
+											<span ng-if="(isOrderGood === undefined) || (isOrderGood === -1)">Generate Estimate</span>
 											<span ng-if="(isOrderGood === 0)">
 												<span class="processing-spinner inline-spinner"></span>
 												 Processing..
@@ -176,17 +176,37 @@
 					</form>
 				</section>
 
-				<div class="gray-box align-center">
+				<div id="orderActionsInfoTop" class="gray-box align-center">
 					<span ng-if="!isOrderGood">
 						<?php if (get_field('disclaimer')) { ?>
 						<h5><?php echo get_field('disclaimer')?></h5>
 						<?php } ?>
 					</span>
 					<div class="success" ng-if="isOrderGood === 1">
-						<h4>Your estimate has been submitted.  We'll contact you ASAP to confirm availability.  Thank you!</h4>
-						<button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Order</a>
+						<h4 ng-if="isFinalOrderGood !== 1">Estimate generated.</h4>
+						<h4 ng-if="isFinalOrderGood === 1">Your estimate has been submitted.  We'll contact you ASAP to confirm availability. Thank you!</h4>
+						<div class="row">
+							<div ng-class="{'col-xs-6 col-md-4 col-md-push-2': (isFinalOrderGood !== 1), 'col-xs-12 col-sm-12': (isFinalOrderGood === 1)}">
+								<button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print {{(isFinalOrderGood === 1) ? 'Order' : 'Estimate'}}</button>
+								<div>
+									<em>Print a copy of your estimate for your records.</em>
+								</div>
+							</div>
+							<div class="col-xs-6 col-md-4 col-md-push-2" ng-if="isFinalOrderGood !== 1">
+								<button class="btn btn-primary" ng-class="{'processing': isFinalOrderGood === 0}" ng-if="isFinalOrderGood !== 1" ng-click="submitOrder({draft:false})">
+									<span ng-if="(isFinalOrderGood === undefined) || (isFinalOrderGood === -1)">Submit Order</span>
+									<span ng-if="(isFinalOrderGood === 0)">
+										<span class="processing-spinner inline-spinner"></span>
+										 Processing..
+									</span>
+								</button>
+								<div>
+									<em>Send a copy of your estimate to Central Rentals, and we'll follow up with you ASAP.</em>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div ng-if="isOrderGood === -1">
+					<div ng-if="isOrderGood === -1 || isFinalOrderGood === -1">
 						<h4><strong>Error</strong> – Unable to process estimate request.</h4>
 						<h5>Order Data:</h5>
  						<pre class="debug client-debug">{{orderData | json}}</pre>
@@ -196,6 +216,19 @@
 				<section class="order-summary" ng-if="isOrderGood === 1">
 					<?php get_template_part('templates/content', 'summary'); ?>
 				</section>
+
+				<div id="orderActionsInfoBottom" class="gray-box align-center">
+					<div class="success" ng-if="isOrderGood === 1">
+						<button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print {{(isFinalOrderGood === 1) ? 'Order' : 'Estimate'}}</button>
+						<button class="btn btn-primary" ng-class="{'processing': isFinalOrderGood === 0}" ng-if="isFinalOrderGood !== 1" ng-click="submitOrder({draft:false})">
+							<span ng-if="(isFinalOrderGood === undefined) || (isFinalOrderGood === -1)">Submit to Central Rentals</span>
+							<span ng-if="(isFinalOrderGood === 0)">
+								<span class="processing-spinner inline-spinner"></span>
+								 Processing..
+							</span>
+						</button>
+					</button>
+				</div>
 
 	</div>
 
