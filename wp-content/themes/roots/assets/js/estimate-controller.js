@@ -1,4 +1,4 @@
-app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$modal', function($scope, $filter, GSLoader, $http, $modal) {
+app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$modal', '$timeout', function($scope, $filter, GSLoader, $http, $modal, $timeout) {
 
 	$scope.dataStatus = null;
 
@@ -144,6 +144,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			if (!draft) {
 				$scope.isFinalOrderGood = 1;
 			}
+			$scope.successScroll('#orderActionsInfoTop');
 		}).error(function(data) {
 			$scope.isOrderGood = -1;
 			if (!draft) {
@@ -152,13 +153,20 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		});
 	};
 
+	$scope.successScroll = function(thetarget) {
+		$timeout(function() {
+		    $('html, body').animate({
+				scrollTop: $(thetarget).offset().top
+		    }, 900);
+		}, 100);
+	
+	}
+
 	// --- DATEPICKER FUNCTIONS ---
  var one_day = 1000*60*60*24;
 
 	$scope.incrementIndividualDate = function(date, amount) {
-		console.log(date);
 		date.setDate(date.getDate() + amount);
-		console.log(date);
 		$scope.calcRentalDates();
 	};
 
