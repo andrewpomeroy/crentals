@@ -4,7 +4,9 @@
       <div ng-controller="mainCtrl">
         <div ng-controller="estimateSingleCtrl">
           <script>theOrderData = <?php echo get_the_content(); ?>;</script>
+
           <?php get_template_part('templates/content', 'summary'); ?>
+          
           <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Order</a>
         </div>
       </div>

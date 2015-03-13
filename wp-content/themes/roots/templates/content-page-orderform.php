@@ -162,7 +162,7 @@
 									<div class="submit-bar align-right" ng-if="isOrderGood !== 1">
 										<button class="btn" ng-click="resetForm()" ng-disabled="(isOrderGood === 0)">Reset Form</button>
 										<button class="btn btn-info submit" ng-click="submitOrder({draft: true})" ng-disabled="orderFormForm.$invalid || (isOrderGood === 0) || (totalEstimate <= 0)" ng-class="{'processing': isOrderGood === 0}">
-											<span ng-if="(isOrderGood === undefined) || (isOrderGood === -1)">Generate Estimate</span>
+											<span ng-if="(isOrderGood === undefined) || (isOrderGood === -1)">Preview Estimate</span>
 											<span ng-if="(isOrderGood === 0)">
 												<span class="processing-spinner inline-spinner"></span>
 												 Processing..
