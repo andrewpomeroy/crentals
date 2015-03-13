@@ -24,13 +24,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="companyName" class="control-label">Company Name</label>
-          <p name="companyName" id="companyName" class="form-control-static" ng-bind="orderMeta.companyName"></p>
+          <p name="companyName" id="companyName" class="form-control-static" ng-bind="orderData.orderMeta.companyName"></p>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="contactName" class="control-label">Contact Name</label>
-          <p name="contactName" id="contactName" class="form-control-static" ng-bind="orderMeta.contactName"></p>
+          <p name="contactName" id="contactName" class="form-control-static" ng-bind="orderData.orderMeta.contactName"></p>
         </div>
       </div>
     </div>
@@ -38,13 +38,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="address" class="control-label">Address</label>
-          <p name="address" id="address" class="form-control-static" ng-bind="orderMeta.address"></p>
+          <p name="address" id="address" class="form-control-static" ng-bind="orderData.orderMeta.address"></p>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="contactPosition" class="control-label">Contact Position</label>
-          <p name="contactPosition" id="contactPosition" class="form-control-static" ng-bind="orderMeta.contactPosition"></p>
+          <p name="contactPosition" id="contactPosition" class="form-control-static" ng-bind="orderData.orderMeta.contactPosition"></p>
         </div>
       </div>
     </div>
@@ -52,13 +52,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="jobName" class="control-label">Job Name</label>
-          <p name="jobName" id="jobName" class="form-control-static" ng-bind="orderMeta.jobName"></p>
+          <p name="jobName" id="jobName" class="form-control-static" ng-bind="orderData.orderMeta.jobName"></p>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="email" class="control-label">Email Address</label>
-          <p name="email" id="email" class="form-control-static" ng-bind="orderMeta.email"></p>
+          <p name="email" id="email" class="form-control-static" ng-bind="orderData.orderMeta.email"></p>
         </div>
       </div>
     </div>
@@ -66,13 +66,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="jobNumber" class="control-label">Job #</label>
-          <p name="jobNumber" id="jobNumber" class="form-control-static" ng-bind="orderMeta.jobNumber"></p>
+          <p name="jobNumber" id="jobNumber" class="form-control-static" ng-bind="orderData.orderMeta.jobNumber"></p>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="phone" class="control-label">Phone Number</label>
-          <p name="phone" id="phone" class="form-control-static" ng-bind="orderMeta.phone"></p>
+          <p name="phone" id="phone" class="form-control-static" ng-bind="orderData.orderMeta.phone"></p>
         </div>
       </div>
     </div>
@@ -80,13 +80,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="PONumber" class="control-label">PO #</label>
-          <p name="PONumber" id="PONumber" class="form-control-static" ng-bind="orderMeta.PONumber"></p>
+          <p name="PONumber" id="PONumber" class="form-control-static" ng-bind="orderData.orderMeta.PONumber"></p>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="notes" class="control-label">Notes</label>
-          <p name="notes" id="notes" class="form-control-static" ng-bind="orderMeta.notes"></p>
+          <p name="notes" id="notes" class="form-control-static" ng-bind="orderData.orderMeta.notes"></p>
         </div>
       </div>
     </div>
