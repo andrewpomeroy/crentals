@@ -1,5 +1,7 @@
 app.controller('productCategory', ['GSLoader', '$scope', '$http', '$modal', function(GSLoader, $scope, $http, $modal) {
 
+$scope.isAdmin = isAdmin;
+
 $scope.dataStatus = null;
 
 $scope.getProducts = function(category) {

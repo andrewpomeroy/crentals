@@ -1,5 +1,7 @@
 app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$modal', '$timeout', function($scope, $filter, GSLoader, $http, $modal, $timeout) {
 
+	$scope.isAdmin = isAdmin;
+
 	$scope.dataStatus = null;
 
 	$scope.calcRentalDates = function() {

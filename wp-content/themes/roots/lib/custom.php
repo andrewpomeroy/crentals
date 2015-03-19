@@ -30,9 +30,16 @@ function typekit_try() {
 add_filter('wp_head', 'typekit_try');
 
 function php_vars_go() {
+    if (current_user_can( 'manage_options' )) {
+        $adminedit = 'true';
+    }
+    else {
+        $adminedit = 'false';
+    }
     ?>
     <script type="text/javascript">
         var globalGSUrl = '<?php echo get_field('product_spreadsheet_url', 'option') ?>';
+        var isAdmin = <?php echo $adminedit ?>;
     </script>
     <?php // echo print_r(get_fields('option'));
 }

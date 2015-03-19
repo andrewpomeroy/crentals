@@ -311,4 +311,21 @@ app.filter( 'nodomain', function () {
   };
 });
 
+app.filter( 'notSecret', function() {
+return function(input) {
 
+    var out = [];
+
+    // Using the angular.forEach method, go through the array of data and perform the operation of figuring out if the language is statically or dynamically typed.
+    angular.forEach(input, function(item) {
+
+      if (!item.secret.length) {
+        out.push(item)
+      }
+      
+    })
+
+    return out;
+  }
+
+});

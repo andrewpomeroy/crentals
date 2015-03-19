@@ -66,8 +66,9 @@
 										<tr>
 											<td colspan="8" class="subcat-heading"><h5 class="subcat-heading" ng-if="subcat.type">{{subcat.type}}</h5></td>
 										</tr>
-										<tr ng-repeat="item in subcat.items" class="item-row" ng-class="{'has-error': (item.estimate === null)}">
+										<tr ng-repeat="item in subcat.items" class="item-row" ng-class="{'has-error': (item.estimate === null), 'hidden': ((item.secret.length) && !isAdmin), 'secret': item.secret.length}">
 											<td class="data static">
+												<span class="item-hidden-label" ng-if="isAdmin">Admin-only item</span>
 												<a href class="item-name linked" ng-if="item.description || item.image" ng-click="infoModal(item)">{{item.name}}<i class="glyphicon glyphicon-camera text-muted" ng-if="item.image"></i></a>
 												<span class="item-name no-image no-description" ng-if="!item.description && !item.image">{{item.name}}</span>
 											</td>
@@ -113,6 +114,9 @@
 								</table>
 							</div>
 						</section>
+
+<pre>{{itemData | json}}</pre>
+
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group"><label for="companyName" class="control-label">Company Name</label><input type="text" name="companyName" id="companyName" class="form-control" ng-model="orderMeta.companyName"></div>

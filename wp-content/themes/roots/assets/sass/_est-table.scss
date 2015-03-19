@@ -184,3 +184,34 @@ td.rental-period
 {
 	margin-left: 1em;
 }
+
+table > tbody > tr.item-row
+{
+	&.secret
+	{
+		background-color: rgba($brand-primary, .1);
+		&:hover
+		{
+			background-color: rgba(darken($brand-primary, 10%), .1);
+		}
+		.item-secret-label
+		{
+			display: block;
+			font-weight: bold;
+		}
+	}
+	&:nth-child(2n)
+	{
+	    background-color: rgba(0,0,0, .02);
+	    /* border: 0; */
+	}
+	&:hover
+	{
+	    background-color: rgba(0,0,0, .05);
+	}
+	& > td
+	{
+	    border: 0;
+	}
+}
+

@@ -45,7 +45,7 @@
 						<div class="subcategory" ng-repeat="subcat in productGroup.subcats">
 							<h3 class="subcategory-heading">{{subcat.type}}</h3>
 							<ul class="product-list">
-								<li class="Media product" ng-repeat="product in subcat.items" ng-class="{'product-page-feature opens-page': hasProductPage(product.id)}">
+								<li class="Media product" ng-repeat="product in subcat.items | notSecret" ng-class="{'product-page-feature opens-page': hasProductPage(product.id)}">
 									<a ng-href="{{hasProductPage(product.id) ? '/?page_id='+hasProductPage(product.id) : ''}}" href ng-click="hasProductPage(product.id) ? return : infoModal(product)" class="Media-figure image-wrap" ng-if="product.image">
 										<img thumb-src="{{product.image}}">
 									</a>
