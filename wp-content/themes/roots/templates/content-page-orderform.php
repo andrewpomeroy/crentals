@@ -115,8 +115,6 @@
 							</div>
 						</section>
 
-<pre>{{itemData | json}}</pre>
-
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group"><label for="companyName" class="control-label">Company Name</label><input type="text" name="companyName" id="companyName" class="form-control" ng-model="orderMeta.companyName"></div>
