@@ -189,10 +189,18 @@ table > tbody > tr.item-row
 {
 	&.secret
 	{
-		background-color: rgba($brand-primary, .1);
+		background-color: rgba($brand-primary, .13);
+		&:nth-child(2n)
+		{
+			background-color: rgba($brand-primary, .16);
+			&:hover
+			{
+				background-color: rgba(darken($brand-primary, 5%), .16);
+			}
+		}
 		&:hover
 		{
-			background-color: rgba(darken($brand-primary, 10%), .1);
+			background-color: rgba(darken($brand-primary, 5%), .13);
 		}
 		.item-secret-label
 		{
@@ -204,6 +212,10 @@ table > tbody > tr.item-row
 	{
 	    background-color: rgba(0,0,0, .02);
 	    /* border: 0; */
+	}
+	&.has-items td
+	{
+		background-color: $bg-has-items-semiopaque;
 	}
 	&:hover
 	{

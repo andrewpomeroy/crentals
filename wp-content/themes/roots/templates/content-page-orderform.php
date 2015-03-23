@@ -66,9 +66,9 @@
 										<tr>
 											<td colspan="8" class="subcat-heading"><h5 class="subcat-heading" ng-if="subcat.type">{{subcat.type}}</h5></td>
 										</tr>
-										<tr ng-repeat="item in subcat.items" class="item-row" ng-class="{'has-error': (item.estimate === null), 'hidden': ((item.secret.length) && !isAdmin), 'secret': item.secret.length}">
+										<tr ng-repeat="item in subcat.items" class="item-row" ng-class="{'has-error': (item.estimate === null), 'hidden': ((item.secret.length) && !isAdmin), 'secret': item.secret.length, 'has-items': item.qty}">
 											<td class="data static">
-												<span class="item-hidden-label" ng-if="isAdmin">Admin-only item</span>
+												<span class="item-secret-label" ng-if="isAdmin && item.secret.length">Admin-only item</span>
 												<a href class="item-name linked" ng-if="item.description || item.image" ng-click="infoModal(item)">{{item.name}}<i class="glyphicon glyphicon-camera text-muted" ng-if="item.image"></i></a>
 												<span class="item-name no-image no-description" ng-if="!item.description && !item.image">{{item.name}}</span>
 											</td>

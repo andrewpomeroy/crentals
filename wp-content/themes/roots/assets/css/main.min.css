@@ -6916,10 +6916,16 @@ td.rental-period .date-controls.right .date-mode-control {
 }
 
 table > tbody > tr.item-row.secret {
-  background-color: rgba(212, 32, 43, 0.1);
+  background-color: rgba(212, 32, 43, 0.13);
+}
+table > tbody > tr.item-row.secret:nth-child(2n) {
+  background-color: rgba(212, 32, 43, 0.16);
+}
+table > tbody > tr.item-row.secret:nth-child(2n):hover {
+  background-color: rgba(190, 29, 39, 0.16);
 }
 table > tbody > tr.item-row.secret:hover {
-  background-color: rgba(168, 25, 34, 0.1);
+  background-color: rgba(190, 29, 39, 0.13);
 }
 table > tbody > tr.item-row.secret .item-secret-label {
   display: block;
@@ -6928,6 +6934,9 @@ table > tbody > tr.item-row.secret .item-secret-label {
 table > tbody > tr.item-row:nth-child(2n) {
   background-color: rgba(0, 0, 0, 0.02);
   /* border: 0; */
+}
+table > tbody > tr.item-row.has-items td {
+  background-color: rgba(0, 136, 255, 0.2);
 }
 table > tbody > tr.item-row:hover {
   background-color: rgba(0, 0, 0, 0.05);
