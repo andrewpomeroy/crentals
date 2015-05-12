@@ -1,5 +1,7 @@
 app.controller('estimateSingleCtrl', ['$scope', 'GSLoader', '$http', '$modal', function($scope, GSLoader, $http, $modal) {
 
+	$scope.isAdmin = isAdmin;
+	
 	// --- INITIALIZE ---
 	var init = function() {
 		$scope.orderData = theOrderData;
