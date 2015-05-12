@@ -10,6 +10,7 @@
 					<h4 class="loading-status">Loading product data</h4>
 				</section>
 				<section class="main-app" ng-if="(dataStatus === 'loaded') && (isOrderGood !== 1)">
+					<!-- <pre>{{orderFormForm | json}}</pre> -->
 					<form name="orderFormForm" novalidate>
 
 						<section class="rental-dates order-form">

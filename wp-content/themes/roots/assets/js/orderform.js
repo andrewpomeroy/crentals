@@ -18,8 +18,6 @@ var orderForm = (function($) {
 					// console.table(flattenGSFeed(feedJSON));
 					var properFormObj = groupObjects(flattenGSFeed(feedJSON));
 					console.log(properFormObj);
-					// popFields(feedJSON);
-					// stringJSON(properFormObj);
 					// console.table(properFormObj);
 					// console.table(feedJSON);
 				});
@@ -31,17 +29,7 @@ var orderForm = (function($) {
 			}
 		});
 	};
-	var popFields = function(feedJSON) {
-		var strings = JSON.stringify(feedJSON, null, "\t");
-		// $('.app-container').append('<div>'+strings+'</div>');
 
-		for (var i = 0; i < feedJSON.length; i++) {
-			$(settings.container).append('<div>' + feedJSON[i].gsx$type.$t + ' ' + feedJSON[i].gsx$name.$t + ' ' + feedJSON[i].gsx$rate.$t + '</div>');
-		}
-	};
-	var stringJSON = function(obj) {
-		$('.app-container').append('<pre>' + JSON.stringify(obj, null, "\t") + '</pre>');
-	};
 	var flattenGSFeed = function(obj) {
 		var output = {};
 		for (var entry in obj) {
