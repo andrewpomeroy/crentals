@@ -131,9 +131,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			titleStr = ($scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "") + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
 			contentStr = JSON.stringify($scope.orderData);
 		}
-		// js_create_post(titleStr, contentStr, $scope.142, $scope.ajaxFail);
 		$scope.js_create_post(titleStr, contentStr, draft, $http, $scope);
-		// $scope.orderData = [];
 	};
 	$scope.js_create_post = function(title, content, draft, $http, $scope) {
 
@@ -204,19 +202,10 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			item.days = parseInt((item.endDate - item.startDate) / one_day) + 1;
 		}
 		else {
-			// console.log("setting default dates on: ");
-			// console.log(item.name);
-			// console.log("ITEM-----BEFORE");
-			// console.log(item);
 			item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
 			item.endDate = new Date($scope.orderMeta.orderReturnDate.date);
-			// console.log("ITEM-----AFTER");
-			// console.log(item);
 			item.days = $scope.orderMeta.totalRentalDays;
-			// console.log(item.startDate);
 		}
-		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
-		// item.days = ($scope.orderMeta.totalRentalDays > 0) ? $scope.orderMeta.totalRentalDays : 0;
 	};
 
 	resetTotal = function() {
