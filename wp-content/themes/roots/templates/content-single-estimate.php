@@ -2,12 +2,16 @@
   <article <?php post_class(); ?>>
     <div ng-app="myApp">
       <div ng-controller="mainCtrl">
-        <div ng-controller="estimateSingleCtrl">
-          <script>theOrderData = <?php echo get_the_content(); ?>;</script>
+        <div ng-controller="estimateForm">
+          <div ng-controller="estimateSingleCtrl">
+            <script type="text/javascript">
+              theOrderData = <?php echo get_the_content(); ?>;
+            </script>
 
-          <?php get_template_part('templates/content', 'summary'); ?>
-          
-          <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Order</a>
+            <?php get_template_part('templates/content', 'summary-edit'); ?>
+            
+            <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Order</button>
+          </div>
         </div>
       </div>
     </div>

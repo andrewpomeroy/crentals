@@ -49,6 +49,7 @@ td.input.dynamic
 td input
 {
 	width: 100%;
+	text-align: inherit;
 }
 td.input.dynamic.notes
 {
@@ -129,7 +130,7 @@ td.rental-period
 	{
 		color: white;
 	}
-	&.edit-mode
+	&.edit-mode, &.has-custom-rental-period
 	{
 		.date-type-label.edit-mode
 		{

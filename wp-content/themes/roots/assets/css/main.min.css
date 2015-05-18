@@ -6809,6 +6809,7 @@ td.input.dynamic {
 
 td input {
   width: 100%;
+  text-align: inherit;
 }
 
 td.input.dynamic.notes {
@@ -6870,23 +6871,23 @@ td.rental-period .date-control {
 td.rental-period .date-control, td.rental-period .date-mode-control {
   color: white;
 }
-td.rental-period.edit-mode .date-type-label.edit-mode {
+td.rental-period.edit-mode .date-type-label.edit-mode, td.rental-period.has-custom-rental-period .date-type-label.edit-mode {
   display: block;
   color: #999999;
   font-style: italic;
 }
-td.rental-period.edit-mode .individual-date {
+td.rental-period.edit-mode .individual-date, td.rental-period.has-custom-rental-period .individual-date {
   color: #333333;
   font-weight: 600;
 }
-td.rental-period.edit-mode .individual-date, td.rental-period.edit-mode .date-control {
+td.rental-period.edit-mode .individual-date, td.rental-period.edit-mode .date-control, td.rental-period.has-custom-rental-period .individual-date, td.rental-period.has-custom-rental-period .date-control {
   display: inline-block;
   vertical-align: middle;
 }
-td.rental-period.edit-mode .non-edit {
+td.rental-period.edit-mode .non-edit, td.rental-period.has-custom-rental-period .non-edit {
   display: none;
 }
-td.rental-period.edit-mode .date-separator {
+td.rental-period.edit-mode .date-separator, td.rental-period.has-custom-rental-period .date-separator {
   display: block;
   font-size: 0;
 }

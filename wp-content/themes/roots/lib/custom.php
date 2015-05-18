@@ -36,8 +36,12 @@ function php_vars_go() {
     else {
         $adminedit = 'false';
     }
+
     ?>
     <script type="text/javascript">
+        var isSingle = function() {
+            return <?php echo is_single() ?>
+        };
         var globalGSUrl = '<?php echo get_field('product_spreadsheet_url', 'option') ?>';
         var isAdmin = <?php echo $adminedit ?>;
     </script>
@@ -98,6 +102,7 @@ function my_scripts_init() {
         wp_enqueue_script('estimateController', $scriptinitDir.'estimate-controller.js', array('angular'), false);
     }
     if ( 'estimate' == get_post_type()) {
+        wp_enqueue_script('estimateController', $scriptinitDir.'estimate-controller.js', array('angular'), false);
         wp_enqueue_script('estimateSingleController', $scriptinitDir.'estimate-single-controller.js', array('mainController'), false);
     }
     if ( is_page_template('template-category.php')) {

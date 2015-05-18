@@ -4,17 +4,30 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 
 	$scope.dataStatus = null;
 
-	$scope.calcRentalDates = function() {
-		$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date)/one_day) + 1;
-		resetTotal();
-		for(var i = 0; i < $scope.itemData.length; i++) {
-			for (var x = 0; x < $scope.itemData[i].subcats.length;x++) {
-				for (var y = 0; y < $scope.itemData[i].subcats[x].items.length;y++) {
-					var _item = $scope.itemData[i].subcats[x].items[y];
-					$scope.flushIndividualDate(_item);
-					$scope.changeQty(_item);
-					addToTotal(_item);
+	$scope.one_day = 1000*60*60*24;
+
+	$scope.calcRentalDates = function(single) {
+		$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date)/$scope.one_day) + 1;
+		$scope.resetTotal();
+		if ($scope.itemData) {
+			for(var i = 0; i < $scope.itemData.length; i++) {
+				for (var x = 0; x < $scope.itemData[i].subcats.length;x++) {
+					for (var y = 0; y < $scope.itemData[i].subcats[x].items.length;y++) {
+						var _item = $scope.itemData[i].subcats[x].items[y];
+						$scope.flushIndividualDate(_item);
+						$scope.changeQty(_item);
+						$scope.addToTotal(_item);
+					}
 				}
+			}
+		}
+		else
+		{
+			for(var i = 0; i < $scope.orderData.items.length; i++) {
+				var _item = $scope.orderData.items[i];
+				$scope.flushIndividualDate(_item);
+				$scope.changeQty(_item);
+				$scope.addToTotal(_item);
 			}
 		}
 	};
@@ -80,7 +93,9 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		if (!item.clientnotes.length) {
 			delete item.clientnotes;
 		}
-		delete item.customRentalPeriod;
+		if (!item.customRentalPeriod) {
+			delete item.customRentalPeriod;
+		}
 		delete item.notes;
 		delete item.description;
 		delete item.link;
@@ -127,6 +142,8 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			angular.forEach($scope.orderData.items, function(value, key) {
 				cleanItemProperties(value);
 			});
+			$scope.orderData.orderMeta.orderPickupDate.date = Date.parse($scope.orderData.orderMeta.orderPickupDate.date);
+			$scope.orderData.orderMeta.orderReturnDate.date = Date.parse($scope.orderData.orderMeta.orderReturnDate.date);
 			newDate = new Date();
 			titleStr = ($scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "") + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
 			contentStr = JSON.stringify($scope.orderData);
@@ -163,11 +180,13 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	}
 
 	// --- DATEPICKER FUNCTIONS ---
- var one_day = 1000*60*60*24;
 
-	$scope.incrementIndividualDate = function(date, amount) {
+	$scope.incrementIndividualDate = function(date, amount, originalDate, item) {
 		date.setDate(date.getDate() + amount);
-		$scope.calcRentalDates();
+		// Set items object to either the set of hierarchically organized categories/items (Estimate Form) or flat array of items (Single Estimate View)
+		// var items = $scope.itemData || $scope.orderData.items; 
+		$scope.calcRentalDates(isSingle());
+		item.customRentalPeriod = true;
 	};
 
 	$scope.flushIndividualDate = function(item, disableCustomRentalPeriod) {
@@ -199,7 +218,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 				console.log('nullifying '+item.name);
 				item.days = null;
 			}
-			item.days = parseInt((item.endDate - item.startDate) / one_day) + 1;
+			item.days = parseInt((item.endDate - item.startDate) / $scope.one_day) + 1;
 		}
 		else {
 			item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
@@ -208,35 +227,44 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		}
 	};
 
-	resetTotal = function() {
+	$scope.resetTotal = function() {
 		$scope.totalEstimate = 0;
 	};
-	addToTotal = function(item) {
+	$scope.addToTotal = function(item) {
 		if (item.qty > 0) {
 			$scope.totalEstimate += item.estimate;
 		}
 	};
 	$scope.calcTotal = function() {
-		resetTotal();
-		loopThroughItems([addToTotal]);
+		$scope.resetTotal();
+		loopThroughItems([$scope.addToTotal]);
 	};
 
 	loopThroughItems = function(itemFunctions) {
 		// console.log($scope.itemData);
-		for (var group in $scope.itemData) {
-			for (var subcat in $scope.itemData[group].subcats) {
-				for (var item in $scope.itemData[group].subcats[subcat].items) {
-					var theItem = $scope.itemData[group].subcats[subcat].items[item];
-					// loop through specific item functions and execute each on found item
-					for (var passedFunction in itemFunctions) {
-						itemFunctions[passedFunction](theItem);
-						// console.log("Called: ");
-						// console.log(itemFunctions[passedFunction]);
-						// console.log("with: ");
-						// console.log(theItem);
+		if ($scope.itemData) {
+			for (var group in $scope.itemData) {
+				for (var subcat in $scope.itemData[group].subcats) {
+					for (var item in $scope.itemData[group].subcats[subcat].items) {
+						var theItem = $scope.itemData[group].subcats[subcat].items[item];
+						// loop through specific item functions and execute each on found item
+						for (var passedFunction in itemFunctions) {
+							itemFunctions[passedFunction](theItem);
+							// console.log("Called: ");
+							// console.log(itemFunctions[passedFunction]);
+							// console.log("with: ");
+							// console.log(theItem);
+						}
 					}
 				}
 			}
+		}
+		else {			
+			angular.forEach($scope.orderData.items, function(item, key) {
+				for (var passedFunction in itemFunctions) {
+					itemFunctions[passedFunction](item);
+				}
+			});
 		}
 	};
 
@@ -278,25 +306,37 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	$scope.format = $scope.formats[3];
 
 	// --- INITIALIZE ---
+
 	var init = function() {
-		$scope.orderMeta = {};
-		$scope.totalEstimate = 0;
-		var todayDate = new Date();
-		// $scope.calcRentalDates();
-		// $scope.getItemDataGS(function() {
-		$scope.orderMeta.orderPickupDate = {
-			opened: false,
-			date: todayDate
-		};
-		$scope.orderMeta.orderReturnDate = {
-			opened: false,
-			date: todayDate
-		};
-		GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
-			$scope.itemData = response;
-			$scope.dataStatus = "loaded";
-			$scope.calcRentalDates();
-		});
+		if (!isSingle()) {
+			$scope.orderMeta = {};
+			$scope.totalEstimate = 0;
+			var todayDate = new Date();
+			$scope.orderMeta.orderPickupDate = {
+				opened: false,
+				date: todayDate
+			};
+			$scope.orderMeta.orderReturnDate = {
+				opened: false,
+				date: todayDate
+			};
+			GSLoader.getItemDataGS(globalGSUrl).then(function(response) {
+				$scope.itemData = response;
+				$scope.dataStatus = "loaded";
+				$scope.calcRentalDates();
+			});
+		}
+		else {
+			$scope.orderData = theOrderData;
+			$scope.orderMeta = theOrderData.orderMeta;
+			$scope.orderMeta.orderPickupDate.date = new Date($scope.orderMeta.orderPickupDate.date);
+			$scope.orderMeta.orderReturnDate.date = new Date($scope.orderMeta.orderReturnDate.date);
+			$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date) / $scope.one_day) + 1;
+			delete $scope.orderData.orderMeta;
+			$scope.printOrder = function() {
+				window.print();
+			}
+		}
 
 			// $scope.calcRentalDates();
 
