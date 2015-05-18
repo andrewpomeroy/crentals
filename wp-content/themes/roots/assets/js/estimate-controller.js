@@ -122,7 +122,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	// Submit Order to Wordpress Backend
 	$scope.submitOrder = function(obj) {
 		var draft = obj.draft;
-		if (!draft) {
+		if (!draft && !isSingle()) {
 			$scope.isFinalOrderGood = 0;
 			titleStr = "SUBMITTED: " + titleStr;
 		}
@@ -150,7 +150,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		}
 		$scope.js_create_post(titleStr, contentStr, draft, $http, $scope);
 	};
-	$scope.js_create_post = function(title, content, draft, $http, $scope) {
+	$scope.js_create_post = function(title, content, draft, $http, $scope, update) {
 
 		$http({
 			url: '/wp-admin/admin-ajax.php',
@@ -169,6 +169,8 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			}
 		});
 	};
+
+	$scope.testStuff = 
 
 	$scope.successScroll = function(thetarget) {
 		$timeout(function() {

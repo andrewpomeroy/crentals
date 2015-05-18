@@ -5,12 +5,20 @@
         <div ng-controller="estimateForm">
           <div ng-controller="estimateSingleCtrl">
             <script type="text/javascript">
-              theOrderData = <?php echo get_the_content(); ?>;
+              var theOrderData = <?php echo get_the_content(); ?>;
+              var isSubmitted = function() {
+                  return <?php echo has_category("Submitted"); ?>
+              };
+
             </script>
+
+            <pre><?php echo get_the_title() ?></pre>
+            <pre><?php echo print_r(get_page_by_title(array('page_title' => get_the_title(), 'post_type' => 'estimate'))) ?></pre>
 
             <?php get_template_part('templates/content', 'summary-edit'); ?>
             
             <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Order</button>
+            <button class="btn btn-default print-styles-toggle btn-print" ng-click="testStuff()">Hello</button>
           </div>
         </div>
       </div>
