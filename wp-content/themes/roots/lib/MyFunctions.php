@@ -9,7 +9,6 @@
  */
 function make_est_post() {
 
-	// Initialize the page ID to -1. This indicates no action has been taken.
 
 	// $postdata = file_get_contents("php://input");
 	// $request = json_decode($postdata);
@@ -18,7 +17,7 @@ function make_est_post() {
 	$postdata = $_REQUEST;
 	// echo var_dump($postdata);
 	$request = $postdata;
-	$post_id = -1;
+	$post_id = null;
 
 	// Setup the author, slug, and title for the post
 	$author_id = 1;
@@ -26,6 +25,11 @@ function make_est_post() {
 	$content = $request['content'];
 	// $esttype = $request['type'];
 	$draft = $request['draft'];
+	$currentPostId = $request['currentPostId'];
+
+	if ($currentPostId != -1)  {
+		$post_id = $currentPostId;
+	}
 
 	$response = array(
     'status' => '200',
@@ -40,20 +44,30 @@ function make_est_post() {
 		)
 	);
 
+	$category = array(0);
+
+	if ($currentPostId != -1)
+	{
+		// Using "Revised" category
+		$category[] = 29;
+	}
 	if ($draft != 'true') {
-		$category = array(27);
+		// $category = array(27);
+		// Using "Submitted" category
+		$category[] = 27;
 	}
-	else {
-		$category = array(0);
-	}
+	// else {
+	// 	$category = array(0);
+	// }
 
 
 
 
 	// If the page doesn't already exist, then create it
-	if ( get_page_by_title(array('page_title' => $title, 'post_type' => 'estimate')) == null ) {
+	// Or, if we're updating an existing estimate.. just let it happen
+	if (( get_page_by_title(array('page_title' => $title, 'post_type' => 'estimate')) == null ) || ($currentPostId != null)) {
 		// Set the post ID so that we know the post was created successfully
-		$post_id = wp_insert_post(
+		$new_post_id = wp_insert_post(
 			array(
 				'comment_status'	=>	'closed',
 				'ping_status'		=>	'closed',
@@ -63,18 +77,19 @@ function make_est_post() {
 				'post_status'		=>	'publish',
 				'post_category'     =>  $category,
 				'post_type'		=>	'estimate'
+				// 'post_id' => $post_id
 			)
 		);
 		$catstring = implode("|",$category);
 
 		$response['message'] = 'OK '.$catstring;
-		$response['new_post_ID'] = $post_id;
+		$response['new_post_ID'] = $new_post_id;
 
 	// Otherwise, we'll stop
 	} else {
 
     		// Arbitrarily use -2 to indicate that the catstring with the title already exists
-    		$post_id = -2;
+    		$new_post_id = -2;
 
 
 	} // end if

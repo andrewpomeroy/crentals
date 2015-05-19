@@ -127,7 +127,7 @@
         <tr ng-repeat="item in orderData.items" class="item-row" ng-class="{'hide-dates': daysWeekZero(item)}" >
           <td class="data static">
             <span ng-if="!item.edit" ng-bind="item.name"></span>
-            <input ng-if="item.edit" ng-model="item.name" />
+            <textarea ng-if="item.edit" ng-model="item.name" ></textarea>
           </td>
           <td class="data static number">
             <span ng-if="!item.edit" ng-bind="item.qty"></span>
@@ -137,19 +137,15 @@
             <span ng-if="!item.edit" ng-bind="item.rate | currency:'$':0"></span>
             <input ng-if="item.edit" ng-model="item.rate" ng-change="changeQty(item); calcTotal()"/>
           </td>
-          <td class="data static date rental-period" ng-class="{'edit-mode': item.edit, 'has-custom-rental-period': item.customRentalPeriod}">
-            <strong class="individual-date" ng-bind="item.startDate | date:'MM/dd/yy'"></strong>
-            <button ng-if="item.edit" class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.startDate, -1, orderMeta.orderPickupDate.date, item)"></button>
-            <button ng-if="item.edit" class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.startDate, 1, orderMeta.orderPickupDate.date, item)"></button>
+          <td class="data static rental-period" ng-class="{'edit-mode': item.edit, 'has-custom-rental-period': item.customRentalPeriod}">
+            <strong class="individual-date date" ng-bind="item.startDate | date:'MM/dd/yy'"></strong>
+            <button ng-if="item.edit" class="btn glyphicon glyphicon-minus date-control date" ng-click="incrementIndividualDate(item.startDate, -1, orderMeta.orderPickupDate.date, item)"></button>
+            <button ng-if="item.edit" class="btn glyphicon glyphicon-plus date-control date" ng-click="incrementIndividualDate(item.startDate, 1, orderMeta.orderPickupDate.date, item)"></button>
           </td>
-          <td class="data static date rental-period" ng-class="{'edit-mode': item.edit, 'has-custom-rental-period': item.customRentalPeriod}">
-            <strong class="individual-date" ng-bind="item.endDate | date:'MM/dd/yy'"></strong>
-            <button ng-if="item.edit" class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.endDate, -1, orderMeta.orderReturnDate.date, item)"></button>
-            <button ng-if="item.edit" class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.endDate, 1, orderMeta.orderReturnDate.date, item)"></button>
-          </td>
-          <td class="data static date" ng-if="!item.endDate">
-            <span ng-if="!item.edit" ng-bind="orderMeta.orderReturnDate.date | date:'MM/dd/yy'"></span>
-            <input ng-if="item.edit" ng-model="orderMeta.orderReturnDate.date" />
+          <td class="data static rental-period" ng-class="{'edit-mode': item.edit, 'has-custom-rental-period': item.customRentalPeriod}">
+            <strong class="individual-date date" ng-bind="item.endDate | date:'MM/dd/yy'"></strong>
+            <button ng-if="item.edit" class="btn glyphicon glyphicon-minus date-control date" ng-click="incrementIndividualDate(item.endDate, -1, orderMeta.orderReturnDate.date, item)"></button>
+            <button ng-if="item.edit" class="btn glyphicon glyphicon-plus date-control date" ng-click="incrementIndividualDate(item.endDate, 1, orderMeta.orderReturnDate.date, item)"></button>
           </td>
           <td class="data static number">
             <span ng-if="!item.edit" ng-bind="item.daysweek"></span>
@@ -157,7 +153,7 @@
           </td>
           <td class="data static">
             <span ng-if="!item.edit" ng-bind="item.clientnotes"></span>
-            <input ng-if="item.edit" ng-model="item.clientnotes" />
+            <textarea ng-if="item.edit" ng-model="item.clientnotes" ></textarea>
           </td>
           <td class="data static number">
             <span ng-bind="item.estimate | currency:'$'"></span>
@@ -175,12 +171,11 @@
   <section class="order-form row">
     <div class="col-sm-12">
       <div>
-        <h4 class="align-right" ng-if="totalEstimate !== 0">Total: <strong>{{totalEstimate | currency:"$"}}</strong></h4>
         <!-- <div class="submit-bar align-right"> -->
         <div class="submit-bar align-right" ng-if="isOrderGood !== 1">
-          <button class="btn" ng-click="resetForm()" ng-disabled="(isOrderGood === 0)">Reset Form</button>
+          <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Estimate</button>
           <button class="btn btn-info submit" ng-click="submitOrder({draft: true})" ng-disabled="orderFormForm.$invalid || (isOrderGood === 0) || (totalEstimate <= 0)" ng-class="{'processing': isOrderGood === 0}">
-            <span ng-if="(isOrderGood === undefined) || (isOrderGood === -1)">Preview Estimate</span>
+            <span ng-if="(isOrderGood === undefined) || (isOrderGood === -1)">Save Copy of Estimate</span>
             <span ng-if="(isOrderGood === 0)">
               <span class="processing-spinner inline-spinner"></span>
                Processing..
@@ -192,37 +187,16 @@
     </div>
   </section>
 
-  <div id="orderActionsInfoTop" class="gray-box align-center">
-    <span ng-if="!isOrderGood">
-      <?php if (get_field('disclaimer')) { ?>
-      <h5><?php echo get_field('disclaimer')?></h5>
-      <?php } ?>
-    </span>
+  <div id="orderActionsInfoTop" class="gray-box align-center" ng-if="isOrderGood">
     <div class="success" ng-if="isOrderGood === 1">
-      <h4 ng-if="isFinalOrderGood !== 1">Estimate generated.</h4>
-      <h4 ng-if="isFinalOrderGood === 1">Your estimate has been submitted.  We'll contact you ASAP to confirm availability. Thank you!</h4>
+      <h4>New copy of estimate saved.</h4>
       <div class="row">
-        <div ng-class="{'col-xs-6 col-md-4 col-md-push-2': (isFinalOrderGood !== 1), 'col-xs-12 col-sm-12': (isFinalOrderGood === 1)}">
-          <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print {{(isFinalOrderGood === 1) ? 'Order' : 'Estimate'}}</button>
-          <div>
-            <em>Print a copy of your estimate for your records.</em>
-          </div>
-        </div>
-        <div class="col-xs-6 col-md-4 col-md-push-2" ng-if="isFinalOrderGood !== 1">
-          <button class="btn btn-primary" ng-class="{'processing': isFinalOrderGood === 0}" ng-if="isFinalOrderGood !== 1" ng-click="submitOrder({draft:false})">
-            <span ng-if="(isFinalOrderGood === undefined) || (isFinalOrderGood === -1)">Submit Order</span>
-            <span ng-if="(isFinalOrderGood === 0)">
-              <span class="processing-spinner inline-spinner"></span>
-               Processing..
-            </span>
-          </button>
-          <div>
-            <em>Send a copy of your estimate to Central Rentals, and we'll follow up with you ASAP.</em>
-          </div>
+        <div>
+          <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Estimate</button>
         </div>
       </div>
     </div>
-    <div ng-if="isOrderGood === -1 || isFinalOrderGood === -1">
+    <div ng-if="isOrderGood === -1">
       <h4><strong>Error</strong> – Unable to process estimate request.</h4>
       <h5>Order Data:</h5>
       <pre class="debug client-debug">{{orderData | json}}</pre>

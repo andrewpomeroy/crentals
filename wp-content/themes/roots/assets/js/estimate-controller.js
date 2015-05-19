@@ -122,55 +122,76 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	// Submit Order to Wordpress Backend
 	$scope.submitOrder = function(obj) {
 		var draft = obj.draft;
+		if (isSingle()) {
+			draft = !isSubmitted();
+		}
+		var newDate = new Date();
+		titleStr = ($scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "") + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
+		if (!draft) {
+			titleStr = "SUBMITTED: " + titleStr;
+		}
+		if (isSingle())
+		{
+			$scope.orderMeta.revision = ++$scope.orderMeta.revision || 1;	
+			titleStr = titleStr + " (Revision " + $scope.orderMeta.revision + ")";
+		}
 		if (!draft && !isSingle()) {
 			$scope.isFinalOrderGood = 0;
-			titleStr = "SUBMITTED: " + titleStr;
 		}
 		else
 		{
 			$scope.isOrderGood = 0;
 			$scope.orderMeta.totalEstimate = $scope.totalEstimate;
-			$scope.orderData = {
-				orderMeta: $scope.orderMeta,
-				items: []
+			// Init stuff for creating new estimates
+			if (!isSingle()) {
+				$scope.orderData = {
+					orderMeta: $scope.orderMeta,
+					items: []
+				}
+				// loopThroughItems([addOne, addQuantityToOrderObj]);
+				loopThroughItems([addQuantityToOrderObj]);
+				// for (var item in $scope.orderData.items) {
+				// 	cleanItemProperties(item);
+				// }
+				angular.forEach($scope.orderData.items, function(value, key) {
+					cleanItemProperties(value);
+				});
+
 			}
-			// loopThroughItems([addOne, addQuantityToOrderObj]);
-			loopThroughItems([addQuantityToOrderObj]);
-			// for (var item in $scope.orderData.items) {
-			// 	cleanItemProperties(item);
-			// }
-			angular.forEach($scope.orderData.items, function(value, key) {
-				cleanItemProperties(value);
-			});
+			// orderData, title, dates, etc. already exists for estimates being revised
+			else {
+				$scope.orderData.orderMeta = $scope.orderMeta;
+				// titleStr = singleEstimateTitle;
+			}
 			$scope.orderData.orderMeta.orderPickupDate.date = Date.parse($scope.orderData.orderMeta.orderPickupDate.date);
 			$scope.orderData.orderMeta.orderReturnDate.date = Date.parse($scope.orderData.orderMeta.orderReturnDate.date);
-			newDate = new Date();
-			titleStr = ($scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "") + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
 			contentStr = JSON.stringify($scope.orderData);
 		}
-		$scope.js_create_post(titleStr, contentStr, draft, $http, $scope);
+		$scope.js_create_post(titleStr, contentStr, draft, $http, $scope, (isSingle() ?  currentPostId : -1));
 	};
-	$scope.js_create_post = function(title, content, draft, $http, $scope, update) {
+	$scope.js_create_post = function(title, content, draft, $http, $scope, currentPostId) {
+
+		// console.log("current post id: ", currentPostId)
 
 		$http({
 			url: '/wp-admin/admin-ajax.php',
 			method: "POST",
-			params: {action : "make_est_post", title: title, content: content, draft: draft}
+			params: {action : "make_est_post", title: title, content: content, draft: draft, currentPostId: currentPostId}
 		}).success(function(response) {
+			// console.log("yup:", response);
 			$scope.isOrderGood = 1;
 			if (!draft) {
 				$scope.isFinalOrderGood = 1;
 			}
 			$scope.successScroll('#orderActionsInfoTop');
-		}).error(function(data) {
+		}).error(function(response) {
+			// console.log("nope:", response);
 			$scope.isOrderGood = -1;
 			if (!draft) {
 				$scope.isFinalOrderGood = -1;
 			}
 		});
 	};
-
-	$scope.testStuff = 
 
 	$scope.successScroll = function(thetarget) {
 		$timeout(function() {

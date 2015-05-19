@@ -9,16 +9,14 @@
               var isSubmitted = function() {
                   return <?php echo has_category("Submitted"); ?>
               };
+              var singleEstimateTitle = "<?php echo get_the_title() ?>";
+              var currentPostId = <?php echo get_the_ID() ?>;
 
             </script>
 
-            <pre><?php echo get_the_title() ?></pre>
-            <pre><?php echo print_r(get_page_by_title(array('page_title' => get_the_title(), 'post_type' => 'estimate'))) ?></pre>
-
             <?php get_template_part('templates/content', 'summary-edit'); ?>
             
-            <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()">Print Order</button>
-            <button class="btn btn-default print-styles-toggle btn-print" ng-click="testStuff()">Hello</button>
+            <!-- <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()" ng-if="!isOrderGood">Print Order</button> -->
           </div>
         </div>
       </div>
