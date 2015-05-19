@@ -55,6 +55,7 @@ function roots_display_sidebar() {
      */
     array(
       'is_404',
+      'is_single'
       // 'is_front_page'
     ),
     /**
@@ -63,6 +64,7 @@ function roots_display_sidebar() {
      */
     array(
       'template-custom.php',
+      // 'single-estimate.php',
       // 'template-orderform.php'
     )
   );
