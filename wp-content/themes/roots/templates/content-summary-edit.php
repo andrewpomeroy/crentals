@@ -159,10 +159,16 @@
             <span ng-bind="item.estimate | currency:'$'"></span>
           </td>
           <td>
-            <button class="btn date-mode-control glyphicon glyphicon-pencil" ng-if="!item.edit" ng-click="item.edit=true;"></button>
-            <button class="btn date-mode-control glyphicon glyphicon-ok-circle" ng-if="item.edit" ng-click="item.edit=false;"></button>
+            <button class="btn glyphicon glyphicon-pencil" ng-if="!item.edit" ng-click="item.edit=true;"></button>
+            <button class="btn glyphicon glyphicon-ok-circle" ng-if="item.edit" ng-click="item.edit=false;"></button>
+            <button class="btn btn-danger glyphicon glyphicon-trash" ng-if="removeItemMode" ng-click="removeItem($index)"></button>
           </td>
         </tr>
+        <tr>
+          <td colspan="9" class="align-center">
+            <button class="btn" ng-click="addItem()">Add New Item</button>
+            <button class="btn btn-danger" ng-click="removeItemMode = !removeItemMode">{{removeItemMode ? "Cancel Item Removal" : "Remove an Item"}}</button>
+          </td>
       </tbody>
     </table>
   </form>

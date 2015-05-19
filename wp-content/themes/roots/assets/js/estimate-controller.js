@@ -304,6 +304,23 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		return false;
 	};
 
+	$scope.removeItem = function($index) {
+		$scope.orderData.items.splice($index, 1);
+		$scope.calcTotal();
+	}
+	$scope.addItem = function() {
+		$scope.orderData.items.push({
+			name: "New Item",
+			qty: 1,
+			rate: 0,
+			daysweek: 7,
+			// startDate: $scope.orderMeta.orderPickupDate,
+			// endDate: $scope.orderMeta.orderReturnDate,
+			edit: true
+		});
+		$scope.flushIndividualDate($scope.orderData.items[$scope.orderData.items.length - 1]);
+	}
+
 
 	$scope.showWeeks = true;
 	$scope.toggleWeeks = function () {
