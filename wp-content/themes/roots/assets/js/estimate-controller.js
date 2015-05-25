@@ -208,8 +208,8 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		date.setDate(date.getDate() + amount);
 		// Set items object to either the set of hierarchically organized categories/items (Estimate Form) or flat array of items (Single Estimate View)
 		// var items = $scope.itemData || $scope.orderData.items; 
-		$scope.calcRentalDates(isSingle());
 		item.customRentalPeriod = true;
+		$scope.calcRentalDates(isSingle());
 	};
 
 	$scope.flushIndividualDate = function(item, disableCustomRentalPeriod) {
@@ -220,25 +220,25 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		}
 		if (item.customRentalPeriod) {
 			if ((!item.startDate) && (!item.endDate)) {
-				console.log("no item start/end dates");
+				// console.log("no item start/end dates");
 				item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
 				item.endDate = new Date($scope.orderMeta.orderReturnDate.date);
 			}
 			if (!item.endDate) {
-				console.log("no end date");
+				// console.log("no end date");
 				item.endDate = angular.copy(item.startDate);
 			}
 			if (!item.startDate || (item.startDate > item.endDate)) {
-				console.log("no start date, or start date after end date");
+				// console.log("no start date, or start date after end date");
 				item.endDate = angular.copy(item.startDate);
 			}
 			if (item.endDate) {
-				console.log("endDate: " + item.endDate);
+				// console.log("endDate: " + item.endDate);
 			}
 			if (item.startDate && item.endDate) {
 			}
 			else {
-				console.log('nullifying '+item.name);
+				// console.log('nullifying '+item.name);
 				item.days = null;
 			}
 			item.days = parseInt((item.endDate - item.startDate) / $scope.one_day) + 1;
