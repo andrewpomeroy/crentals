@@ -6705,6 +6705,18 @@ body:not(.page-template-template-orderform):not(.page-template-template-orderfor
   vertical-align: bottom;
 }
 
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
+
 .svg img.svg-inject {
   visibility: hidden !important;
 }

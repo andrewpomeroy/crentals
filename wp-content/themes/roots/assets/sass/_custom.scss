@@ -382,6 +382,19 @@ body:not(.page-template-template-orderform):not(.page-template-template-orderfor
 {
 	vertical-align: bottom;
 }
+.no-print
+{
+	@media print {
+		display: none !important;
+	}
+}
+
+.print-only
+{
+	@media screen {
+		display: none !important;
+	}
+}
 
 // HAX
 

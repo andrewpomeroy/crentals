@@ -374,7 +374,10 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date) / $scope.one_day) + 1;
 			delete $scope.orderData.orderMeta;
 			$scope.printOrder = function() {
-				window.print();
+				$scope.orderData.orderMeta = angular.copy($scope.orderMeta);
+				setTimeout(function() {
+					window.print();
+				}, 20);
 			}
 		}
 

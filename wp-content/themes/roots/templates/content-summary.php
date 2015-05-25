@@ -110,10 +110,10 @@
         <td class="data static" ng-bind="item.name"></td>
         <td class="data static number" ng-bind="item.qty"></td>
         <td class="data static" ng-bind="item.rate | currency:'$':0"></td>
-        <td class="data static date" ng-if="item.startDate"><strong ng-bind="item.startDate"></strong></td>
-        <td class="data static date" ng-if="!item.startDate" ng-bind="orderData.orderMeta.orderPickupDate.date | date:'MM/dd'"></td>
-        <td class="data static date" ng-if="item.endDate"><strong ng-bind="item.endDate"></strong></td>
-        <td class="data static date" ng-if="!item.endDate" ng-bind="orderData.orderMeta.orderReturnDate.date | date:'MM/dd'"></td>
+        <td class="data static date" ng-if="item.startDate"><strong ng-bind="item.startDate | date:'MM/dd/yy'"></strong></td>
+        <td class="data static date" ng-if="!item.startDate" ng-bind="orderData.orderMeta.orderPickupDate.date | date:'MM/dd/yy'"></td>
+        <td class="data static date" ng-if="item.endDate"><strong ng-bind="item.endDate | date:'MM/dd/yy'"></strong></td>
+        <td class="data static date" ng-if="!item.endDate" ng-bind="orderData.orderMeta.orderReturnDate.date | date:'MM/dd/yy'"></td>
         <td class="data static" ng-bind="item.clientnotes"></td>
         <td class="data static number" ng-bind="item.estimate | currency:'$'"></td>
       </tr>

@@ -13,8 +13,12 @@
               var currentPostId = <?php echo get_the_ID() ?>;
 
             </script>
-
-            <?php get_template_part('templates/content', 'summary-edit'); ?>
+            <div class="no-print estimateEdit">
+              <?php get_template_part('templates/content', 'summary-edit'); ?>
+            </div>
+            <div class="print-only estimateSummary">
+              <?php get_template_part('templates/content', 'summary'); ?>
+            </div>
             
             <!-- <button class="btn btn-default print-styles-toggle btn-print" ng-click="printOrder()" ng-if="!isOrderGood">Print Order</button> -->
           </div>
