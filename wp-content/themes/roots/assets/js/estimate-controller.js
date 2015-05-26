@@ -87,8 +87,9 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			delete item.endDate;
 		}
 		else {
-			item.startDate = $filter('date')(item.startDate, 'MM/dd');
-			item.endDate = $filter('date')(item.endDate, 'MM/dd');
+			// Safari is not feelin this.
+			// item.startDate = $filter('date')(item.startDate, 'MM/dd');
+			// item.endDate = $filter('date')(item.endDate, 'MM/dd');
 		}
 		if (!item.clientnotes.length) {
 			delete item.clientnotes;

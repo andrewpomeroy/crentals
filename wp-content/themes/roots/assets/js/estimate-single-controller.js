@@ -12,6 +12,16 @@ app.controller('estimateSingleCtrl', ['$scope', 'GSLoader', '$http', '$modal', f
 	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'MM/dd/yyyy'];
 	$scope.format = $scope.formats[3];
 
+	var fixShortDate = function(date, correctYear) {
+		if (date.match(/\d\d?\/\d\d?/g).length) {
+			var newDate = new Date();
+			newDate.setYear(correctYear);
+			newDate.setMonth(parseInt(date.substr(0, 2)) - 1);
+			newDate.setDate(date.substr(3, 2));
+			return newDate;
+		}
+	}
+
 	// --- INITIALIZE ---
 	var init = function() {
 		// Add back dates to items, calculate item total
@@ -20,13 +30,15 @@ app.controller('estimateSingleCtrl', ['$scope', 'GSLoader', '$http', '$modal', f
 				item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
 			}
 			else {
-				item.startDate = new Date(item.startDate);
+				item.startDate = fixShortDate(item.startDate, $scope.orderMeta.orderPickupDate.date.getFullYear());
+				// item.startDate = new Date(item.startDate);
 			}
 			if (!item.endDate) {
 				item.endDate = new Date($scope.orderMeta.orderReturnDate.date);
 			}
 			else {
-				item.endDate = new Date(item.endDate);
+				item.endDate = fixShortDate(item.endDate, $scope.orderMeta.orderReturnDate.date.getFullYear());
+				// item.endDate = new Date(item.endDate);
 			}
 			item.days = parseInt((item.endDate - item.startDate) / $scope.one_day) + 1;
 			$scope.changeQty(item);
