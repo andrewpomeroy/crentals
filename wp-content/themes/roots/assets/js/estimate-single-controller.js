@@ -13,7 +13,7 @@ app.controller('estimateSingleCtrl', ['$scope', 'GSLoader', '$http', '$modal', f
 	$scope.format = $scope.formats[3];
 
 	var fixShortDate = function(date, correctYear) {
-		if (date.match(/\d\d?\/\d\d?/g).length) {
+		if (date.match(/\d\d?\/\d\d?/g)) {
 			var newDate = new Date();
 			newDate.setYear(correctYear);
 			newDate.setMonth(parseInt(date.substr(0, 2)) - 1);
