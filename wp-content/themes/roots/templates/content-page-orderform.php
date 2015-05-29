@@ -81,14 +81,14 @@
 											<div class="date-controls-container" ng-if="item.daysweek != 0">
 												<div class="date-controls left">
 													<span class="date-type-label edit-mode">First Day</span>
-													<span class="individual-date">{{item.startDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.startDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.startDate, 1)" ng-if="item.customRentalPeriod"></button>
+													<span class="individual-date">{{item.startDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.startDate, -1, orderMeta.orderPickupDate, item)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.startDate, 1, orderMeta.orderPickupDate, item)" ng-if="item.customRentalPeriod"></button>
 													<span class="date-separator"> – </span>
 													<span class="date-type-label edit-mode">Last Day</span>
-													<span class="individual-date">{{item.endDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.endDate, -1)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.endDate, 1)" ng-if="item.customRentalPeriod"></button>
+													<span class="individual-date">{{item.endDate | date:"MM/dd"}}</span><button class="btn glyphicon glyphicon-minus date-control" ng-click="incrementIndividualDate(item.endDate, -1, orderMeta.orderReturnDate, item)" ng-if="item.customRentalPeriod"></button><button class="btn glyphicon glyphicon-plus date-control" ng-click="incrementIndividualDate(item.endDate, 1, orderMeta.orderReturnDate, item)" ng-if="item.customRentalPeriod"></button>
 												</div>
 												<div class="date-controls right">
 													<button class="btn date-mode-control glyphicon glyphicon-pencil" ng-if="!item.customRentalPeriod" ng-click="item.customRentalPeriod=true;"></button>
-													<button class="btn date-mode-control glyphicon glyphicon-remove-circle" ng-if="item.customRentalPeriod" ng-click="flushIndividualDate(item, true)" title="Reset"></button>
+													<button class="btn date-mode-control glyphicon glyphicon-remove-circle" ng-if="item.customRentalPeriod" ng-click="flushIndividualDate(item, true); calcRentalDates(isSingle())" title="Reset"></button>
 												</div>
 											</div>
 										</td>
