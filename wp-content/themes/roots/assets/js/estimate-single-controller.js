@@ -20,6 +20,9 @@ app.controller('estimateSingleCtrl', ['$scope', 'GSLoader', '$http', '$modal', f
 			newDate.setDate(date.substr(3, 2));
 			return newDate;
 		}
+		else {
+			return date;
+		}
 	}
 
 	// --- INITIALIZE ---
