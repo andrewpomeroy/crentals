@@ -82,7 +82,8 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	}
 
 	var cleanItemProperties = function(item) {
-		if ((item.startDate.toDateString() === $scope.orderMeta.orderPickupDate.date.toDateString()) && (item.endDate.toDateString() === $scope.orderMeta.orderReturnDate.date.toDateString())) {
+		debugger;
+		if ((new Date(item.startDate).toDateString() === $scope.orderMeta.orderPickupDate.date.toDateString()) && (new Date(item.endDate).toDateString() === $scope.orderMeta.orderReturnDate.date.toDateString())) {
 			delete item.startDate;
 			delete item.endDate;
 		}
@@ -91,7 +92,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			// item.startDate = $filter('date')(item.startDate, 'MM/dd');
 			// item.endDate = $filter('date')(item.endDate, 'MM/dd');
 		}
-		if (!item.clientnotes.length) {
+		if (item.clientnotes && !item.clientnotes.length) {
 			delete item.clientnotes;
 		}
 		if (!item.customRentalPeriod) {
@@ -103,6 +104,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		delete item.type;
 		delete item.id;
 		delete item.image;
+		delete item.edit;
 	}
 
 	$scope.printOrder = function() {
@@ -154,16 +156,15 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 				// for (var item in $scope.orderData.items) {
 				// 	cleanItemProperties(item);
 				// }
-				angular.forEach($scope.orderData.items, function(value, key) {
-					cleanItemProperties(value);
-				});
-
 			}
 			// orderData, title, dates, etc. already exists for estimates being revised
 			else {
-				$scope.orderData.orderMeta = $scope.orderMeta;
+				$scope.orderData.orderMeta = angular.copy($scope.orderMeta);
 				// titleStr = singleEstimateTitle;
 			}
+			angular.forEach($scope.orderData.items, function(value, key) {
+				cleanItemProperties(value);
+			});
 			$scope.orderData.orderMeta.orderPickupDate.date = Date.parse($scope.orderData.orderMeta.orderPickupDate.date);
 			$scope.orderData.orderMeta.orderReturnDate.date = Date.parse($scope.orderData.orderMeta.orderReturnDate.date);
 			contentStr = JSON.stringify($scope.orderData);
