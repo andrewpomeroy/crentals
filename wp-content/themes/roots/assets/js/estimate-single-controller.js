@@ -43,6 +43,12 @@ app.controller('estimateSingleCtrl', ['$scope', 'GSLoader', '$http', '$modal', f
 				item.endDate = fixShortDate(item.endDate, $scope.orderMeta.orderReturnDate.date.getFullYear());
 				// item.endDate = new Date(item.endDate);
 			}
+			if (typeof(item.startDate) === "string") {
+				item.startDate = new Date(item.startDate);
+			}
+			if (typeof(item.endDate) === "string") {
+				item.endDate = new Date(item.endDate);
+			}
 			item.days = parseInt((item.endDate - item.startDate) / $scope.one_day) + 1;
 			$scope.changeQty(item);
 		});
