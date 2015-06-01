@@ -101,8 +101,8 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="clientnotes" class="control-label">Notes</label>
-            <input name="clientnotes" id="clientnotes" class="form-control" ng-model="orderMeta.clientnotes">
+            <label for="notes" class="control-label">Notes</label>
+            <input name="notes" id="notes" class="form-control" ng-model="orderMeta.notes">
           </div>
         </div>
       </div>

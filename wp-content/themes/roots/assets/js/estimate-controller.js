@@ -97,10 +97,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		if (!item.customRentalPeriod) {
 			delete item.customRentalPeriod;
 		}
-		// Sometimes the notes bit was being used for internal notes on revisions and such
-		if (!isSingle()) {
-			delete item.notes;
-		}
+		delete item.notes;
 		delete item.description;
 		delete item.link;
 		delete item.type;
