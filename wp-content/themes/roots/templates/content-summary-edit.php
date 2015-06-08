@@ -124,7 +124,7 @@
         </tr>
       </thead>
       <tbody>                  
-        <tr ng-repeat="item in orderData.items" class="item-row" ng-class="{'hide-dates': daysWeekZero(item)}" >
+        <tr ng-repeat="item in orderData.items track by $index" class="item-row" ng-class="{'hide-dates': daysWeekZero(item)}" >
           <td class="data static">
             <span ng-if="!item.edit" ng-bind="item.name"></span>
             <textarea ng-if="item.edit" ng-model="item.name" ></textarea>
