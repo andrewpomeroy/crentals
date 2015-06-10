@@ -84,6 +84,8 @@ function make_est_post() {
 
 		$response['message'] = 'OK '.$catstring;
 		$response['new_post_ID'] = $new_post_id;
+		$response['errthang'] = get_post_meta($new_post_id);
+
 
 	// Otherwise, we'll stop
 	} else {

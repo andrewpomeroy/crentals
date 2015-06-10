@@ -83,6 +83,7 @@ function my_scripts_init() {
     // wp_enqueue_script('phpvars', $scriptinitDir.'phpvars.js', array('jquery'), false);
     wp_register_script('jquery', $scriptinitDir.'vendor/jquery-1.11.0.min.js', array(), null, false);
     wp_enqueue_script('svginject', get_bloginfo('template_directory').'/bower_components/svg-injector/dist/svg-injector.min.js', array('jquery'), false);
+    wp_enqueue_script('jsonpack', get_bloginfo('template_directory').'/node_modules/jsonpack/main.js', array('jquery'), false);
 
     function add_google_analytics() {
         wp_register_script('ga', $scriptinitDir.'ga.js', array(), 1.0, false);
@@ -195,6 +196,16 @@ function estimate_posttype() {
 
     register_post_type( 'estimate' , $args );
 }
+
+// Add 'compressed' key to Estimate
+add_action( 'wp_insert_post', 'wpse128767_add_meta' );
+function wpse128767_add_meta( $post_id ) {
+    add_post_meta( $post_id, 'key', 'value' );
+    if ( ! add_post_meta( $post_id, 'compressed', 2, true ) ) { 
+       update_post_meta ( $post_id, 'compressed', 2 );
+    }
+}
+add_action( 'wp_insert_post', 'wpse128767_add_meta', 1 );
 
 
 

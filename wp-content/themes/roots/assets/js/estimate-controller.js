@@ -82,7 +82,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	}
 
 	var cleanItemProperties = function(item) {
-		debugger;
 		if ((new Date(item.startDate).toDateString() === $scope.orderMeta.orderPickupDate.date.toDateString()) && (new Date(item.endDate).toDateString() === $scope.orderMeta.orderReturnDate.date.toDateString())) {
 			delete item.startDate;
 			delete item.endDate;
@@ -167,27 +166,28 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			});
 			$scope.orderData.orderMeta.orderPickupDate.date = Date.parse($scope.orderData.orderMeta.orderPickupDate.date);
 			$scope.orderData.orderMeta.orderReturnDate.date = Date.parse($scope.orderData.orderMeta.orderReturnDate.date);
-			contentStr = JSON.stringify($scope.orderData);
+			// contentStr = JSON.stringify($scope.orderData);
+			contentStr = jsonpack.pack($scope.orderData);
 		}
-		$scope.js_create_post(titleStr, contentStr, draft, $http, $scope, (isSingle() ?  currentPostId : -1));
+		$scope.js_create_post(titleStr, contentStr, draft, $http, $scope, (isSingle() ?  currentPostId : -1), true);
 	};
-	$scope.js_create_post = function(title, content, draft, $http, $scope, currentPostId) {
+	$scope.js_create_post = function(title, content, draft, $http, $scope, currentPostId, compressed) {
 
 		// console.log("current post id: ", currentPostId)
 
 		$http({
 			url: '/wp-admin/admin-ajax.php',
 			method: "POST",
-			params: {action : "make_est_post", title: title, content: content, draft: draft, currentPostId: currentPostId}
+			params: {action : "make_est_post", title: title, content: content, draft: draft, currentPostId: currentPostId, compressed: compressed}
 		}).success(function(response) {
-			// console.log("yup:", response);
+			console.log("yup:", response);
 			$scope.isOrderGood = 1;
 			if (!draft) {
 				$scope.isFinalOrderGood = 1;
 			}
 			$scope.successScroll('#orderActionsInfoTop');
 		}).error(function(response) {
-			// console.log("nope:", response);
+			console.log("nope:", response);
 			$scope.isOrderGood = -1;
 			if (!draft) {
 				$scope.isFinalOrderGood = -1;
@@ -323,6 +323,13 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		$scope.flushIndividualDate($scope.orderData.items[$scope.orderData.items.length - 1]);
 	}
 
+	$scope.compressJson = function(obj) {
+		var packed = jsonpack.pack(obj);
+		console.log("PACKED:");
+		console.log(packed);
+		var unpacked = jsonpack.unpack(packed);
+		console.log(unpacked);
+	}
 
 	$scope.showWeeks = true;
 	$scope.toggleWeeks = function () {
@@ -370,7 +377,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		}
 		else {
 			$scope.orderData = theOrderData;
-			$scope.orderMeta = theOrderData.orderMeta;
+			$scope.orderMeta = $scope.orderData.orderMeta;
 			$scope.orderMeta.orderPickupDate.date = new Date($scope.orderMeta.orderPickupDate.date);
 			$scope.orderMeta.orderReturnDate.date = new Date($scope.orderMeta.orderReturnDate.date);
 			$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date) / $scope.one_day) + 1;

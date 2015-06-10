@@ -5,7 +5,17 @@
         <div ng-controller="estimateForm">
           <div ng-controller="estimateSingleCtrl">
             <script type="text/javascript">
-              var theOrderData = <?php echo get_the_content(); ?>;
+              var isCompressed = function() {
+                return <?php echo get_post_meta(get_the_ID(), 'compressed', true); ?>;
+              }
+              <?php 
+              if (get_post_meta(get_the_ID(), 'compressed', true)) {
+                echo ("var theOrderData = jsonpack.unpack(\"". get_the_content() . "\");");
+              }
+              else {
+                echo ("var theOrderData = " . get_the_content() . ";");
+              }
+              ?>
               var isSubmitted = function() {
                   return <?php echo has_category("Submitted"); ?>
               };
