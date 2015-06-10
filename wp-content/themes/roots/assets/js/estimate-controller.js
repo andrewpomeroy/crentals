@@ -180,14 +180,14 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			method: "POST",
 			params: {action : "make_est_post", title: title, content: content, draft: draft, currentPostId: currentPostId, compressed: compressed}
 		}).success(function(response) {
-			console.log("yup:", response);
+			// console.log("yup:", response);
 			$scope.isOrderGood = 1;
 			if (!draft) {
 				$scope.isFinalOrderGood = 1;
 			}
 			$scope.successScroll('#orderActionsInfoTop');
 		}).error(function(response) {
-			console.log("nope:", response);
+			// console.log("nope:", response);
 			$scope.isOrderGood = -1;
 			if (!draft) {
 				$scope.isFinalOrderGood = -1;
@@ -323,14 +323,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		$scope.flushIndividualDate($scope.orderData.items[$scope.orderData.items.length - 1]);
 	}
 
-	$scope.compressJson = function(obj) {
-		var packed = jsonpack.pack(obj);
-		console.log("PACKED:");
-		console.log(packed);
-		var unpacked = jsonpack.unpack(packed);
-		console.log(unpacked);
-	}
-
 	$scope.showWeeks = true;
 	$scope.toggleWeeks = function () {
 		$scope.showWeeks = ! $scope.showWeeks;
@@ -390,11 +382,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			}
 		}
 
-			// $scope.calcRentalDates();
-
-		// (function(data, status, headers, config) {
-					// console.log("AJAX
-		// });
 	};
 	init();
 

@@ -82,10 +82,8 @@ function make_est_post() {
 		);
 		$catstring = implode("|",$category);
 
-		$response['message'] = 'OK '.$catstring;
+		$response['message'] = 'OK. Categories: '.$catstring;
 		$response['new_post_ID'] = $new_post_id;
-		$response['errthang'] = get_post_meta($new_post_id);
-
 
 	// Otherwise, we'll stop
 	} else {
