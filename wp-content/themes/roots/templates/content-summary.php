@@ -106,7 +106,7 @@
       </tr>
     </thead>
     <tbody>                  
-      <tr ng-repeat="item in orderData.items" class="item-row" ng-class="{'hide-dates': daysWeekZero(item)}" >
+      <tr ng-repeat="item in orderData.items track by $index" class="item-row" ng-class="{'hide-dates': daysWeekZero(item)}" >
         <td class="data static" ng-bind="item.name"></td>
         <td class="data static number" ng-bind="item.qty"></td>
         <td class="data static" ng-bind="item.rate | currency:'$':0"></td>
