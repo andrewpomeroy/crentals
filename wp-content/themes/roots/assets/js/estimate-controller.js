@@ -137,6 +137,12 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		{
 			$scope.orderMeta.revision = ++$scope.orderMeta.revision || 1;	
 			titleStr = titleStr + " (Revision " + $scope.orderMeta.revision + ")";
+			var headStr = $('head title').html();
+			if (headStr.match(/Revision \d*/)) {
+				headStr = headStr.replace(/Revision \d*/, "Revision " + ($scope.orderMeta.revision));
+				// titleStr = titleStr.replace(/Revision \d*/, headStr);
+				$('head title').html(headStr);
+			}
 		}
 		if (!draft && !isSingle()) {
 			$scope.isFinalOrderGood = 0;
