@@ -10,7 +10,13 @@
               }
               <?php 
               if (get_post_meta(get_the_ID(), 'compressed', true)) {
-                echo ("var theOrderData = jsonpack.unpack(\"". get_the_content() . "\");");
+                $rawOrderData = get_the_content();
+                $orderData = addslashes($rawOrderData);
+                // echo ("var rawOrderData = \"". $rawOrderData . "\");");
+                echo (
+                  "var theOrderData = jsonpack.unpack(\"". $orderData . "\");
+                  debugger; "
+                  );
               }
               else {
                 echo ("var theOrderData = " . get_the_content() . ";");

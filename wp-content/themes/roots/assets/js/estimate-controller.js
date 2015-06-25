@@ -82,14 +82,15 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	}
 
 	var cleanItemProperties = function(item) {
+		debugger;
 		if ((new Date(item.startDate).toDateString() === $scope.orderMeta.orderPickupDate.date.toDateString()) && (new Date(item.endDate).toDateString() === $scope.orderMeta.orderReturnDate.date.toDateString())) {
 			delete item.startDate;
 			delete item.endDate;
 		}
 		else {
 			// Safari is not feelin this.
-			// item.startDate = $filter('date')(item.startDate, 'MM/dd');
-			// item.endDate = $filter('date')(item.endDate, 'MM/dd');
+			item.startDate = $filter('date')(item.startDate, 'MM/dd/yyyy');
+			item.endDate = $filter('date')(item.endDate, 'MM/dd/yyyy');
 		}
 		if (item.clientnotes && !item.clientnotes.length) {
 			delete item.clientnotes;
