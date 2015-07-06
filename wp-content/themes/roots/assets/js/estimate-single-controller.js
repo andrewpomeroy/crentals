@@ -16,7 +16,6 @@ app.controller('estimateSingleCtrl', ['$scope', 'GSLoader', '$http', '$modal', f
 		// MM/dd/yyy
 		if (date.match(/\d\d\/\d\d\/\d\d\d\d/g)) {
 			var newDate = new Date();
-			debugger;
 			newDate.setYear(date.substr(6, 4));
 			newDate.setMonth(parseInt(date.substr(0, 2)) - 1);
 			newDate.setDate(date.substr(3, 2));
@@ -39,7 +38,6 @@ app.controller('estimateSingleCtrl', ['$scope', 'GSLoader', '$http', '$modal', f
 	var init = function() {
 		// Add back dates to items, calculate item total
 		angular.forEach($scope.orderData.items, function(item, key) {
-			debugger;
 			if (!item.startDate) {
 				item.startDate = new Date($scope.orderMeta.orderPickupDate.date);
 			}

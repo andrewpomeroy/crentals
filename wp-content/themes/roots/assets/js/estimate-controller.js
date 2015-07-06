@@ -82,7 +82,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	}
 
 	var cleanItemProperties = function(item) {
-		debugger;
 		if ((new Date(item.startDate).toDateString() === $scope.orderMeta.orderPickupDate.date.toDateString()) && (new Date(item.endDate).toDateString() === $scope.orderMeta.orderReturnDate.date.toDateString())) {
 			delete item.startDate;
 			delete item.endDate;
@@ -127,6 +126,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		var draft = obj.draft;
 		if (isSingle()) {
 			draft = !isSubmitted();
+			$scope.orderData.orderMeta = angular.copy($scope.orderMeta);
 		}
 		var newDate = new Date();
 		titleStr = ($scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "") + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
@@ -137,14 +137,15 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		{
 			$scope.orderMeta.revision = ++$scope.orderMeta.revision || 1;	
 			titleStr = titleStr + " (Revision " + $scope.orderMeta.revision + ")";
-			var headStr = $('head title').html();
-			if (headStr.match(/Revision \d*/)) {
-				headStr = headStr.replace(/Revision \d*/, "Revision " + ($scope.orderMeta.revision));
-				// titleStr = titleStr.replace(/Revision \d*/, headStr);
-				$('head title').html(headStr);
-			}
+			// var headStr = $('head title').html();
+			// if (headStr.match(/Revision \d*/)) {
+			// 	headStr = headStr.replace(/Revision \d*/, "Revision " + ($scope.orderMeta.revision));
+			// 	// titleStr = titleStr.replace(/Revision \d*/, headStr);
+			// 	$('head title').html(headStr);
+			// }
+			$('head title').html(titleStr);
 		}
-		if (!draft && !isSingle()) {
+		if (!isSingle() && !draft) {
 			$scope.isFinalOrderGood = 0;
 		}
 		else
@@ -164,10 +165,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 				// }
 			}
 			// orderData, title, dates, etc. already exists for estimates being revised
-			else {
-				$scope.orderData.orderMeta = angular.copy($scope.orderMeta);
-				// titleStr = singleEstimateTitle;
-			}
 			angular.forEach($scope.orderData.items, function(value, key) {
 				cleanItemProperties(value);
 			});

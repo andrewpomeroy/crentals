@@ -14,8 +14,7 @@
                 $orderData = addslashes($rawOrderData);
                 // echo ("var rawOrderData = \"". $rawOrderData . "\");");
                 echo (
-                  "var theOrderData = jsonpack.unpack(\"". $orderData . "\");
-                  debugger; "
+                  "var theOrderData = jsonpack.unpack(\"". $orderData . "\");"
                   );
               }
               else {
