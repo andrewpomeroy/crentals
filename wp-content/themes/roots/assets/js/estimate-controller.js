@@ -143,8 +143,9 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			// 	// titleStr = titleStr.replace(/Revision \d*/, headStr);
 			// 	$('head title').html(headStr);
 			// }
-			$('head title').html(titleStr);
 		}
+		$('head title').html(titleStr);
+		
 		if (!isSingle() && !draft) {
 			$scope.isFinalOrderGood = 0;
 		}
