@@ -87,7 +87,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			delete item.endDate;
 		}
 		else {
-			// Safari is not feelin this.
 			item.startDate = $filter('date')(item.startDate, 'MM/dd/yyyy');
 			item.endDate = $filter('date')(item.endDate, 'MM/dd/yyyy');
 		}
@@ -145,7 +144,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			// }
 		}
 		$('head title').html(titleStr);
-		
+
 		if (!isSingle() && !draft) {
 			$scope.isFinalOrderGood = 0;
 		}
