@@ -12,7 +12,8 @@
               if (get_post_meta(get_the_ID(), 'compressed', true)) {
                 $rawOrderData = get_the_content();
                 $orderData = addslashes($rawOrderData);
-                $orderData = str_replace( "\r\n" , " ", $orderData);
+                $orderData = str_replace(array("\r\n", "\n", "\r"), ' ', $orderData);
+
                 echo (
                   "var theOrderData = jsonpack.unpack(\"". $orderData . "\");"
                   );
