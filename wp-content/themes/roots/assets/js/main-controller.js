@@ -67,6 +67,7 @@ app.service('dataTransform', function() {
 						for (var item in obj[entry].subcats[subcat].items)
 						{
 							item = checkEmptyItem(obj[entry].subcats[subcat].items[item]);
+
 						}
 					}
 				}
@@ -133,6 +134,7 @@ app.service('dataTransform', function() {
 						// Put em in there
 						var subCatIndex = output[output.length - 1].subcats.length - 1;
 						output[output.length - 1].subcats[subCatIndex].items.push(obj[entry]);
+
 					// }
 					// else {
 					// 	// Otherwise, just put em in the Section.
@@ -141,7 +143,26 @@ app.service('dataTransform', function() {
 				}
 			}
 			return output;
+		},
+
+		reFlatten: function(obj) {
+			var flattenedData = [];
+			for (var entry in obj) {
+				for (var subcat in obj[entry].subcats) {
+					if (obj[entry].subcats[subcat].items) {
+						for (var item in obj[entry].subcats[subcat].items)
+						{
+							var actualItem = obj[entry].subcats[subcat].items[item];
+							if (actualItem.type && (actualItem.type === "Item")) {
+								flattenedData.push(actualItem);
+							}
+						}
+					}
+				}
+			}
+			return flattenedData;
 		}
+
 
 	};
 });
@@ -183,9 +204,10 @@ app.service('GSLoader', ['dataTransform', '$http', '$q', function(dataTransform,
 
 	// this.dataGet = $q.defer();
 
-	this.getItemDataGS = function(url) {
+	this.getItemDataGS = function(url, params) {
 		var responsePromise = $http.get(url).then(function(response) {
 			// console.log("Response Promise in SERVICE:", response);
+			// if (!params || !params.returnFlat) { 
 			var transformedData = dataTransform.baselineColVars(
 				dataTransform.groupObjects(
 					dataTransform.flattenGSFeed(
@@ -193,7 +215,19 @@ app.service('GSLoader', ['dataTransform', '$http', '$q', function(dataTransform,
 						)
 					)
 				);
+			debugger;
+			if (params && params.returnFlat) { 
+				transformedData = dataTransform.reFlatten(transformedData);
+			}
 			return transformedData;
+				
+			// }
+			// else
+			// {
+			// 	var transformedData = 
+			// 	return response;
+			// }
+
 		});
 		return responsePromise;
 		// responsePromise.success(function(data, status, headers, config) {

@@ -378,6 +378,11 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			$scope.orderMeta.orderReturnDate.date = new Date($scope.orderMeta.orderReturnDate.date);
 			$scope.orderMeta.totalRentalDays = parseInt(($scope.orderMeta.orderReturnDate.date - $scope.orderMeta.orderPickupDate.date) / $scope.one_day) + 1;
 			delete $scope.orderData.orderMeta;
+			GSLoader.getItemDataGS(globalGSUrl, {returnFlat: true}).then(function(response) {
+				$scope.flatItemData = response;
+				$scope.dataStatus = "loaded";
+				console.log($scope.flatItemData);
+			});
 			$scope.printOrder = function() {
 				$scope.orderData.orderMeta = angular.copy($scope.orderMeta);
 				setTimeout(function() {
