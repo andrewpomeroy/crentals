@@ -124,7 +124,7 @@
         </tr>
       </thead>
       <tbody>                  
-        <tr ng-repeat="item in orderData.items track by $index" class="item-row" ng-class="{'hide-dates': daysWeekZero(item)}" >
+        <tr ng-repeat="item in orderData.items track by $index" class="item-row" ng-class="{'hide-dates': daysWeekZero(item), 'is-editing': item.edit}" >
           <td class="data static">
             <span ng-if="!item.edit" ng-bind="item.name"></span>
             <textarea ng-if="item.edit" ng-model="item.name" ></textarea>
@@ -160,15 +160,26 @@
           </td>
           <td>
             <button class="btn glyphicon glyphicon-pencil" ng-if="!item.edit" ng-click="item.edit=true;"></button>
-            <button class="btn glyphicon glyphicon-ok-circle" ng-if="item.edit" ng-click="item.edit=false;"></button>
-            <button class="btn btn-danger glyphicon glyphicon-trash" ng-if="removeItemMode" ng-click="removeItem($index)"></button>
+            <button class="btn btn-info glyphicon glyphicon-ok-circle" ng-if="item.edit" ng-click="item.edit=false;"></button>
+            <button class="btn btn-danger glyphicon glyphicon-trash" ng-if="editStates.listEditMode === 'removeItem'" ng-click="removeItem($index)"></button>
+          </td>
+        </tr>
+        <tr class="item-row item-lookup" ng-if="editStates.listEditMode === 'addFromCatalog'">
+          <td colspan="9">
+            <div class="form-group">
+              <label for="" class="control-label">Item Lookup</label>
+              <input type="text" ng-model="selectedItem" typeahead="item as item.name for item in flatItemData | filter:{name: $viewValue} | limitTo:8" class="form-control" ng-if="dataStatus === 'loaded'" typeahead-focus-first="false" typeahead-on-select="addItemFromCatalog($item, $model, $label)">
+            </div>
           </td>
         </tr>
         <tr>
           <td colspan="9" class="align-center">
-            <button class="btn" ng-click="addItem()">Add New Item</button>
-            <button class="btn btn-danger" ng-click="removeItemMode = !removeItemMode">{{removeItemMode ? "Cancel Item Removal" : "Remove an Item"}}</button>
+            <button class="btn btn-info" ng-click="editStates.listEditMode = (editStates.listEditMode === 'addFromCatalog') ? null : 'addFromCatalog'" ng-if="(editStates.listEditMode === 'addFromCatalog' || !editStates.listEditMode)">{{(editStates.listEditMode === 'addFromCatalog') ? "Cancel" : "Add Item from Catalog"}}</button>
+            <button class="btn" ng-click="addItem()" ng-if="!editStates.listEditMode">Add Empty Item</button>
+            <button class="btn btn-danger" ng-click="editStates.listEditMode = (editStates.listEditMode === 'removeItem') ? null : 'removeItem'" ng-if="(editStates.listEditMode === 'removeItem' || !editStates.listEditMode)">{{(editStates.listEditMode === 'removeItem') ? "Cancel Item Removal" : "Remove an Item"}}</button>
           </td>
+        </tr>
+
       </tbody>
     </table>
   </form>

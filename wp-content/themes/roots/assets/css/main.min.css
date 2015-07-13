@@ -6948,7 +6948,7 @@ table > tbody > tr.item-row:nth-child(2n) {
   background-color: rgba(0, 0, 0, 0.02);
   /* border: 0; */
 }
-table > tbody > tr.item-row.has-items td {
+table > tbody > tr.item-row.has-items td, table > tbody > tr.item-row.is-editing td, table > tbody > tr.item-row.item-lookup td {
   background-color: rgba(0, 136, 255, 0.2);
 }
 table > tbody > tr.item-row:hover {

@@ -214,7 +214,7 @@ table > tbody > tr.item-row
 	    background-color: rgba(0,0,0, .02);
 	    /* border: 0; */
 	}
-	&.has-items td
+	&.has-items td, &.is-editing td, &.item-lookup td
 	{
 		background-color: $bg-has-items-semiopaque;
 	}

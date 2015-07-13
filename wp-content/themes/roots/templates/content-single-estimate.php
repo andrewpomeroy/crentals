@@ -29,11 +29,12 @@
               var currentPostId = <?php echo get_the_ID() ?>;
 
             </script>
-            <input type="text" ng-model="selectedItem" typeahead="item as item.name for item in flatItemData | filter:{name: $viewValue} | limitTo:8" class="form-control" ng-if="dataStatus === 'loaded'" typeahead-focus-first="false" typeahead-on-select="hello($item, $model, $label)">
-            <pre>{{selectedItem | json}}</pre>
+            <!-- <pre>{{selectedItem | json}}</pre> -->
             <div class="no-print estimateEdit">
               <?php get_template_part('templates/content', 'summary-edit'); ?>
             </div>
+            <!-- <div class="form-group"> -->
+              <!-- <label for="" class="control-label">Add Item from Catalog</label> -->
             <div class="print-only estimateSummary">
               <?php get_template_part('templates/content', 'summary'); ?>
             </div>

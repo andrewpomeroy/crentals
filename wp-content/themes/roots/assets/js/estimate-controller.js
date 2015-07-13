@@ -314,18 +314,36 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 		$scope.orderData.items.splice($index, 1);
 		$scope.calcTotal();
 	}
-	$scope.addItem = function() {
-		$scope.orderData.items.push({
-			name: "New Item",
-			qty: 1,
-			rate: 0,
-			daysweek: 7,
-			// startDate: $scope.orderMeta.orderPickupDate,
-			// endDate: $scope.orderMeta.orderReturnDate,
-			edit: true
-		});
+	$scope.addItem = function(item) {
+		if (!item) {
+			$scope.orderData.items.push({
+				name: "New Item",
+				qty: 1,
+				rate: 0,
+				daysweek: 7,
+				// startDate: $scope.orderMeta.orderPickupDate,
+				// endDate: $scope.orderMeta.orderReturnDate,
+				edit: true
+			});
+		}
+		else {
+			var newItem = angular.copy(item);
+			newItem.qty = 1;
+			newItem.edit = true;
+			$scope.orderData.items.push(angular.copy(newItem));
+		}
 		$scope.flushIndividualDate($scope.orderData.items[$scope.orderData.items.length - 1]);
 	}
+	$scope.addItemFromCatalog = function($item, $model, $label) {
+		console.log($item, $model, $label);
+		$scope.addItem($item);
+		$scope.editStates.listEditMode = null;
+		$scope.calcRentalDates(isSingle);
+	};
+	$scope.editStates = {
+		listEditMode: null
+	}
+
 
 	$scope.showWeeks = true;
 	$scope.toggleWeeks = function () {
@@ -349,10 +367,6 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 
 	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'MM/dd/yyyy'];
 	$scope.format = $scope.formats[3];
-
-	$scope.hello = function($item, $model, $label) {
-		debugger;
-	}
 
 	// --- INITIALIZE ---
 
