@@ -215,7 +215,6 @@ app.service('GSLoader', ['dataTransform', '$http', '$q', function(dataTransform,
 						)
 					)
 				);
-			debugger;
 			if (params && params.returnFlat) { 
 				transformedData = dataTransform.reFlatten(transformedData);
 			}

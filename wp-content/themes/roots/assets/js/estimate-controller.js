@@ -350,6 +350,10 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate', 'MM/dd/yyyy'];
 	$scope.format = $scope.formats[3];
 
+	$scope.hello = function($item, $model, $label) {
+		debugger;
+	}
+
 	// --- INITIALIZE ---
 
 	var init = function() {
