@@ -123,17 +123,14 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 	// Submit Order to Wordpress Backend
 	$scope.submitOrder = function(obj) {
 		var draft = obj.draft;
-		if (isSingle()) {
-			draft = !isSubmitted();
-			$scope.orderData.orderMeta = angular.copy($scope.orderMeta);
-		}
 		var newDate = new Date();
 		titleStr = ($scope.orderMeta.companyName ? ($scope.orderMeta.companyName + " – ") : "") + ($scope.orderMeta.jobName || "") + " (" + newDate.toLocaleString() + ")";
 		if (!draft) {
 			titleStr = "SUBMITTED: " + titleStr;
 		}
-		if (isSingle())
-		{
+		if (isSingle()) {
+			draft = !isSubmitted();
+
 			$scope.orderMeta.revision = ++$scope.orderMeta.revision || 1;	
 			titleStr = titleStr + " (Revision " + $scope.orderMeta.revision + ")";
 			// var headStr = $('head title').html();
@@ -142,6 +139,8 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 			// 	// titleStr = titleStr.replace(/Revision \d*/, headStr);
 			// 	$('head title').html(headStr);
 			// }
+
+			$scope.orderData.orderMeta = angular.copy($scope.orderMeta);
 		}
 		$('head title').html(titleStr);
 
@@ -158,11 +157,7 @@ app.controller('estimateForm', ['$scope', '$filter', 'GSLoader', '$http', '$moda
 					orderMeta: $scope.orderMeta,
 					items: []
 				}
-				// loopThroughItems([addOne, addQuantityToOrderObj]);
 				loopThroughItems([addQuantityToOrderObj]);
-				// for (var item in $scope.orderData.items) {
-				// 	cleanItemProperties(item);
-				// }
 			}
 			// orderData, title, dates, etc. already exists for estimates being revised
 			angular.forEach($scope.orderData.items, function(value, key) {
