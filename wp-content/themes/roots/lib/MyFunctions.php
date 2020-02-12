@@ -60,9 +60,6 @@ function make_est_post() {
 	// 	$category = array(0);
 	// }
 
-
-
-
 	// If the page doesn't already exist, then create it
 	// Or, if we're updating an existing estimate.. just let it happen
 	if (( get_page_by_title(array('page_title' => $title, 'post_type' => 'estimate')) == null ) || ($currentPostId != null)) {
@@ -91,8 +88,28 @@ function make_est_post() {
     		// Arbitrarily use -2 to indicate that the catstring with the title already exists
     		$new_post_id = -2;
 
-
 	} // end if
+
+	if ($new_post_id != -2) {
+		// $url = get_home_url() . "/"
+
+		$url = get_post_permalink($new_post_id);
+
+		// Code for custom webhook — publishing new-estimate notifier
+
+		$custom_data = array(
+				'url' => $url,
+				'title' => $title,
+				'category' => $category
+		);
+		$webhook_names = array(
+			'new-estimate-notifier'
+		);
+
+		do_action( 'wp_webhooks_send_to_webhook', $custom_data, $webhook_names );
+
+	}
+
 
 	echo json_encode( $response );
 	exit;
